@@ -140,7 +140,7 @@
             <div id="assetListContainer">
                 <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bnb.png" alt="BNB"></div><div class="asset-info"><div class="asset-name">BNB</div><div class="asset-price" id="price-BNB">$580.25</div></div><div class="asset-right"><div class="asset-balance" id="bal-BNB">0.0000</div><div class="asset-usd-value" id="usd-BNB">≈ $0.00</div></div></div>
                 <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/usdt.png" alt="USDT"></div><div class="asset-info"><div class="asset-name">USDT</div><div class="asset-price">$1.00</div></div><div class="asset-right"><div class="asset-balance" id="bal-USDT">0.0000</div><div class="asset-usd-value" id="usd-USDT">≈ $0.00</div></div></div>
-                <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aigc.png" alt="AIGC"></div><div class="asset-info"><div class="asset-name">AIGC</div><div class="asset-price">$1.00</div></div><div class="asset-right"><div class="asset-balance" id="bal-AIGC">0.0000</div><div class="asset-usd-value" id="usd-AIGC">≈ $0.00</div></div></div>
+                <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"></div><div class="asset-info"><div class="asset-name">AIDC</div><div class="asset-price">$1.00</div></div><div class="asset-right"><div class="asset-balance" id="bal-AIDC">0.0000</div><div class="asset-usd-value" id="usd-AIDC">≈ $0.00</div></div></div>
                 <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bcbs.png" alt="BCBS"></div><div class="asset-info"><div class="asset-name">BCBS</div><div class="asset-price" id="price-BCBS">$0.00</div></div><div class="asset-right"><div class="asset-balance" id="bal-BCBS">0.0000</div><div class="asset-usd-value" id="usd-BCBS">≈ $0.00</div></div></div>
                 <div class="asset-card"><div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/HSBC.icon.png" alt="HSBC"></div><div class="asset-info"><div class="asset-name">HSBC</div><div class="asset-price">$0.00</div></div><div class="asset-right"><div class="asset-balance" id="bal-HSBC">0.0000</div><div class="asset-usd-value" id="usd-HSBC">≈ $0.00</div></div></div>
             </div>
@@ -508,14 +508,14 @@
             if (!hasDividend) dividendHtml = '<span class="dividend-empty">' + langData.dividendEmpty + '</span>';
             document.getElementById('dividendList').innerHTML = dividendHtml;
 
-            let bnb = 0, usdt = 0, aigc = 0, bcbs = 0, hsbc = 0;
+            let bnb = 0, usdt = 0, aidc = 0, bcbs = 0, hsbc = 0;
             try { bnb = parseFloat(ethers.utils.formatEther(await provider.getBalance(currentAccount))); } catch (e) {}
             try { usdt = parseFloat(ethers.utils.formatEther(await usdtContract.balanceOf(currentAccount))); } catch (e) {}
-            try { aigc = parseFloat(ethers.utils.formatEther(await aigcContract.balanceOf(currentAccount))); } catch (e) {}
+            try { aidc = parseFloat(ethers.utils.formatEther(await aigcContract.balanceOf(currentAccount))); } catch (e) {}
             try { bcbs = parseFloat(ethers.utils.formatEther(await bcbsContract.balanceOf(currentAccount))); } catch (e) {}
             try { hsbc = parseFloat(ethers.utils.formatEther(await hsbcContract.balanceOf(currentAccount))); } catch (e) {}
 
-            const tokens = [{ sym: 'BNB', balance: bnb, price: bnbPrice },{ sym: 'USDT', balance: usdt, price: 1 },{ sym: 'AIGC', balance: aigc, price: 1 },{ sym: 'BCBS', balance: bcbs, price: bcbsPrice },{ sym: 'HSBC', balance: hsbc, price: 0 }];
+            const tokens = [{ sym: 'BNB', balance: bnb, price: bnbPrice },{ sym: 'USDT', balance: usdt, price: 1 },{ sym: 'AIDC', balance: aidc, price: 1 },{ sym: 'BCBS', balance: bcbs, price: bcbsPrice },{ sym: 'HSBC', balance: hsbc, price: 0 }];
             let total = 0;
             for (const t of tokens) { const usdVal = t.balance * t.price; total += usdVal; document.getElementById('bal-' + t.sym).textContent = t.balance.toFixed(4); document.getElementById('usd-' + t.sym).textContent = '≈ $' + usdVal.toFixed(2); }
             document.getElementById('totalAssetValue').innerHTML = '$' + total.toFixed(2) + ' <small>USD</small>';
@@ -537,7 +537,7 @@
             document.getElementById('dividendList').innerHTML = langData.dividendEmpty;
             document.getElementById('price-BNB').textContent = '$580.25';
             document.getElementById('price-BCBS').textContent = '$0.00';
-            ['BNB','USDT','AIGC','BCBS','HSBC'].forEach(s => {
+            ['BNB','USDT','AIDC','BCBS','HSBC'].forEach(s => {
                 document.getElementById('bal-' + s).textContent = '0.0000';
                 document.getElementById('usd-' + s).textContent = '≈ $0.00';
             });
