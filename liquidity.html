@@ -2,517 +2,333 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>流动性 - BCBS</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SpaceX MEME 铸造</title>
     <style>
+        /* 基础重置 */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        
-        /* ================= 纯科技蓝赛博风主题色 ================= */
-        :root {
-            --bg-color: #050B15;
-            --card-bg: rgba(8, 20, 48, 0.4);
-            --border-color: rgba(0, 136, 255, 0.15);
-            
-            --text-primary: #FFFFFF;
-            --text-primary-soft: #E2F0FB;
-            --text-secondary: #8AA9C9;
-            --text-dim: rgba(255, 255, 255, 0.45);
-            
-            --cyan-glow: #00DDFF;
-            --cyan-dim: #0088FF;
-            --cyan-deep: #0A2463;
-        }
+        body { background-color: #050505; color: #ffffff; padding-bottom: 80px; }
 
-        body { 
-            background-color: var(--bg-color); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            color: var(--text-primary); 
-        }
-
-        .app-container { 
-            width: 100%; 
-            max-width: 420px; 
-            height: 100%;
-            max-height: 100vh;
-            max-height: 100dvh;
-            background: radial-gradient(circle at 50% 10%, #102040 0%, #050B15 100%); 
-            border-radius: 20px; 
-            box-shadow: 0 0 40px rgba(0, 136, 255, 0.1); 
-            display: flex; 
-            flex-direction: column; 
-            position: relative; 
-            overflow: hidden; 
-        }
-        
-        .app-container::before { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0; 
-            background-image: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bg.png'); 
-            background-size: cover; 
-            background-position: center top; 
-            background-repeat: no-repeat; 
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
-            opacity: 0.8;
-            z-index: 0; 
-            pointer-events: none; 
-            border-radius: 20px; 
-        }
-
-        .scroll-area { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding: 15px; 
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior: contain;
-            position: relative; 
-            z-index: 1; 
-        }
-
-        /* ================= Header ================= */
-        .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; position: relative; }
-        .logo-area { display: flex; align-items: center; font-size: 16px; font-weight: 600; color: var(--text-primary); letter-spacing: 0.5px; }
-        .logo-area img { width: 24px; height: 24px; margin-right: 5px; }
-        .logo-area span { margin-left: 5px; }
-        .header-controls { display: flex; gap: 10px; align-items: center; position: relative; }
-        
-        .lang-btn { 
-            background: transparent; 
-            border: 1px solid var(--border-color); 
-            color: var(--text-secondary); 
-            padding: 4px 8px; 
-            border-radius: 4px; 
-            font-size: 12px; 
-            cursor: pointer; 
-            position: relative;
-        }
-        .lang-btn.active { background: rgba(0, 136, 255, 0.1); border-color: var(--cyan-dim); color: var(--cyan-glow); }
-
-        .lang-dropdown {
-            display: none;
-            position: absolute;
-            top: 35px;
-            right: 0;
-            background: rgba(8, 20, 48, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px;
-            width: 200px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-            z-index: 999;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .lang-dropdown.open { display: flex; }
-        .lang-option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: var(--text-primary-soft);
-            font-size: 14px;
+        /* 通用组件 */
+        .btn-primary {
+            background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            width: 100%;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255, 210, 0, 0.2);
+            transition: transform 0.2s;
         }
-        .lang-option:hover {
-            background: rgba(0, 204, 255, 0.1);
-            color: var(--text-primary);
-        }
-        .lang-option .code {
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            margin-left: 8px;
-        }
+        .btn-primary:active { transform: scale(0.96); }
         
-        .connect-btn { 
-            background: transparent; 
-            border: 1px solid rgba(0, 221, 255, 0.3); 
-            color: var(--cyan-glow); 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            font-size: 12px; 
-            font-weight: 500; 
-            cursor: pointer; 
-            box-shadow: 0 0 15px rgba(0, 204, 255, 0.05); 
-            transition: all 0.3s; 
-            white-space: nowrap; 
+        .gold-border-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            /* 模拟角落金色装饰 */
+            box-shadow: inset 0 0 20px rgba(255, 210, 0, 0.02);
         }
-        .connect-btn:hover:not(:disabled) { box-shadow: 0 0 25px rgba(0, 204, 255, 0.2); background: rgba(0, 204, 255, 0.05); }
-        .connect-btn.connected { background: rgba(0, 204, 255, 0.1); border-color: var(--cyan-glow); color: var(--cyan-glow); }
-        .connect-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .gold-border-card::before, .gold-border-card::after {
+            content: ''; position: absolute; width: 15px; height: 15px; border-color: #f7971e; border-style: solid; pointer-events: none;
+        }
+        .gold-border-card::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+        .gold-border-card::after { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
 
-        /* ================= 面板基础样式 ================= */
-        .panel { 
-            background: var(--card-bg); 
-            border-radius: 16px; 
-            padding: 15px; 
-            margin-bottom: 15px; 
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(8px);
-            position: relative; 
+        /* 头部导航 */
+        .header {
+            position: sticky; top: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
         }
-        .panel::before { 
-            content: ''; 
-            position: absolute; 
-            top: -1px; left: -1px; right: -1px; bottom: -1px; 
-            border-radius: 16px; 
-            padding: 1px; 
-            background: linear-gradient(135deg, var(--cyan-dim), transparent, var(--cyan-glow)); 
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
-            -webkit-mask-composite: xor; 
-            mask-composite: exclude; 
-            pointer-events: none; 
-            opacity: 0.5;
-        }
+        .header .logo { display: flex; align-items: center; font-weight: bold; font-size: 18px; }
+        .header .logo span { color: #f7971e; margin-right: 5px; }
+        .header .logo img { width: 24px; height: 24px; margin-right: 8px; }
+        
+        .lang-switch { background: #1a1a1a; padding: 4px 10px; border-radius: 6px; font-size: 12px; border: 1px solid #333; margin-right: 10px; }
+        .btn-connect { background: transparent; border: 1px solid #f7971e; color: #f7971e; padding: 8px 16px; border-radius: 6px; font-size: 14px; cursor: pointer; }
 
-        /* ================= 标题 ================= */
-        .page-title { 
-            font-size: 24px; 
-            color: var(--text-primary); 
-            text-align: center; 
-            margin: 10px 0 20px; 
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .page-title img { width: 28px; height: 28px; object-fit: contain; }
+        /* 主图/引导区 */
+        .hero-section { text-align: center; padding: 30px 20px 20px; }
+        .hero-section h1 { font-size: 18px; line-height: 1.4; margin-bottom: 5px; }
+        .hero-section .subtitle { color: #888; font-size: 14px; margin-bottom: 20px; }
+        
+        /* 火箭占位图 */
+        .rocket-container { position: relative; height: 180px; margin: 20px 0; display: flex; justify-content: center; }
+        .rocket-container img { height: 100%; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(255, 100, 0, 0.4)); }
 
-        /* ================= 按钮 ================= */
-        .btn-primary { 
-            width: 100%; 
-            background: linear-gradient(90deg, var(--cyan-dim), var(--cyan-glow)); 
-            border: none; 
-            border-radius: 8px; 
-            padding: 14px; 
-            font-size: 16px; 
-            font-weight: bold; 
-            color: #050B15; 
-            cursor: pointer; 
-            box-shadow: 0 6px 20px rgba(0, 136, 255, 0.3); 
-            transition: all 0.3s;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0, 204, 255, 0.5); }
+        /* 进度卡片 */
+        .progress-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
+        .progress-track { width: 100%; height: 10px; background: #1a1a1a; border-radius: 5px; overflow: hidden; border: 1px solid #333; margin: 8px 0 15px; }
+        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #f7971e, #ffd200); transition: width 1s ease-in-out; }
+        .price-info { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; border-top: 1px solid #222; padding-top: 10px; }
+        .price-info .percent { color: #fff; font-weight: bold; font-size: 20px; }
 
-        /* ================= 底部导航栏 ================= */
-        .bottom-nav { 
-            flex-shrink: 0; 
-            background: rgba(5, 11, 21, 0.85); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(0, 136, 255, 0.15); 
-            border-radius: 20px; 
-            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8); 
-            display: flex; 
-            justify-content: space-around; 
-            padding: 12px 0; 
-            margin: 0 15px 15px 15px; 
-            position: relative; 
-            z-index: 10;
+        /* 铸造卡片 */
+        .mint-header { text-align: center; color: #f7971e; font-weight: bold; font-size: 16px; margin-bottom: 15px; }
+        .mint-status { color: #4CAF50; font-size: 12px; margin-top: 2px; }
+
+        .input-group { background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 15px; margin-bottom: 12px; }
+        .input-label { display: flex; justify-content: space-between; font-size: 13px; color: #ccc; margin-bottom: 10px; }
+        .input-flex { display: flex; justify-content: space-between; align-items: center; }
+        .coin-pill { display: flex; align-items: center; background: #1a1a1a; padding: 5px 10px; border-radius: 20px; border: 1px solid #333; font-size: 14px; font-weight: bold; }
+        .coin-pill img { width: 16px; height: 16px; margin-right: 6px; }
+        
+        .input-number { background: transparent; border: none; color: #fff; font-size: 20px; font-weight: bold; width: 60%; text-align: right; outline: none; }
+        .input-number::placeholder { color: #555; }
+
+        .swap-icon { text-align: center; margin: -5px 0; position: relative; z-index: 2; }
+        .swap-icon span { background: #1a1a1a; padding: 5px 10px; border-radius: 50%; border: 1px solid #333; display: inline-block; }
+
+        /* 底部数据卡片 */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+        .stat-item { text-align: center; }
+        .stat-item img { width: 20px; height: 20px; margin-bottom: 4px; opacity: 0.8; }
+        .stat-item .label { font-size: 10px; color: #888; }
+        .stat-item .value { font-size: 14px; font-weight: bold; margin-top: 2px; }
+
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #0a0a0a; border-top: 1px solid #222;
+            display: flex; justify-content: space-around; padding: 10px 0 25px; z-index: 200;
         }
-        .bottom-nav::before { 
-            content: ''; 
-            position: absolute; 
-            top: -1px; left: -1px; right: -1px; bottom: -1px; 
-            border-radius: 20px; 
-            padding: 1px; 
-            background: linear-gradient(135deg, var(--cyan-dim), transparent, var(--cyan-glow)); 
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); 
-            -webkit-mask-composite: xor; 
-            mask-composite: exclude; 
-            pointer-events: none; 
-            opacity: 0.5;
+        .nav-item { text-align: center; color: #666; font-size: 10px; cursor: pointer; transition: color 0.3s; }
+        .nav-item.active { color: #f7971e; }
+        .nav-item svg { width: 24px; height: 24px; fill: currentColor; margin-bottom: 4px; }
+
+        /* 弹窗 (Toast) */
+        .toast {
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.9); border: 1px solid #f7971e; padding: 15px 25px;
+            border-radius: 8px; display: none; z-index: 300;
+            text-align: center; font-size: 14px;
         }
-        .nav-item { 
-            display: flex; flex-direction: column; align-items: center; 
-            color: var(--text-secondary); font-size: 11px; gap: 4px; cursor: pointer; padding: 5px 10px; 
-            transition: all 0.3s ease; text-decoration: none; 
-        }
-        .nav-item .nav-icon { width: 20px; height: 20px; object-fit: contain; }
-        .nav-item.active { color: var(--text-primary); position: relative; }
-        .nav-item.active::after { 
-            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); 
-            width: 20px; height: 2px; 
-            background: linear-gradient(to right, var(--cyan-dim), var(--cyan-glow)); 
-            border-radius: 5px; box-shadow: 0 0 15px var(--cyan-glow); 
-        }
-        .nav-item:not(.active):hover { color: var(--cyan-glow); }
+        .toast.show { display: block; animation: fadeInUp 0.4s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <div class="scroll-area">
-            <div class="header">
-                <div class="logo-area"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"><span>BCBS</span></div>
-                <div class="header-controls">
-                    <button class="lang-btn" id="langBtn">🇨🇳 CN ⌄</button>
-                    
-                    <div class="lang-dropdown" id="langDropdown">
-                        <div class="lang-option"><span>🇨🇳 简体中文</span><span class="code">CN</span></div>
-                        <div class="lang-option"><span>🇺🇸 English</span><span class="code">EN</span></div>
-                        <div class="lang-option"><span>🇭🇰 繁體中文</span><span class="code">ZH</span></div>
-                        <div class="lang-option"><span>🇪🇸 Español</span><span class="code">ES</span></div>
-                        <div class="lang-option"><span>🇫🇷 Français</span><span class="code">FR</span></div>
-                        <div class="lang-option"><span>🇰🇷 한국어</span><span class="code">KO</span></div>
-                        <div class="lang-option"><span>🇯🇵 日本語</span><span class="code">JA</span></div>
-                        <div class="lang-option"><span>🇸🇦 العربية</span><span class="code">AR</span></div>
-                        <div class="lang-option"><span>🇷🇺 Русский</span><span class="code">RU</span></div>
-                    </div>
 
-                    <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
-                </div>
-            </div>
-            <div class="page-title" id="pageTitle">💧 流动性</div>
-            
-            <div class="panel">
-                <div style="color:var(--text-primary);font-size:14px;font-weight:600;margin-bottom:8px;" id="panelTitle">添加流动性</div>
-                <div style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;" id="panelDesc">为交易对提供流动性，赚取手续费奖励</div>
-                <button class="btn-primary" id="panelBtn">添加流动性</button>
-            </div>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">
+            <!-- 使用简单图标占位 -->
+            <span style="color:#fff; font-weight:900; font-style:italic;">S</span>PACEX
         </div>
-        
-        <div class="bottom-nav">
-            <a href="index.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产"><span id="navAssets">资产</span></a>
-            <a href="invite.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/invite.icon.png" alt="邀请"><span id="navInvite">邀请</span></a>
-            <a href="liquidity.html" class="nav-item active"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性"><span id="navLiquidity">流动性</span></a>
-            <a href="stake.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押"><span id="navStake">质押</span></a>
-            <a href="ecosystem.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ecosystem.icon.png" alt="生态"><span id="navEcosystem">生态</span></a>
+        <div>
+            <span class="lang-switch">🇺🇸 ZH ⌄</span>
+            <button class="btn-connect" onclick="toggleWallet()">連接錢包</button>
+        </div>
+    </header>
+
+    <!-- 主视觉区 -->
+    <section class="hero-section">
+        <h1>全球首個星艦粉絲群發射的AI智能體代幣</h1>
+        <div class="subtitle">星艦屬於每一個仰望星空的人</div>
+        <div class="rocket-container">
+            <!-- 模拟火箭图片 -->
+            <img src="https://img.freepik.com/free-psd/rocket-launch-3d-illustration_23-2151192275.jpg?w=740" alt="Rocket" style="border-radius: 50%; box-shadow: 0 0 30px rgba(255,165,0,0.3);">
+        </div>
+    </section>
+
+    <!-- 铸造进度卡片 -->
+    <div style="padding: 0 15px;">
+        <div class="gold-border-card">
+            <div class="progress-row">
+                <span>鑄造進度</span>
+                <span>完成指標</span>
+            </div>
+            <div class="progress-row" style="font-size: 14px; color: #fff;">
+                <span id="minted-amount">0.00 SPACEX</span>
+                <span id="target-amount">0.00/0 BNB</span>
+            </div>
+            
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+
+            <div class="price-info">
+                <span>鑄造價格 = $0.000195</span>
+                <span class="percent" id="progress-percent">0.00%</span>
+            </div>
         </div>
     </div>
-    
+
+    <!-- 铸造面板 -->
+    <div style="padding: 0 15px;">
+        <div class="gold-border-card">
+            <div class="mint-header">
+                鑄造 $SPACEX
+                <div class="mint-status">● PRESALE LIVE</div>
+            </div>
+
+            <!-- 支付区域 -->
+            <div class="input-group">
+                <div class="input-label">
+                    <span>需要支付</span>
+                    <span id="wallet-balance">錢包餘額: 0.00 BNB</span>
+                </div>
+                <div class="input-flex">
+                    <div class="coin-pill">
+                        <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026" alt="BNB"> BNB
+                    </div>
+                    <input type="number" class="input-number" id="pay-amount" placeholder="輸入最低 0.1BNB" step="0.1">
+                </div>
+            </div>
+
+            <!-- 切换按钮 -->
+            <div class="swap-icon"><span>⇅</span></div>
+
+            <!-- 接收区域 -->
+            <div class="input-group">
+                <div class="input-label">
+                    <span>可以接收</span>
+                </div>
+                <div class="input-flex">
+                    <div class="coin-pill">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/SpaceX_logo_black.svg/2560px-SpaceX_logo_black.svg.png" style="background:#fff; border-radius:50%; padding:2px;" alt="SPACEX"> SPACEX
+                    </div>
+                    <span class="input-number" id="receive-amount" style="cursor:default; font-weight:normal;">0</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="startMint()">立刻鑄造</button>
+        </div>
+    </div>
+
+    <!-- 底部数据 -->
+    <div style="padding: 0 15px;">
+        <div class="gold-border-card">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div>🚀</div>
+                    <div class="label">發行量</div>
+                    <div class="value">100,000M</div>
+                </div>
+                <div class="stat-item">
+                    <div>👤</div>
+                    <div class="label">持有地址</div>
+                    <div class="value">∞</div>
+                </div>
+                <div class="stat-item">
+                    <div>📈</div>
+                    <div class="label">現價</div>
+                    <div class="value">$0.000195</div>
+                </div>
+                <div class="stat-item">
+                    <div>🔄</div>
+                    <div class="label">預售</div>
+                    <div class="value">10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+            <div>鑄造</div>
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <div>邀請</div>
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            <div>任務</div>
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <div>NFTs</div>
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+            <div>生態</div>
+        </div>
+    </div>
+
+    <!-- 模拟提示弹窗 -->
+    <div class="toast" id="mint-toast">
+        <div style="font-weight:bold; color:#ffd200; margin-bottom:5px;">鑄造成功！</div>
+        <div style="font-size:12px; color:#ccc;">正在處理鏈上交易，請稍候...</div>
+    </div>
+
     <script>
-        // ======================== 多语言翻译数据 ========================
-        const translations = {
-            cn: {
-                langBtn: '🇨🇳 CN',
-                pageTitle: '💧 流动性',
-                panelTitle: '添加流动性',
-                panelDesc: '为交易对提供流动性，赚取手续费奖励',
-                panelBtn: '添加流动性',
-                navAssets: '资产',
-                navStake: '质押',
-                navLiquidity: '流动性',
-                navInvite: '邀请',
-                navEcosystem: '生态'
-            },
-            en: {
-                langBtn: '🇺🇸 EN',
-                pageTitle: '💧 Liquidity',
-                panelTitle: 'Add Liquidity',
-                panelDesc: 'Provide liquidity for trading pairs and earn fee rewards',
-                panelBtn: 'Add Liquidity',
-                navAssets: 'Assets',
-                navStake: 'Stake',
-                navLiquidity: 'Liquidity',
-                navInvite: 'Invite',
-                navEcosystem: 'Ecosystem'
-            },
-            zh: {
-                langBtn: '🇭🇰 繁中',
-                pageTitle: '💧 流動性',
-                panelTitle: '添加流動性',
-                panelDesc: '為交易對提供流動性，賺取手續費獎勵',
-                panelBtn: '添加流動性',
-                navAssets: '資產',
-                navStake: '質押',
-                navLiquidity: '流動性',
-                navInvite: '邀請',
-                navEcosystem: '生態'
-            },
-            es: {
-                langBtn: '🇪🇸 ES',
-                pageTitle: '💧 Liquidez',
-                panelTitle: 'Agregar Liquidez',
-                panelDesc: 'Proporcione liquidez para pares comerciales y gane recompensas por tarifas',
-                panelBtn: 'Agregar Liquidez',
-                navAssets: 'Activos',
-                navStake: 'Stake',
-                navLiquidity: 'Liquidez',
-                navInvite: 'Invitar',
-                navEcosystem: 'Ecosistema'
-            },
-            fr: {
-                langBtn: '🇫🇷 FR',
-                pageTitle: '💧 Liquidité',
-                panelTitle: 'Ajouter de la Liquidité',
-                panelDesc: 'Fournissez de la liquidité pour les paires de trading et gagnez des récompenses de frais',
-                panelBtn: 'Ajouter de la Liquidité',
-                navAssets: 'Actifs',
-                navStake: 'Staking',
-                navLiquidity: 'Liquidité',
-                navInvite: 'Inviter',
-                navEcosystem: 'Écosystème'
-            },
-            ko: {
-                langBtn: '🇰🇷 KO',
-                pageTitle: '💧 유동성',
-                panelTitle: '유동성 추가',
-                panelDesc: '거래 쌍에 유동성을 제공하고 수수료 보상을 받으세요',
-                panelBtn: '유동성 추가',
-                navAssets: '자산',
-                navStake: '스테이킹',
-                navLiquidity: '유동성',
-                navInvite: '초대',
-                navEcosystem: '생태계'
-            },
-            ja: {
-                langBtn: '🇯🇵 JA',
-                pageTitle: '💧 流動性',
-                panelTitle: '流動性を追加',
-                panelDesc: '取引ペアに流動性を提供し、手数料報酬を獲得',
-                panelBtn: '流動性を追加',
-                navAssets: '資産',
-                navStake: 'ステーキング',
-                navLiquidity: '流動性',
-                navInvite: '招待',
-                navEcosystem: 'エコシステム'
-            },
-            ar: {
-                langBtn: '🇸🇦 AR',
-                pageTitle: '💧 السيولة',
-                panelTitle: 'إضافة سيولة',
-                panelDesc: 'تقديم السيولة لأزواج التداول وكسب مكافآت الرسوم',
-                panelBtn: 'إضافة سيولة',
-                navAssets: 'الأصول',
-                navStake: 'تخزين',
-                navLiquidity: 'سيولة',
-                navInvite: 'دعوة',
-                navEcosystem: 'النظام البيئي'
-            },
-            ru: {
-                langBtn: '🇷🇺 RU',
-                pageTitle: '💧 Ликвидность',
-                panelTitle: 'Добавить ликвидность',
-                panelDesc: 'Предоставьте ликвидность для торговых пар и получайте вознаграждение за комиссии',
-                panelBtn: 'Добавить ликвидность',
-                navAssets: 'Активы',
-                navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
-                navInvite: 'Пригласить',
-                navEcosystem: 'Экосистема'
+        // 模拟钱包连接
+        function toggleWallet() {
+            const btn = document.querySelector('.btn-connect');
+            const balanceEl = document.getElementById('wallet-balance');
+            if(btn.innerText === '連接錢包') {
+                btn.innerText = '0x1234...ABCD';
+                balanceEl.innerText = '錢包餘額: 12.50 BNB';
+                btn.style.background = '#f7971e';
+                btn.style.color = '#000';
+                btn.style.border = 'none';
+            } else {
+                btn.innerText = '連接錢包';
+                balanceEl.innerText = '錢包餘額: 0.00 BNB';
+                btn.style.background = 'transparent';
+                btn.style.color = '#f7971e';
+                btn.style.border = '1px solid #f7971e';
             }
-        };
+        }
 
-        // ======================== 语言切换弹窗逻辑 ========================
-        const langBtn = document.getElementById('langBtn');
-        const langDropdown = document.getElementById('langDropdown');
-        let currentLang = localStorage.getItem('bcbsLang') || 'cn';
+        // 开始铸造动画
+        function startMint() {
+            const input = document.getElementById('pay-amount');
+            const val = parseFloat(input.value);
+            
+            if (!val || val <= 0) {
+                alert("請輸入有效的 BNB 數量（最低 0.1）");
+                return;
+            }
 
-        window.addEventListener('DOMContentLoaded', function() {
-            const langData = translations[currentLang];
-            if (langData) applyTranslations(langData);
-        });
+            // 模拟计算接收数量 (假设 1 BNB = 5000 SPACEX)
+            const receiveEl = document.getElementById('receive-amount');
+            const receiveVal = val * 5000;
+            receiveEl.innerText = receiveVal.toLocaleString();
 
-        langBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langDropdown.classList.toggle('open');
-            langBtn.classList.toggle('active');
-        });
+            // 进度条动画
+            const fill = document.getElementById('progress-fill');
+            const percentText = document.getElementById('progress-percent');
+            const mintedText = document.getElementById('minted-amount');
+            
+            // 模拟进度从当前值增加
+            let currentWidth = parseFloat(fill.style.width) || 0;
+            let increment = Math.min(35, 100 - currentWidth); // 每次增加一点
+            let newWidth = Math.min(currentWidth + increment, 100);
+            
+            fill.style.width = newWidth + '%';
+            percentText.innerText = newWidth.toFixed(2) + '%';
+            mintedText.innerText = (newWidth * 10000).toFixed(2) + ' SPACEX';
 
-        document.addEventListener('click', (e) => {
-            if (!langDropdown.contains(e.target) && e.target !== langBtn) {
-                langDropdown.classList.remove('open');
-                langBtn.classList.remove('active');
+            // 显示提示
+            const toast = document.getElementById('mint-toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 自动监听输入框变化计算接收数量（增加体验）
+        document.getElementById('pay-amount').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            const receiveEl = document.getElementById('receive-amount');
+            if (val && val > 0) {
+                receiveEl.innerText = (val * 5000).toLocaleString();
+            } else {
+                receiveEl.innerText = '0';
             }
         });
-
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', () => {
-                const langCode = option.querySelector('.code').innerText.trim().toLowerCase();
-                const langData = translations[langCode];
-                
-                if (langData) {
-                    currentLang = langCode;
-                    localStorage.setItem('bcbsLang', langCode);
-                    applyTranslations(langData);
-                }
-                
-                langDropdown.classList.remove('open');
-                langBtn.classList.remove('active');
-            });
-        });
-
-        function applyTranslations(langData) {
-            langBtn.textContent = langData.langBtn + ' ⌄';
-            document.getElementById('pageTitle').textContent = langData.pageTitle;
-            document.getElementById('panelTitle').textContent = langData.panelTitle;
-            document.getElementById('panelDesc').textContent = langData.panelDesc;
-            document.getElementById('panelBtn').textContent = langData.panelBtn;
-            document.getElementById('navAssets').textContent = langData.navAssets;
-            document.getElementById('navStake').textContent = langData.navStake;
-            document.getElementById('navLiquidity').textContent = langData.navLiquidity;
-            document.getElementById('navInvite').textContent = langData.navInvite;
-            document.getElementById('navEcosystem').textContent = langData.navEcosystem;
-        }
-
-        // ======================== 原有钱包连接逻辑 ========================
-        const AIGC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
-        const BCBS_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995';
-        const HSBC_ADDRESS = '0x20aD84A60902A91F036bD6bdB85AD1d61B2f65C1';
-        let provider, signer, currentAccount;
-        const connectBtn = document.getElementById('connectWalletBtn');
-        
-        function updateUIForConnected(acc){ 
-            connectBtn.textContent=`${acc.substring(0,6)}...${acc.substring(acc.length-4)}`; 
-            connectBtn.classList.add('connected'); 
-            connectBtn.onclick=disconnectWallet; 
-        }
-        function setDisconnectedUI(){ 
-            connectBtn.textContent='Connect wallet'; 
-            connectBtn.classList.remove('connected'); 
-            connectBtn.onclick=connectWallet; 
-        }
-        async function connectWallet(){ 
-            if(typeof window.ethereum==='undefined'){ alert('请安装MetaMask'); return; } 
-            const accounts=await window.ethereum.request({method:'eth_requestAccounts'}); 
-            currentAccount=accounts[0]; 
-            provider=new ethers.providers.Web3Provider(window.ethereum); 
-            signer=provider.getSigner(); 
-            updateUIForConnected(currentAccount); 
-        }
-        function disconnectWallet(){ 
-            currentAccount=null; 
-            signer=null; 
-            setDisconnectedUI(); 
-        }
-        function handleAccountsChanged(accounts){ 
-            if(accounts.length===0)disconnectWallet(); 
-            else{ currentAccount=accounts[0]; provider=new ethers.providers.Web3Provider(window.ethereum); signer=provider.getSigner(); updateUIForConnected(currentAccount); } 
-        }
-        async function autoConnect(){ 
-            if(typeof window.ethereum!=='undefined'){ 
-                provider=new ethers.providers.Web3Provider(window.ethereum); 
-                try{ 
-                    const accounts=await provider.listAccounts(); 
-                    if(accounts.length>0){ 
-                        currentAccount=accounts[0]; 
-                        signer=provider.getSigner(); 
-                        updateUIForConnected(currentAccount); 
-                    }else setDisconnectedUI(); 
-                }catch(e){ setDisconnectedUI(); } 
-                window.ethereum.on('accountsChanged',handleAccountsChanged); 
-                window.ethereum.on('chainChanged',()=>window.location.reload()); 
-            } 
-        }
-        window.addEventListener('load',autoConnect);
     </script>
 </body>
 </html>
