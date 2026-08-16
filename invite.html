@@ -66,11 +66,12 @@
         .connect-btn.connected { background: rgba(0, 204, 255, 0.1); border-color: var(--cyan-glow); color: var(--cyan-glow); }
         .connect-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .panel { background: var(--card-bg); border-radius: 16px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); backdrop-filter: blur(8px); position: relative; box-shadow: inset 0 0 30px rgba(0, 136, 255, 0.02); }
-        .panel::before, .process-panel::before, .airdrop-card::before { content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px; border-radius: 16px; padding: 1px; background: linear-gradient(135deg, var(--cyan-dim), transparent, var(--cyan-glow)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5; }
-        .airdrop-card { background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/cover no-repeat; border: 1px solid rgba(0, 136, 255, 0.3); }
+        .panel::before, .process-panel::before { content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px; border-radius: 16px; padding: 1px; background: linear-gradient(135deg, var(--cyan-dim), transparent, var(--cyan-glow)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5; }
+        .airdrop-card { background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/cover no-repeat; border: 1px solid transparent; }
+        .airdrop-card::before { display: none; }
         .page-title { font-size: 24px; color: var(--text-primary); text-align: center; margin: 10px 0 20px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .page-title img { width: 28px; height: 28px; object-fit: contain; }
-        .airdrop-card .airdrop-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .airdrop-card .airdrop-header { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; margin-bottom: 8px; }
         .airdrop-card .airdrop-icon { width: 36px; height: 36px; }
         .airdrop-card .airdrop-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0, 221, 255, 0.5)); }
         .airdrop-card .airdrop-title { color: var(--text-primary); font-size: 18px; font-weight: 700; }
@@ -178,7 +179,7 @@
             <div class="panel airdrop-card">
                 <div class="airdrop-header">
                     <div class="airdrop-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/HSBC.icon.png" alt="HSBC"></div>
-                    <div><div class="airdrop-title" id="airdropTitle">限量红包领取计划</div><div class="airdrop-desc" id="airdropDesc">新用户专享，推荐好友可奖励50HSBC</div></div>
+                    <div style="text-align:center;"><div class="airdrop-title" id="airdropTitle">发红包 交朋友</div><div class="airdrop-desc" id="airdropDesc">邀请好友，一起探索太空文明</div></div>
                 </div>
                 <div class="airdrop-amount-box" id="airdropStatus">未领取</div>
                 <button class="airdrop-btn" id="claimAirdropBtn">立即领取</button>
@@ -253,8 +254,8 @@
             cn: {
                 langBtn: '🇨🇳 CN',
                 pageTitle: '邀请好友',
-                airdropTitle: '限量红包领取计划',
-                airdropDesc: '新用户专享，推荐好友可奖励50HSBC',
+                airdropTitle: '发红包 交朋友',
+                airdropDesc: '邀请好友，一起探索太空文明',
                 airdropStatusClaimed: '已领取 100 HSBC',
                 airdropStatusAvailable: '可领取 100 HSBC',
                 claimBtn: '立即领取',
@@ -328,8 +329,8 @@
             en: {
                 langBtn: '🇺🇸 EN',
                 pageTitle: 'Invite Friends',
-                airdropTitle: 'Limited Red Packet Plan',
-                airdropDesc: 'Exclusive for new users, invite friends to earn 50 HSBC',
+                airdropTitle: 'Send Red Packets, Make Friends',
+                airdropDesc: 'Invite friends to explore space civilization together',
                 airdropStatusClaimed: 'Claimed 100 HSBC',
                 airdropStatusAvailable: 'Claimable 100 HSBC',
                 claimBtn: 'Claim Now',
@@ -403,8 +404,8 @@
             zh: {
                 langBtn: '🇭🇰 繁中',
                 pageTitle: '邀請好友',
-                airdropTitle: '限量紅包領取計劃',
-                airdropDesc: '新用戶專享，推薦好友可獎勵50HSBC',
+                airdropTitle: '發紅包 交朋友',
+                airdropDesc: '邀請好友，一起探索太空文明',
                 airdropStatusClaimed: '已領取 100 HSBC',
                 airdropStatusAvailable: '可領取 100 HSBC',
                 claimBtn: '立即領取',
@@ -478,8 +479,8 @@
             es: {
                 langBtn: '🇪🇸 ES',
                 pageTitle: 'Invitar Amigos',
-                airdropTitle: 'Plan de Sobres Rojos Limitados',
-                airdropDesc: 'Exclusivo para nuevos usuarios, invite amigos para ganar 50 HSBC',
+                airdropTitle: 'Envía Sobres Rojos, Haz Amigos',
+                airdropDesc: 'Invita amigos a explorar la civilización espacial juntos',
                 airdropStatusClaimed: 'Reclamado 100 HSBC',
                 airdropStatusAvailable: 'Reclamable 100 HSBC',
                 claimBtn: 'Reclamar Ahora',
@@ -553,8 +554,8 @@
             fr: {
                 langBtn: '🇫🇷 FR',
                 pageTitle: 'Inviter des Amis',
-                airdropTitle: 'Plan d\'Enveloppes Rouges Limité',
-                airdropDesc: 'Exclusif pour les nouveaux utilisateurs, invitez des amis pour gagner 50 HSBC',
+                airdropTitle: 'Envoyez des Enveloppes Rouges, Faites des Amis',
+                airdropDesc: 'Invitez des amis à explorer la civilisation spatiale ensemble',
                 airdropStatusClaimed: 'Réclamé 100 HSBC',
                 airdropStatusAvailable: 'Réclamable 100 HSBC',
                 claimBtn: 'Réclamer Maintenant',
@@ -628,8 +629,8 @@
             ko: {
                 langBtn: '🇰🇷 KO',
                 pageTitle: '친구 초대',
-                airdropTitle: '한정판 레드패킷 플랜',
-                airdropDesc: '신규 사용자 전용, 친구 초대 시 50 HSBC 보상',
+                airdropTitle: '레드패킷 보내기, 친구 만들기',
+                airdropDesc: '친구를 초대하여 우주 문명을 함께 탐험하세요',
                 airdropStatusClaimed: '100 HSBC 수령 완료',
                 airdropStatusAvailable: '100 HSBC 수령 가능',
                 claimBtn: '지금 수령',
@@ -703,8 +704,8 @@
             ja: {
                 langBtn: '🇯🇵 JA',
                 pageTitle: '友達を招待',
-                airdropTitle: '限定レッドパケットプラン',
-                airdropDesc: '新規ユーザー限定、友達招待で50 HSBC獲得',
+                airdropTitle: 'レッドパケットを送って友達を作ろう',
+                airdropDesc: '友達を招待して宇宙文明を一緒に探検しよう',
                 airdropStatusClaimed: '100 HSBC受領済み',
                 airdropStatusAvailable: '100 HSBC受領可能',
                 claimBtn: '今すぐ受領',
@@ -778,8 +779,8 @@
             ar: {
                 langBtn: '🇸🇦 AR',
                 pageTitle: 'دعوة الأصدقاء',
-                airdropTitle: 'خطة المغلفات الحمراء المحدودة',
-                airdropDesc: 'حصري للمستخدمين الجدد، ادعُ الأصدقاء لربح 50 HSBC',
+                airdropTitle: 'أرسل مظاريف حمراء، واكسب أصدقاء',
+                airdropDesc: 'ادعُ الأصدقاء لاستكشاف الحضارة الفضائية معًا',
                 airdropStatusClaimed: 'تم المطالبة بـ 100 HSBC',
                 airdropStatusAvailable: 'قابل للمطالبة 100 HSBC',
                 claimBtn: 'المطالبة الآن',
@@ -853,8 +854,8 @@
             ru: {
                 langBtn: '🇷🇺 RU',
                 pageTitle: 'Пригласить друзей',
-                airdropTitle: 'Лимитированный план красных конвертов',
-                airdropDesc: 'Эксклюзивно для новых пользователей, пригласите друзей и получите 50 HSBC',
+                airdropTitle: 'Отправляйте красные конверты, заводите друзей',
+                airdropDesc: 'Пригласите друзей исследовать космическую цивилизацию вместе',
                 airdropStatusClaimed: 'Получено 100 HSBC',
                 airdropStatusAvailable: 'Можно получить 100 HSBC',
                 claimBtn: 'Получить сейчас',
