@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>邀请 - BCBS</title>
+    <title>邀请 - AIDC</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         :root {
@@ -67,7 +67,7 @@
         .connect-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .panel { background: var(--card-bg); border-radius: 16px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); backdrop-filter: blur(8px); position: relative; box-shadow: inset 0 0 30px rgba(0, 136, 255, 0.02); }
         .panel::before, .process-panel::before, .airdrop-card::before { content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px; border-radius: 16px; padding: 1px; background: linear-gradient(135deg, var(--cyan-dim), transparent, var(--cyan-glow)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.5; }
-        .airdrop-card { background: linear-gradient(135deg, rgba(0, 136, 255, 0.1), rgba(0, 221, 255, 0.02)); border: 1px solid rgba(0, 136, 255, 0.3); }
+        .airdrop-card { background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/cover no-repeat; border: 1px solid rgba(0, 136, 255, 0.3); }
         .page-title { font-size: 24px; color: var(--text-primary); text-align: center; margin: 10px 0 20px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .page-title img { width: 28px; height: 28px; object-fit: contain; }
         .airdrop-card .airdrop-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
@@ -156,7 +156,7 @@
     <div class="app-container">
         <div class="scroll-area">
             <div class="header">
-                <div class="logo-area"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"><span>BCBS</span></div>
+                <div class="logo-area"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"><span>AIDC</span></div>
                 <div class="header-controls">
                     <button class="lang-btn" id="langBtn">🇨🇳 CN ⌄</button>
                     <div class="lang-dropdown" id="langDropdown">
@@ -191,8 +191,8 @@
                     <div class="node-card"><div class="node-title" id="nodeTitle3">创世节点</div><div class="node-reward" id="nodeReward3">收益9倍</div><div class="node-rights" id="nodeRights3">S8权益 极差15%-40%</div><div class="node-dividend" id="nodeDividend3">全球分红2.4%</div><button class="node-apply-btn" data-node="genesis">立即申请</button></div>
                 </div>
                 <div class="claim-stats-row">
-                    <div class="claim-stats-item"><div class="claim-stats-label" id="statsLabel1">累计铸币</div><div class="claim-stats-value" style="color: var(--cyan-glow);"><span id="totalClaimed">0.0000</span> <span style="font-size:11px;color:var(--text-secondary);">AIGC</span></div></div>
-                    <div class="claim-stats-item"><div class="claim-stats-label" id="statsLabel2">本次最低提取</div><div class="claim-stats-value" style="color: #ff6b6b;"><span id="minClaimAmount">0.0000</span> <span style="font-size:11px;color:var(--text-secondary);">AIGC</span></div></div>
+                    <div class="claim-stats-item"><div class="claim-stats-label" id="statsLabel1">累计铸币</div><div class="claim-stats-value" style="color: var(--cyan-glow);"><span id="totalClaimed">0.0000</span> <span style="font-size:11px;color:var(--text-secondary);">AIDC</span></div></div>
+                    <div class="claim-stats-item"><div class="claim-stats-label" id="statsLabel2">本次最低提取</div><div class="claim-stats-value" style="color: #ff6b6b;"><span id="minClaimAmount">0.0000</span> <span style="font-size:11px;color:var(--text-secondary);">AIDC</span></div></div>
                 </div>
                 <button class="withdraw-reward-btn" id="withdrawRewardBtn">当前可提取 --</button>
             </div>
@@ -217,7 +217,7 @@
                 <div class="process-flow">
                     <div class="process-step"><div class="step-icon">👤</div><span id="step1">老用户</span></div>
                     <span class="process-arrow">→</span>
-                    <div class="process-step"><div class="step-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aigc.png" alt="AIGC"></div><span id="step2">转AIGC</span></div>
+                    <div class="process-step"><div class="step-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"></div><span id="step2">转AIDC</span></div>
                     <span class="process-arrow">→</span>
                     <div class="process-step"><div class="step-icon">👥</div><span id="step3">新用户</span></div>
                     <span class="process-arrow">→</span>
@@ -289,7 +289,7 @@
                 progressDetailPrefix: '业绩',
                 processBadge: '邀请流程',
                 step1: '老用户',
-                step2: '转AIGC',
+                step2: '转AIDC',
                 step3: '新用户',
                 step4: '绑定成功',
                 cardLabel1: '直推人数',
@@ -314,9 +314,9 @@
                 applyFailed: '操作失败: ',
                 claimAirdropFailed: '领取失败: ',
                 withdrawBtn: '当前可提取 --',
-                noPending: '没有可提取的 AIGC',
+                noPending: '没有可提取的 AIDC',
                 minClaimFailed: '未达到最低提取要求',
-                confirmWithdraw: '确认提取 {amount} AIGC？',
+                confirmWithdraw: '确认提取 {amount} AIDC？',
                 withdrawSuccess: '✅ 提取成功！',
                 withdrawFailed: '提币失败: ',
                 claimAlready: '已领取或不符合条件',
@@ -364,7 +364,7 @@
                 progressDetailPrefix: 'Volume ',
                 processBadge: 'Invite Process',
                 step1: 'Old User',
-                step2: 'Transfer AIGC',
+                step2: 'Transfer AIDC',
                 step3: 'New User',
                 step4: 'Bind Success',
                 cardLabel1: 'Direct Referrals',
@@ -389,9 +389,9 @@
                 applyFailed: 'Operation failed: ',
                 claimAirdropFailed: 'Claim failed: ',
                 withdrawBtn: 'Claimable --',
-                noPending: 'No claimable AIGC',
+                noPending: 'No claimable AIDC',
                 minClaimFailed: 'Does not meet minimum claim requirement',
-                confirmWithdraw: 'Confirm withdraw {amount} AIGC?',
+                confirmWithdraw: 'Confirm withdraw {amount} AIDC?',
                 withdrawSuccess: '✅ Withdraw successful!',
                 withdrawFailed: 'Withdraw failed: ',
                 claimAlready: 'Already claimed or not eligible',
@@ -439,7 +439,7 @@
                 progressDetailPrefix: '業績',
                 processBadge: '邀請流程',
                 step1: '老用戶',
-                step2: '轉AIGC',
+                step2: '轉AIDC',
                 step3: '新用戶',
                 step4: '綁定成功',
                 cardLabel1: '直推人數',
@@ -464,9 +464,9 @@
                 applyFailed: '操作失敗: ',
                 claimAirdropFailed: '領取失敗: ',
                 withdrawBtn: '當前可提取 --',
-                noPending: '沒有可提取的 AIGC',
+                noPending: '沒有可提取的 AIDC',
                 minClaimFailed: '未達到最低提取要求',
-                confirmWithdraw: '確認提取 {amount} AIGC？',
+                confirmWithdraw: '確認提取 {amount} AIDC？',
                 withdrawSuccess: '✅ 提取成功！',
                 withdrawFailed: '提幣失敗: ',
                 claimAlready: '已領取或不符合條件',
@@ -514,7 +514,7 @@
                 progressDetailPrefix: 'Volumen ',
                 processBadge: 'Proceso de Invitación',
                 step1: 'Usuario Antiguo',
-                step2: 'Transferir AIGC',
+                step2: 'Transferir AIDC',
                 step3: 'Nuevo Usuario',
                 step4: 'Vinculación Exitosa',
                 cardLabel1: 'Referidos Directos',
@@ -539,9 +539,9 @@
                 applyFailed: 'Operación fallida: ',
                 claimAirdropFailed: 'Reclamación fallida: ',
                 withdrawBtn: 'Reclamable --',
-                noPending: 'Sin AIGC reclamable',
+                noPending: 'Sin AIDC reclamable',
                 minClaimFailed: 'No cumple con el requisito mínimo',
-                confirmWithdraw: '¿Confirmar retiro de {amount} AIGC?',
+                confirmWithdraw: '¿Confirmar retiro de {amount} AIDC?',
                 withdrawSuccess: '✅ ¡Retiro exitoso!',
                 withdrawFailed: 'Fallo en el retiro: ',
                 claimAlready: 'Ya reclamado o no elegible',
@@ -589,7 +589,7 @@
                 progressDetailPrefix: 'Volume ',
                 processBadge: 'Processus d\'Invitation',
                 step1: 'Ancien Utilisateur',
-                step2: 'Transférer AIGC',
+                step2: 'Transférer AIDC',
                 step3: 'Nouvel Utilisateur',
                 step4: 'Liaison Réussie',
                 cardLabel1: 'Parrainages Directs',
@@ -614,9 +614,9 @@
                 applyFailed: 'Opération échouée: ',
                 claimAirdropFailed: 'Réclamation échouée: ',
                 withdrawBtn: 'Réclamable --',
-                noPending: 'Aucun AIGC réclamable',
+                noPending: 'Aucun AIDC réclamable',
                 minClaimFailed: 'Ne répond pas à l\'exigence minimale',
-                confirmWithdraw: 'Confirmer le retrait de {amount} AIGC?',
+                confirmWithdraw: 'Confirmer le retrait de {amount} AIDC?',
                 withdrawSuccess: '✅ Retrait réussi!',
                 withdrawFailed: 'Échec du retrait: ',
                 claimAlready: 'Déjà réclamé ou non éligible',
@@ -664,7 +664,7 @@
                 progressDetailPrefix: '실적 ',
                 processBadge: '초대 프로세스',
                 step1: '기존 사용자',
-                step2: 'AIGC 전송',
+                step2: 'AIDC 전송',
                 step3: '신규 사용자',
                 step4: '바인딩 성공',
                 cardLabel1: '직추 인원',
@@ -689,9 +689,9 @@
                 applyFailed: '작업 실패: ',
                 claimAirdropFailed: '수령 실패: ',
                 withdrawBtn: '현재 수령 가능 --',
-                noPending: '수령 가능한 AIGC가 없습니다',
+                noPending: '수령 가능한 AIDC가 없습니다',
                 minClaimFailed: '최소 수령 요건을 충족하지 않습니다',
-                confirmWithdraw: '{amount} AIGC를 인출하시겠습니까?',
+                confirmWithdraw: '{amount} AIDC를 인출하시겠습니까?',
                 withdrawSuccess: '✅ 인출 성공!',
                 withdrawFailed: '인출 실패: ',
                 claimAlready: '이미 수령했거나 자격이 없습니다',
@@ -739,7 +739,7 @@
                 progressDetailPrefix: '業績 ',
                 processBadge: '招待プロセス',
                 step1: '既存ユーザー',
-                step2: 'AIGC送信',
+                step2: 'AIDC送信',
                 step3: '新規ユーザー',
                 step4: 'バインディング成功',
                 cardLabel1: '直推人数',
@@ -764,9 +764,9 @@
                 applyFailed: '操作失敗: ',
                 claimAirdropFailed: '受領失敗: ',
                 withdrawBtn: '現在受領可能 --',
-                noPending: '受領可能なAIGCはありません',
+                noPending: '受領可能なAIDCはありません',
                 minClaimFailed: '最低受領要件を満たしていません',
-                confirmWithdraw: '{amount} AIGCを引き出しますか？',
+                confirmWithdraw: '{amount} AIDCを引き出しますか？',
                 withdrawSuccess: '✅ 引き出し成功！',
                 withdrawFailed: '引き出し失敗: ',
                 claimAlready: '受領済みまたは資格なし',
@@ -814,7 +814,7 @@
                 progressDetailPrefix: 'أداء ',
                 processBadge: 'عملية الدعوة',
                 step1: 'المستخدم القديم',
-                step2: 'تحويل AIGC',
+                step2: 'تحويل AIDC',
                 step3: 'المستخدم الجديد',
                 step4: 'ربط ناجح',
                 cardLabel1: 'عدد الإحالات المباشرة',
@@ -839,9 +839,9 @@
                 applyFailed: 'فشل العملية: ',
                 claimAirdropFailed: 'فشل المطالبة: ',
                 withdrawBtn: 'قابل للمطالبة --',
-                noPending: 'لا يوجد AIGC قابل للمطالبة',
+                noPending: 'لا يوجد AIDC قابل للمطالبة',
                 minClaimFailed: 'لا يفي بالحد الأدنى للمطالبة',
-                confirmWithdraw: 'تأكيد سحب {amount} AIGC؟',
+                confirmWithdraw: 'تأكيد سحب {amount} AIDC؟',
                 withdrawSuccess: '✅ تم السحب بنجاح!',
                 withdrawFailed: 'فشل السحب: ',
                 claimAlready: 'تمت المطالبة مسبقًا أو غير مؤهل',
@@ -889,7 +889,7 @@
                 progressDetailPrefix: 'Производительность ',
                 processBadge: 'Процесс приглашения',
                 step1: 'Старый пользователь',
-                step2: 'Перевести AIGC',
+                step2: 'Перевести AIDC',
                 step3: 'Новый пользователь',
                 step4: 'Привязка успешна',
                 cardLabel1: 'Прямые рекомендации',
@@ -914,9 +914,9 @@
                 applyFailed: 'Ошибка операции: ',
                 claimAirdropFailed: 'Ошибка получения: ',
                 withdrawBtn: 'Доступно для получения --',
-                noPending: 'Нет доступных для получения AIGC',
+                noPending: 'Нет доступных для получения AIDC',
                 minClaimFailed: 'Не соответствует минимальному требованию',
-                confirmWithdraw: 'Подтвердить вывод {amount} AIGC?',
+                confirmWithdraw: 'Подтвердить вывод {amount} AIDC?',
                 withdrawSuccess: '✅ Вывод успешен!',
                 withdrawFailed: 'Ошибка вывода: ',
                 claimAlready: 'Уже получено или не подходит',
@@ -1088,7 +1088,7 @@
         async function updateClaimableReward() {
             const ld = translations[currentLang]||translations.cn;
             if (!aigcContract) { withdrawBtn.textContent = ld.withdrawBtn; return; }
-            try { const p = await aigcContract.getPendingReward(currentAccount); withdrawBtn.textContent = `${ld.currentClaimable} ${parseFloat(ethers.utils.formatEther(p)).toFixed(4)} AIGC`; } catch (e) { withdrawBtn.textContent = ld.withdrawBtn; }
+            try { const p = await aigcContract.getPendingReward(currentAccount); withdrawBtn.textContent = `${ld.currentClaimable} ${parseFloat(ethers.utils.formatEther(p)).toFixed(4)} AIDC`; } catch (e) { withdrawBtn.textContent = ld.withdrawBtn; }
         }
 
         async function updateClaimStats() {
@@ -1266,7 +1266,7 @@
                 let maxTime = 0;
                 for (const lv of [1,2,3]) { try { const d = await rpcAigcContract.getLevelDetail(currentAccount, lv); if (d.activated && d.lastClaimTime.toNumber() > maxTime) maxTime = d.lastClaimTime.toNumber(); } catch (e) {} }
                 const ds = maxTime > 0 ? new Date(maxTime*1000).toLocaleString('zh-CN',{hour12:false}) : '--';
-                c.innerHTML = `<div class="record-item"><div class="field"><div class="field-label">${ld.claimRecordLabel}</div><div class="field-value">${lca.toFixed(4)} AIGC</div></div><div class="field"><div class="field-label">${ld.claimRecordTimeLabel}</div><div class="field-value">${ds}</div></div></div>`;
+                c.innerHTML = `<div class="record-item"><div class="field"><div class="field-label">${ld.claimRecordLabel}</div><div class="field-value">${lca.toFixed(4)} AIDC</div></div><div class="field"><div class="field-label">${ld.claimRecordTimeLabel}</div><div class="field-value">${ds}</div></div></div>`;
             } catch (e) { c.innerHTML = `<div class="record-item" style="justify-content:center;color:var(--text-secondary);">${ld.loadFailed}</div>`; }
         }
 
