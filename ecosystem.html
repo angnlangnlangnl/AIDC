@@ -141,7 +141,7 @@
             position: relative;
         }
 
-        /* --- 语言切换按钮 (改为AIDC蓝色系) --- */
+        /* --- 语言切换按钮 (AIDC蓝色系) --- */
         .lang-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -163,7 +163,7 @@
             color: #00DDFF;
         }
 
-        /* --- 语言弹窗 (金色风格保留) --- */
+        /* --- 语言弹窗 --- */
         .lang-dropdown {
             display: none;
             position: absolute;
@@ -205,7 +205,7 @@
             margin-left: 8px;
         }
 
-        /* --- 连接钱包按钮 (改为AIDC蓝色系) --- */
+        /* --- 连接钱包按钮 (AIDC蓝色系) --- */
         .connect-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -314,7 +314,7 @@
             border-radius: 16px;
         }
 
-        /* 外层边框：金色 · 细线 (1.5px) · 断点 30%-70% */
+        /* ★★★ 外层边框：金色 · 超细线 (0.75px) · 断点 30%-70% ★★★ */
         .gold-break-card::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -322,22 +322,22 @@
                 linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
                 linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
             background-size:
-                100% 1.5px,
-                1.5px 100%,
-                100% 1.5px,
-                1.5px 100%;
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
             background-position:
                 0 0,
                 100% 0,
                 0 100%,
                 0 0;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 6px rgba(245, 200, 66, 0.4));
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
             opacity: 0.95;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* 内层边框：蓝色 · 细线 (1.5px) · 断点错位 15%-55% (交替) */
+        /* ★★★ 内层边框：蓝色 · 超细线 (0.75px) · 断点错位 15%-55% ★★★ */
         .gold-break-card::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -345,17 +345,17 @@
                 linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
                 linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
             background-size:
-                100% 1.5px,
-                1.5px 100%,
-                100% 1.5px,
-                1.5px 100%;
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
             background-position:
                 6px 6px,
                 calc(100% - 6px) 6px,
                 6px calc(100% - 6px),
                 6px 6px;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.5));
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.4));
             opacity: 0.95;
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
@@ -389,7 +389,7 @@
             box-shadow: 0 0 30px rgba(245, 200, 66, 0.08);
         }
         .gold-break-card:hover::before {
-            filter: drop-shadow(0 0 12px rgba(245, 200, 66, 0.6));
+            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.5));
         }
 
         /* ---- 四角金色装饰 (L型小线段) ---- */
@@ -406,7 +406,7 @@
             content: '';
             position: absolute;
             background: #f5c842;
-            box-shadow: 0 0 10px rgba(245, 200, 66, 0.5);
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
         /* 左上 */
@@ -418,13 +418,13 @@
             top: 0;
             left: 0;
             width: 10px;
-            height: 2px;
+            height: 1.5px;
             background: #f5c842;
         }
         .gold-break-card .corner-deco.tl::after {
             top: 0;
             left: 0;
-            width: 2px;
+            width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
@@ -437,13 +437,13 @@
             top: 0;
             right: 0;
             width: 10px;
-            height: 2px;
+            height: 1.5px;
             background: #f5c842;
         }
         .gold-break-card .corner-deco.tr::after {
             top: 0;
             right: 0;
-            width: 2px;
+            width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
@@ -456,13 +456,13 @@
             bottom: 0;
             left: 0;
             width: 10px;
-            height: 2px;
+            height: 1.5px;
             background: #f5c842;
         }
         .gold-break-card .corner-deco.bl::after {
             bottom: 0;
             left: 0;
-            width: 2px;
+            width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
@@ -475,13 +475,13 @@
             bottom: 0;
             right: 0;
             width: 10px;
-            height: 2px;
+            height: 1.5px;
             background: #f5c842;
         }
         .gold-break-card .corner-deco.br::after {
             bottom: 0;
             right: 0;
-            width: 2px;
+            width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
@@ -507,7 +507,7 @@
         }
 
         /* ============================================================
-                   ★★★ 扫描线效果 (替换原来的旋转光环) ★★★
+                   ★★★ 扫描线效果 ★★★
                    ============================================================ */
         .gold-break-card .card-image-box .scanline {
             position: absolute;
@@ -544,7 +544,6 @@
             filter: blur(2px);
         }
 
-        /* 扫描线发光核心 - 更亮的光束 */
         .gold-break-card .card-image-box .scanline::after {
             content: '';
             position: absolute;
@@ -673,6 +672,7 @@
             background: transparent;
             border-radius: 16px;
         }
+        /* ★★★ 底部面板外框金色超细线 0.75px ★★★ */
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -680,20 +680,21 @@
                 linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
                 linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
             background-size:
-                100% 1.5px,
-                1.5px 100%,
-                100% 1.5px,
-                1.5px 100%;
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
             background-position:
                 0 0,
                 100% 0,
                 0 100%,
                 0 0;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 6px rgba(245, 200, 66, 0.4));
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
             opacity: 0.9;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
+        /* ★★★ 底部面板内框蓝色超细线 0.75px ★★★ */
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -701,17 +702,17 @@
                 linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
                 linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
             background-size:
-                100% 1.5px,
-                1.5px 100%,
-                100% 1.5px,
-                1.5px 100%;
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
             background-position:
                 6px 6px,
                 calc(100% - 6px) 6px,
                 6px calc(100% - 6px),
                 6px 6px;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.4));
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
             opacity: 0.9;
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
