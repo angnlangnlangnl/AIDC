@@ -326,7 +326,7 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* ★★★ 主面板四角金色装饰 (L型小线段) ★★★ */
+        /* 主面板四角金色装饰 (L型小线段) */
         .gold-break-panel .corner-deco {
             position: absolute;
             z-index: 3;
@@ -343,7 +343,6 @@
             box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
-        /* 左上 */
         .gold-break-panel .corner-deco.tl {
             top: 3px;
             left: 3px;
@@ -362,7 +361,6 @@
             height: 10px;
             background: #f5c842;
         }
-        /* 右上 */
         .gold-break-panel .corner-deco.tr {
             top: 3px;
             right: 3px;
@@ -381,7 +379,6 @@
             height: 10px;
             background: #f5c842;
         }
-        /* 左下 */
         .gold-break-panel .corner-deco.bl {
             bottom: 3px;
             left: 3px;
@@ -400,7 +397,6 @@
             height: 10px;
             background: #f5c842;
         }
-        /* 右下 */
         .gold-break-panel .corner-deco.br {
             bottom: 3px;
             right: 3px;
@@ -520,7 +516,7 @@
             opacity: 0.7;
         }
 
-        /* ★★★ 资产卡片四角金色装饰 (L型小线段) ★★★ */
+        /* 资产卡片四角金色装饰 (L型小线段) */
         .gold-break-asset-card .corner-deco {
             position: absolute;
             z-index: 3;
@@ -537,7 +533,6 @@
             box-shadow: 0 0 6px rgba(245, 200, 66, 0.3);
             border-radius: 0;
         }
-        /* 左上 */
         .gold-break-asset-card .corner-deco.tl {
             top: 2px;
             left: 2px;
@@ -556,7 +551,6 @@
             height: 8px;
             background: #f5c842;
         }
-        /* 右上 */
         .gold-break-asset-card .corner-deco.tr {
             top: 2px;
             right: 2px;
@@ -575,7 +569,6 @@
             height: 8px;
             background: #f5c842;
         }
-        /* 左下 */
         .gold-break-asset-card .corner-deco.bl {
             bottom: 2px;
             left: 2px;
@@ -594,7 +587,6 @@
             height: 8px;
             background: #f5c842;
         }
-        /* 右下 */
         .gold-break-asset-card .corner-deco.br {
             bottom: 2px;
             right: 2px;
@@ -918,7 +910,6 @@
             ★★★ 用户信息面板 (金色断点风格 + 四角装饰) ★★★
             ========================================================== -->
             <div class="gold-break-panel">
-                <!-- 四角金色装饰 -->
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
@@ -947,7 +938,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 资产列表 (金色断点风格 + 四角装饰) ★★★
+            ★★★ 资产列表 (金色断点风格 + 四角装饰) — 已移除BCBS和HSBC ★★★
             ========================================================== -->
             <div id="assetListContainer">
 
@@ -1004,44 +995,6 @@
                         <div class="asset-right">
                             <div class="asset-balance" id="bal-AIDC">0.0000</div>
                             <div class="asset-usd-value" id="usd-AIDC">≈ $0.00</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BCBS -->
-                <div class="gold-break-asset-card">
-                    <div class="corner-deco tl"></div>
-                    <div class="corner-deco tr"></div>
-                    <div class="corner-deco bl"></div>
-                    <div class="corner-deco br"></div>
-                    <div class="asset-inner">
-                        <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bcbs.png" alt="BCBS"></div>
-                        <div class="asset-info">
-                            <div class="asset-name">BCBS</div>
-                            <div class="asset-price" id="price-BCBS">$0.00</div>
-                        </div>
-                        <div class="asset-right">
-                            <div class="asset-balance" id="bal-BCBS">0.0000</div>
-                            <div class="asset-usd-value" id="usd-BCBS">≈ $0.00</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HSBC -->
-                <div class="gold-break-asset-card">
-                    <div class="corner-deco tl"></div>
-                    <div class="corner-deco tr"></div>
-                    <div class="corner-deco bl"></div>
-                    <div class="corner-deco br"></div>
-                    <div class="asset-inner">
-                        <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/HSBC.icon.png" alt="HSBC"></div>
-                        <div class="asset-info">
-                            <div class="asset-name">HSBC</div>
-                            <div class="asset-price">$0.00</div>
-                        </div>
-                        <div class="asset-right">
-                            <div class="asset-balance" id="bal-HSBC">0.0000</div>
-                            <div class="asset-usd-value" id="usd-HSBC">≈ $0.00</div>
                         </div>
                     </div>
                 </div>
@@ -1299,11 +1252,9 @@
         }
 
         // ============================================================
-        // 钱包配置
+        // 钱包配置 (已移除BCBS和HSBC相关合约)
         // ============================================================
         const AIGC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
-        const BCBS_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995';
-        const HSBC_ADDRESS = '0x20aD84A60902A91F036bD6bdB85AD1d61B2f65C1';
         const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
         const BNB_ORACLE_ADDR = '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE';
 
@@ -1316,21 +1267,16 @@
             "function claimDividend(uint8 pool) returns (bool)",
             "function isInPool(uint8, address) view returns (bool)"
         ];
-        const BCBS_ABI = ["function balanceOf(address) view returns (uint256)", "function userRate(address) view returns (uint256)", "function getBCBSPrice() view returns (uint256)"];
         const ERC20_ABI = ["function balanceOf(address) view returns (uint256)"];
 
         let currentAccount = null, provider = null, signer = null;
-        let aigcContract, bcbsContract, hsbcContract, usdtContract, bnbOracle;
+        let aigcContract, usdtContract, bnbOracle;
         let isLoading = false, refreshTimer = null;
         const connectBtn = document.getElementById('connectWalletBtn');
-        const nodeNames = ['普通用户', '首富节点', '星链节点', '创世节点'];
-        const poolNames = ['首富池', '星链池', '创世池', 'S4池', 'S5池', 'S6池', 'S7池', 'S8池'];
 
         function initContracts() {
             if (provider && signer) {
                 aigcContract = new ethers.Contract(AIGC_ADDRESS, AIGC_ABI, signer);
-                bcbsContract = new ethers.Contract(BCBS_ADDRESS, BCBS_ABI, signer);
-                hsbcContract = new ethers.Contract(HSBC_ADDRESS, ERC20_ABI, signer);
                 usdtContract = new ethers.Contract(USDT_ADDRESS, ERC20_ABI, signer);
                 bnbOracle = new ethers.Contract(BNB_ORACLE_ADDR, BNB_ORACLE_ABI, provider);
             }
@@ -1338,11 +1284,6 @@
 
         async function getBNBPrice() {
             try { const [, a] = await bnbOracle.latestRoundData(); return parseFloat(ethers.utils.formatUnits(a, 8)); } catch (e) { return 580; }
-        }
-
-        async function getBCBSPrice() {
-            try { const r = await bcbsContract.getBCBSPrice(); const p = parseFloat(ethers.utils.formatEther(r)); if (p > 0) return p; } catch (e) {}
-            return 0;
         }
 
         window.handleConnect = async function() {
@@ -1383,8 +1324,6 @@
             provider = null;
             signer = null;
             aigcContract = null;
-            bcbsContract = null;
-            hsbcContract = null;
             usdtContract = null;
             bnbOracle = null;
             if (refreshTimer) { clearInterval(refreshTimer);
@@ -1396,11 +1335,10 @@
         }
 
         async function loadAllData() {
-            if (!currentAccount || !aigcContract || !bcbsContract) return;
+            if (!currentAccount || !aigcContract) return;
 
-            const [bnbPrice, bcbsPrice] = await Promise.all([getBNBPrice(), getBCBSPrice()]);
+            const bnbPrice = await getBNBPrice();
             document.getElementById('price-BNB').textContent = '$' + bnbPrice.toFixed(2);
-            document.getElementById('price-BCBS').textContent = '$' + bcbsPrice.toFixed(4);
 
             let nodeLevel = 0, identityLevel = 0, userRate = 0;
             try { const lvl = await aigcContract.getNodeLevel(currentAccount);
@@ -1410,7 +1348,8 @@
             if (nodeLevel === 0) { try { if (await aigcContract.isInPool(0, currentAccount)) nodeLevel = 1; } catch (e) {} }
             try { const id = await aigcContract.identityLevel(currentAccount);
                 identityLevel = parseInt(id.toString()); } catch (e) {}
-            try { const rate = await bcbsContract.userRate(currentAccount);
+            // 用户利率从AIGC合约获取，如果没有则使用默认值
+            try { const rate = await aigcContract.userRate ? await aigcContract.userRate(currentAccount) : 0;
                 userRate = parseFloat(ethers.utils.formatEther(rate)); } catch (e) {}
             if (userRate === 0) { const baseRates = [0, 0.02, 0.04, 0.15];
                 userRate = baseRates[nodeLevel] || 0; }
@@ -1437,19 +1376,15 @@
             if (!hasDividend) dividendHtml = '<span class="dividend-empty">' + langData.dividendEmpty + '</span>';
             document.getElementById('dividendList').innerHTML = dividendHtml;
 
-            let bnb = 0, usdt = 0, aidc = 0, bcbs = 0, hsbc = 0;
+            let bnb = 0, usdt = 0, aidc = 0;
             try { bnb = parseFloat(ethers.utils.formatEther(await provider.getBalance(currentAccount))); } catch (e) {}
             try { usdt = parseFloat(ethers.utils.formatEther(await usdtContract.balanceOf(currentAccount))); } catch (e) {}
             try { aidc = parseFloat(ethers.utils.formatEther(await aigcContract.balanceOf(currentAccount))); } catch (e) {}
-            try { bcbs = parseFloat(ethers.utils.formatEther(await bcbsContract.balanceOf(currentAccount))); } catch (e) {}
-            try { hsbc = parseFloat(ethers.utils.formatEther(await hsbcContract.balanceOf(currentAccount))); } catch (e) {}
 
             const tokens = [
                 { sym: 'BNB', balance: bnb, price: bnbPrice },
                 { sym: 'USDT', balance: usdt, price: 1 },
-                { sym: 'AIDC', balance: aidc, price: 1 },
-                { sym: 'BCBS', balance: bcbs, price: bcbsPrice },
-                { sym: 'HSBC', balance: hsbc, price: 0 }
+                { sym: 'AIDC', balance: aidc, price: 1 }
             ];
             let total = 0;
             for (const t of tokens) {
@@ -1482,8 +1417,7 @@
             document.getElementById('rateRow').textContent = langData.rateLabel + '：0.00%';
             document.getElementById('dividendList').innerHTML = langData.dividendEmpty;
             document.getElementById('price-BNB').textContent = '$580.25';
-            document.getElementById('price-BCBS').textContent = '$0.00';
-            ['BNB', 'USDT', 'AIDC', 'BCBS', 'HSBC'].forEach(s => {
+            ['BNB', 'USDT', 'AIDC'].forEach(s => {
                 document.getElementById('bal-' + s).textContent = '0.0000';
                 document.getElementById('usd-' + s).textContent = '≈ $0.00';
             });
