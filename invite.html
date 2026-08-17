@@ -75,7 +75,7 @@
         .connect-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-                   ★★★ 金色断点科技边框风格 (用于业绩/流程/记录卡片) ★★★
+                   ★★★ 金色断点科技边框风格 ★★★
                    ============================================================ */
         .gold-break-panel {
             position: relative;
@@ -153,9 +153,9 @@
         @keyframes goldPulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
         @keyframes bluePulse { 0% { opacity: 0.3; } 50% { opacity: 0.9; } 100% { opacity: 0.3; } }
 
-        /* ★★★ 空投卡片 — 恢复修改前样式 (普通panel边框) ★★★ */
+        /* ★★★ 空投卡片 — hb.png铺满 ★★★ */
         .airdrop-card { 
-            background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ty.png') center/contain no-repeat; 
+            background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/100% 100% no-repeat; 
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 15px;
@@ -164,6 +164,10 @@
             position: relative;
             box-shadow: inset 0 0 30px rgba(0, 136, 255, 0.02);
             background-color: var(--card-bg);
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .airdrop-card::before { 
             content: ''; 
@@ -182,9 +186,12 @@
             padding: 0; 
             background: transparent; 
             clip-path: none;
+            position: relative;
+            z-index: 1;
+            width: 100%;
         }
 
-        /* ★★★ 节点容器 — 恢复修改前样式 (普通panel边框) ★★★ */
+        /* ★★★ 节点容器 ★★★ */
         .node-container {
             background: var(--card-bg);
             border-radius: 16px;
@@ -210,13 +217,24 @@
         }
         .node-container .panel-inner { padding: 0; }
 
-        .page-title { font-size: 24px; color: var(--text-primary); text-align: center; margin: 10px 0 20px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .page-title img { width: 28px; height: 28px; object-fit: contain; }
+        /* ★★★ 移除页面标题 ★★★ */
+        .page-title { display: none; }
 
         .airdrop-card .airdrop-header { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; margin-bottom: 8px; }
-        .airdrop-card .airdrop-title { color: var(--text-primary); font-size: 18px; font-weight: 700; }
-        .airdrop-card .airdrop-amount-box { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 12px; text-align: center; color: var(--text-primary); font-size: 24px; font-weight: 700; margin: 8px 0 12px 0; }
-        .airdrop-card .airdrop-desc { color: var(--text-secondary); font-size: 12px; margin-bottom: 12px; }
+        .airdrop-card .airdrop-title { color: var(--text-primary); font-size: 18px; font-weight: 700; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .airdrop-card .airdrop-amount-box { 
+            background: transparent !important; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 6px; 
+            padding: 12px; 
+            text-align: right !important; 
+            color: var(--text-primary); 
+            font-size: 24px; 
+            font-weight: 700; 
+            margin: 8px 0 12px 0; 
+            backdrop-filter: none !important;
+        }
+        .airdrop-card .airdrop-desc { color: var(--text-primary-soft); font-size: 12px; margin-bottom: 12px; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
         .airdrop-btn { width: 100%; background: linear-gradient(90deg, var(--cyan-dim), var(--cyan-glow)); border: none; border-radius: 8px; padding: 12px; font-weight: 600; color: #050B15; cursor: pointer; box-shadow: 0 0 15px rgba(0, 136, 255, 0.4); font-size: 15px; transition: all 0.2s; clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px); }
         .airdrop-btn:hover:not(:disabled) { box-shadow: 0 0 25px rgba(0, 204, 255, 0.6); transform: translateY(-2px); }
         .airdrop-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -228,6 +246,7 @@
         .node-card:active { transform: scale(0.98); }
         .node-title { font-size: 20px; font-weight: 700; color: var(--text-primary); letter-spacing: 1px; }
         .node-reward { font-size: 16px; color: var(--cyan-glow); }
+        /* ★★★ S改成X ★★★ */
         .node-rights { font-size: 14px; color: var(--text-primary-soft); background: rgba(0, 136, 255, 0.1); padding: 2px 10px; border-radius: 10px; }
         .node-dividend { font-size: 14px; color: #4caf50; background: rgba(76, 175, 80, 0.1); padding: 2px 10px; border-radius: 10px; }
         .node-apply-btn { width: 85%; background: linear-gradient(135deg, #0A1A30, #1A2A40) padding-box, linear-gradient(90deg, var(--cyan-dim), var(--cyan-glow)) border-box; border: 1px solid transparent; border-radius: 8px; padding: 12px; font-weight: bold; color: var(--cyan-glow); cursor: pointer; box-shadow: 0 4px 15px rgba(0, 136, 255, 0.2); font-size: 15px; margin-top: 5px; transition: all 0.2s; clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px); }
@@ -315,26 +334,29 @@
                     <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
                 </div>
             </div>
-            <div class="page-title"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/rp.png" alt="邀请"> <span id="pageTitle">邀请好友</span></div>
+            <!-- ★★★ 移除"邀请好友"标题 ★★★ -->
+            <!-- <div class="page-title"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/rp.png" alt="邀请"> <span id="pageTitle">邀请好友</span></div> -->
 
-            <!-- ★★★ 空投卡片 — 恢复修改前边框样式 ★★★ -->
+            <!-- ★★★ 空投卡片 — hb.png铺满 ★★★ -->
             <div class="airdrop-card">
                 <div class="panel-inner">
                     <div class="airdrop-header">
                         <div style="text-align:center;"><div class="airdrop-title" id="airdropTitle">发红包 交朋友</div><div class="airdrop-desc" id="airdropDesc">邀请好友，一起探索太空文明</div></div>
                     </div>
+                    <!-- ★★★ 未领取文字靠右 ★★★ -->
                     <div class="airdrop-amount-box" id="airdropStatus">未领取</div>
                     <button class="airdrop-btn" id="claimAirdropBtn">立即领取</button>
                 </div>
             </div>
 
-            <!-- ★★★ 节点容器 — 恢复修改前边框样式 ★★★ -->
+            <!-- ★★★ 节点容器 ★★★ -->
             <div class="node-container">
                 <div class="panel-inner">
                     <div class="node-slider" id="nodeSlider">
-                        <div class="node-card"><div class="node-title" id="nodeTitle1">创世节点</div><div class="node-reward" id="nodeReward1">收益3倍</div><div class="node-rights" id="nodeRights1">S2权益 极差2%-10%</div><div class="node-dividend" id="nodeDividend1">全球分红1%</div><button class="node-apply-btn" data-node="rich">立即申请</button></div>
-                        <div class="node-card"><div class="node-title" id="nodeTitle2">Open AI 节点</div><div class="node-reward" id="nodeReward2">收益4倍</div><div class="node-rights" id="nodeRights2">S3权益 极差4%-15%</div><div class="node-dividend" id="nodeDividend2">全球分红1.6%</div><button class="node-apply-btn" data-node="starlink">立即申请</button></div>
-                        <div class="node-card"><div class="node-title" id="nodeTitle3">Spacex 节点</div><div class="node-reward" id="nodeReward3">收益5倍</div><div class="node-rights" id="nodeRights3">S8权益 极差15%-40%</div><div class="node-dividend" id="nodeDividend3">全球分红2.4%</div><button class="node-apply-btn" data-node="genesis">立即申请</button></div>
+                        <!-- ★★★ S改成X ★★★ -->
+                        <div class="node-card"><div class="node-title" id="nodeTitle1">创世节点</div><div class="node-reward" id="nodeReward1">收益3倍</div><div class="node-rights" id="nodeRights1">X2权益 极差2%-10%</div><div class="node-dividend" id="nodeDividend1">全球分红1%</div><button class="node-apply-btn" data-node="rich">立即申请</button></div>
+                        <div class="node-card"><div class="node-title" id="nodeTitle2">Open AI 节点</div><div class="node-reward" id="nodeReward2">收益4倍</div><div class="node-rights" id="nodeRights2">X3权益 极差4%-15%</div><div class="node-dividend" id="nodeDividend2">全球分红1.6%</div><button class="node-apply-btn" data-node="starlink">立即申请</button></div>
+                        <div class="node-card"><div class="node-title" id="nodeTitle3">Spacex 节点</div><div class="node-reward" id="nodeReward3">收益5倍</div><div class="node-rights" id="nodeRights3">X8权益 极差15%-40%</div><div class="node-dividend" id="nodeDividend3">全球分红2.4%</div><button class="node-apply-btn" data-node="genesis">立即申请</button></div>
                     </div>
                     <div class="claim-stats-row">
                         <div class="claim-stats-item"><div class="claim-stats-label" id="statsLabel1">累计铸币</div><div class="claim-stats-value" style="color: var(--cyan-glow);"><span id="totalClaimed">0.0000</span> <span style="font-size:11px;color:var(--text-secondary);">AIDC</span></div></div>
@@ -428,17 +450,18 @@
                 airdropStatusAvailable: '可领取 100 HSBC',
                 claimBtn: '立即领取',
                 claimBtnClaimed: '已领取',
+                // ★★★ 节点权益S改成X ★★★
                 nodeTitle1: '创世节点',
                 nodeReward1: '收益3倍',
-                nodeRights1: 'S2权益 极差2%-10%',
+                nodeRights1: 'X2权益 极差2%-10%',
                 nodeDividend1: '全球分红1%',
                 nodeTitle2: 'Open AI 节点',
                 nodeReward2: '收益4倍',
-                nodeRights2: 'S3权益 极差4%-15%',
+                nodeRights2: 'X3权益 极差4%-15%',
                 nodeDividend2: '全球分红1.6%',
                 nodeTitle3: 'Spacex 节点',
                 nodeReward3: '收益5倍',
-                nodeRights3: 'S8权益 极差15%-40%',
+                nodeRights3: 'X8权益 极差15%-40%',
                 nodeDividend3: '全球分红2.4%',
                 applyBtn: '立即申请',
                 applyBtnDisabled: '已申请',
@@ -505,15 +528,15 @@
                 claimBtnClaimed: 'Claimed',
                 nodeTitle1: 'Genesis Node',
                 nodeReward1: '3x Reward',
-                nodeRights1: 'S2 Rights 2%-10%',
+                nodeRights1: 'X2 Rights 2%-10%',
                 nodeDividend1: 'Global Dividend 1%',
                 nodeTitle2: 'Open AI Node',
                 nodeReward2: '4x Reward',
-                nodeRights2: 'S3 Rights 4%-15%',
+                nodeRights2: 'X3 Rights 4%-15%',
                 nodeDividend2: 'Global Dividend 1.6%',
                 nodeTitle3: 'SpaceX Node',
                 nodeReward3: '5x Reward',
-                nodeRights3: 'S8 Rights 15%-40%',
+                nodeRights3: 'X8 Rights 15%-40%',
                 nodeDividend3: 'Global Dividend 2.4%',
                 applyBtn: 'Apply Now',
                 applyBtnDisabled: 'Applied',
@@ -580,15 +603,15 @@
                 claimBtnClaimed: '已領取',
                 nodeTitle1: '創世節點',
                 nodeReward1: '收益3倍',
-                nodeRights1: 'S2權益 極差2%-10%',
+                nodeRights1: 'X2權益 極差2%-10%',
                 nodeDividend1: '全球分紅1%',
                 nodeTitle2: 'Open AI 節點',
                 nodeReward2: '收益4倍',
-                nodeRights2: 'S3權益 極差4%-15%',
+                nodeRights2: 'X3權益 極差4%-15%',
                 nodeDividend2: '全球分紅1.6%',
                 nodeTitle3: 'Spacex 節點',
                 nodeReward3: '收益5倍',
-                nodeRights3: 'S8權益 極差15%-40%',
+                nodeRights3: 'X8權益 極差15%-40%',
                 nodeDividend3: '全球分紅2.4%',
                 applyBtn: '立即申請',
                 applyBtnDisabled: '已申請',
@@ -655,15 +678,15 @@
                 claimBtnClaimed: 'Reclamado',
                 nodeTitle1: 'Nodo Génesis',
                 nodeReward1: '3x Recompensa',
-                nodeRights1: 'Derechos S2 2%-10%',
+                nodeRights1: 'X2 Derechos 2%-10%',
                 nodeDividend1: 'Dividendo Global 1%',
                 nodeTitle2: 'Nodo Open AI',
                 nodeReward2: '4x Recompensa',
-                nodeRights2: 'Derechos S3 4%-15%',
+                nodeRights2: 'X3 Derechos 4%-15%',
                 nodeDividend2: 'Dividendo Global 1.6%',
                 nodeTitle3: 'Nodo SpaceX',
                 nodeReward3: '5x Recompensa',
-                nodeRights3: 'Derechos S8 15%-40%',
+                nodeRights3: 'X8 Derechos 15%-40%',
                 nodeDividend3: 'Dividendo Global 2.4%',
                 applyBtn: 'Solicitar Ahora',
                 applyBtnDisabled: 'Solicitado',
@@ -730,15 +753,15 @@
                 claimBtnClaimed: 'Réclamé',
                 nodeTitle1: 'Nœud Genesis',
                 nodeReward1: '3x Récompense',
-                nodeRights1: 'Droits S2 2%-10%',
+                nodeRights1: 'X2 Droits 2%-10%',
                 nodeDividend1: 'Dividende Global 1%',
                 nodeTitle2: 'Nœud Open AI',
                 nodeReward2: '4x Récompense',
-                nodeRights2: 'Droits S3 4%-15%',
+                nodeRights2: 'X3 Droits 4%-15%',
                 nodeDividend2: 'Dividende Global 1.6%',
                 nodeTitle3: 'Nœud SpaceX',
                 nodeReward3: '5x Récompense',
-                nodeRights3: 'Droits S8 15%-40%',
+                nodeRights3: 'X8 Droits 15%-40%',
                 nodeDividend3: 'Dividende Global 2.4%',
                 applyBtn: 'Postuler Maintenant',
                 applyBtnDisabled: 'Postulé',
@@ -805,15 +828,15 @@
                 claimBtnClaimed: '수령 완료',
                 nodeTitle1: '창세 노드',
                 nodeReward1: '3배 보상',
-                nodeRights1: 'S2 권한 2%-10%',
+                nodeRights1: 'X2 권한 2%-10%',
                 nodeDividend1: '글로벌 배당 1%',
                 nodeTitle2: 'Open AI 노드',
                 nodeReward2: '4배 보상',
-                nodeRights2: 'S3 권한 4%-15%',
+                nodeRights2: 'X3 권한 4%-15%',
                 nodeDividend2: '글로벌 배당 1.6%',
                 nodeTitle3: 'SpaceX 노드',
                 nodeReward3: '5배 보상',
-                nodeRights3: 'S8 권한 15%-40%',
+                nodeRights3: 'X8 권한 15%-40%',
                 nodeDividend3: '글로벌 배당 2.4%',
                 applyBtn: '지금 신청',
                 applyBtnDisabled: '신청 완료',
@@ -880,15 +903,15 @@
                 claimBtnClaimed: '受領済み',
                 nodeTitle1: 'ジェネシスノード',
                 nodeReward1: '3倍報酬',
-                nodeRights1: 'S2権限 2%-10%',
+                nodeRights1: 'X2権限 2%-10%',
                 nodeDividend1: 'グローバル配当 1%',
                 nodeTitle2: 'Open AI ノード',
                 nodeReward2: '4倍報酬',
-                nodeRights2: 'S3権限 4%-15%',
+                nodeRights2: 'X3権限 4%-15%',
                 nodeDividend2: 'グローバル配当 1.6%',
                 nodeTitle3: 'SpaceX ノード',
                 nodeReward3: '5倍報酬',
-                nodeRights3: 'S8権限 15%-40%',
+                nodeRights3: 'X8権限 15%-40%',
                 nodeDividend3: 'グローバル配当 2.4%',
                 applyBtn: '今すぐ申請',
                 applyBtnDisabled: '申請済み',
@@ -955,15 +978,15 @@
                 claimBtnClaimed: 'تم المطالبة',
                 nodeTitle1: 'عقدة التكوين',
                 nodeReward1: '3x مكافأة',
-                nodeRights1: 'حقوق S2 2%-10%',
+                nodeRights1: 'X2 حقوق 2%-10%',
                 nodeDividend1: 'توزيع عالمي 1%',
                 nodeTitle2: 'عقدة Open AI',
                 nodeReward2: '4x مكافأة',
-                nodeRights2: 'حقوق S3 4%-15%',
+                nodeRights2: 'X3 حقوق 4%-15%',
                 nodeDividend2: 'توزيع عالمي 1.6%',
                 nodeTitle3: 'عقدة SpaceX',
                 nodeReward3: '5x مكافأة',
-                nodeRights3: 'حقوق S8 15%-40%',
+                nodeRights3: 'X8 حقوق 15%-40%',
                 nodeDividend3: 'توزيع عالمي 2.4%',
                 applyBtn: 'تقديم الآن',
                 applyBtnDisabled: 'تم التقديم',
@@ -1030,15 +1053,15 @@
                 claimBtnClaimed: 'Получено',
                 nodeTitle1: 'Узел Genesis',
                 nodeReward1: '3x вознаграждение',
-                nodeRights1: 'Права S2 2%-10%',
+                nodeRights1: 'X2 Права 2%-10%',
                 nodeDividend1: 'Глобальные дивиденды 1%',
                 nodeTitle2: 'Узел Open AI',
                 nodeReward2: '4x вознаграждение',
-                nodeRights2: 'Права S3 4%-15%',
+                nodeRights2: 'X3 Права 4%-15%',
                 nodeDividend2: 'Глобальные дивиденды 1.6%',
                 nodeTitle3: 'Узел SpaceX',
                 nodeReward3: '5x вознаграждение',
-                nodeRights3: 'Права S8 15%-40%',
+                nodeRights3: 'X8 Права 15%-40%',
                 nodeDividend3: 'Глобальные дивиденды 2.4%',
                 applyBtn: 'Подать заявку сейчас',
                 applyBtnDisabled: 'Заявка подана',
@@ -1139,7 +1162,8 @@
 
         function applyTranslations(langData) {
             langBtn.textContent = langData.langBtn + ' ⌄';
-            document.getElementById('pageTitle').textContent = langData.pageTitle;
+            // ★★★ pageTitle 已移除，但保留以防JS报错 ★★★
+            // document.getElementById('pageTitle').textContent = langData.pageTitle;
             document.getElementById('airdropTitle').textContent = langData.airdropTitle;
             document.getElementById('airdropDesc').textContent = langData.airdropDesc;
             document.getElementById('nodeTitle1').textContent = langData.nodeTitle1;
