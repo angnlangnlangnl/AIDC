@@ -261,9 +261,10 @@
             background: rgba(0, 16, 40, 0.5);
             backdrop-filter: blur(8px);
             border-radius: 16px;
-            padding: 10px 15px 10px 0;
+            padding: 8px 12px 8px 0;
             margin-bottom: 20px;
-            min-height: 113px;
+            /* ★★★ 高度缩小20%：min-height从113px → 90px ★★★ */
+            min-height: 90px;
             transition: all 0.3s;
             /* 核心斜切边缘 (非圆角/非直角) */
             clip-path: polygon(
@@ -291,10 +292,12 @@
                 0% calc(100% - 8px),
                 0% 8px
             );
-            padding: 6px 12px 6px 6px;
+            /* ★★★ 内边距缩小 ★★★ */
+            padding: 4px 10px 4px 4px;
             display: flex;
             align-items: center;
-            min-height: 100px;
+            /* ★★★ min-height从100px → 80px ★★★ */
+            min-height: 80px;
         }
 
         /* ---- 双层边框 (外框金色细线 + 内框蓝色细线 断点交替) ---- */
@@ -314,7 +317,7 @@
             border-radius: 16px;
         }
 
-        /* ★★★ 外层边框：金色 · 超细线 (0.75px) · 断点 30%-70% ★★★ */
+        /* 外层边框：金色 · 超细线 (0.75px) · 断点 30%-70% */
         .gold-break-card::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -337,7 +340,7 @@
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* ★★★ 内层边框：蓝色 · 超细线 (0.75px) · 断点错位 15%-55% ★★★ */
+        /* 内层边框：蓝色 · 超细线 (0.75px) · 断点错位 15%-55% */
         .gold-break-card::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -488,17 +491,20 @@
 
         /* ---- 卡片内部内容样式 ---- */
         .gold-break-card .card-image-box {
-            flex: 0 0 110px;
-            height: 100px;
+            /* ★★★ 图片区域缩小20%：110px → 88px ★★★ */
+            flex: 0 0 88px;
+            /* ★★★ 高度缩小20%：100px → 80px ★★★ */
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            margin-left: 6px;
+            margin-left: 4px;
         }
         .gold-break-card .card-image-box img {
-            width: 64px;
-            height: 64px;
+            /* ★★★ 图片缩小20%：64px → 52px ★★★ */
+            width: 52px;
+            height: 52px;
             object-fit: contain;
             filter: drop-shadow(0 0 10px rgba(245, 200, 66, 0.15));
             border-radius: 50%;
@@ -507,7 +513,7 @@
         }
 
         /* ============================================================
-                   ★★★ 扫描线效果 ★★★
+                   ★★★ 扫描线效果 (尺寸自适应缩小) ★★★
                    ============================================================ */
         .gold-break-card .card-image-box .scanline {
             position: absolute;
@@ -578,7 +584,8 @@
 
         .gold-break-card .card-content {
             flex: 1;
-            padding: 5px 15px 5px 10px;
+            /* ★★★ 内边距缩小 ★★★ */
+            padding: 2px 12px 2px 8px;
             display: flex;
             flex-direction: column;
         }
@@ -586,40 +593,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2px;
+            margin-bottom: 0px;
         }
         .gold-break-card .card-header h2 {
-            font-size: 18px;
+            /* ★★★ 标题字号略微缩小 ★★★ */
+            font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
             letter-spacing: 1px;
         }
         .gold-break-card .card-header .arrow {
             color: var(--gold);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 300;
             cursor: pointer;
             text-shadow: 0 0 10px var(--gold-glow);
         }
         .gold-break-card .card-separator {
             color: var(--gold);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             letter-spacing: 1px;
-            font-size: 12px;
-            transform: scale(0.375);
+            font-size: 10px;
+            transform: scale(0.3);
             transform-origin: left center;
             display: inline-block;
             opacity: 0.6;
         }
         .gold-break-card .card-description {
-            font-size: 12px;
-            line-height: 1.4;
+            font-size: 11px;
+            line-height: 1.3;
             color: var(--text-primary-soft);
             text-align: justify;
-            transform: scale(0.666);
+            transform: scale(0.6);
             transform-origin: left top;
-            width: calc(100% / 0.666);
-            padding-right: 10px;
+            width: calc(100% / 0.6);
+            padding-right: 8px;
         }
 
         /* ============================================================
@@ -672,7 +680,6 @@
             background: transparent;
             border-radius: 16px;
         }
-        /* ★★★ 底部面板外框金色超细线 0.75px ★★★ */
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -694,7 +701,6 @@
             opacity: 0.9;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
-        /* ★★★ 底部面板内框蓝色超细线 0.75px ★★★ */
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -821,11 +827,11 @@
                    ============================================================ */
         @media (max-width: 600px) {
             .gold-break-card .card-description {
-                transform: scale(0.6);
-                width: calc(100% / 0.6);
+                transform: scale(0.55);
+                width: calc(100% / 0.55);
             }
             .gold-break-card .card-content {
-                padding: 5px 8px 5px 6px;
+                padding: 2px 8px 2px 4px;
             }
         }
     </style>
@@ -866,7 +872,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 卡片1: REUST (金色断点风格 + 扫描线) ★★★
+            ★★★ 卡片1: REUST (高度缩小20%) ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <!-- 四角金色装饰 -->
@@ -878,7 +884,7 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/reust.png" alt="REUST">
-                        <!-- ★★★ 扫描线容器 ★★★ -->
+                        <!-- 扫描线容器 -->
                         <div class="scanline"></div>
                     </div>
                     <div class="card-content">
@@ -893,7 +899,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 卡片2: VEUST (金色断点风格 + 扫描线) ★★★
+            ★★★ 卡片2: VEUST (高度缩小20%) ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -904,7 +910,7 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/veust.png" alt="VEUST">
-                        <!-- ★★★ 扫描线容器 ★★★ -->
+                        <!-- 扫描线容器 -->
                         <div class="scanline"></div>
                     </div>
                     <div class="card-content">
