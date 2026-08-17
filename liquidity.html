@@ -39,6 +39,11 @@
             --aidc-blue-dim: #0088FF;
             --aidc-blue-glow: rgba(0, 221, 255, 0.5);
             --aidc-blue-border: rgba(0, 221, 255, 0.3);
+            
+            /* 内边框蓝色 */
+            --inner-blue: #7fc9ff;
+            --inner-blue-glow: rgba(127, 201, 255, 0.5);
+            --inner-blue-dim: rgba(127, 201, 255, 0.15);
         }
 
         body {
@@ -586,29 +591,30 @@
             font-size: 14px;
         }
 
-        .btn-gold {
+        /* 立刻铸造按钮 — 内边框蓝色系 */
+        .btn-mint-blue {
             display: inline-block;
             padding: 12px 24px;
-            border: 1px solid #f5c842;
+            border: 1px solid #7fc9ff;
             border-radius: 0;
             font-size: 0.95rem;
             letter-spacing: 3px;
-            color: #f5c842;
-            background: rgba(245, 200, 66, 0.08);
+            color: #7fc9ff;
+            background: rgba(127, 201, 255, 0.08);
             clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
             text-align: center;
             font-weight: 600;
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.05);
+            box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
         }
-        .btn-gold:hover {
-            background: rgba(245, 200, 66, 0.18);
-            box-shadow: 0 0 30px rgba(245, 200, 66, 0.2);
+        .btn-mint-blue:hover {
+            background: rgba(127, 201, 255, 0.18);
+            box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
             transform: translateY(-2px);
         }
-        .btn-gold:active {
+        .btn-mint-blue:active {
             transform: translateY(0px);
         }
 
@@ -634,26 +640,6 @@
             font-weight: 600;
             color: var(--text-primary);
             margin-top: 2px;
-        }
-
-        /* 流动性面板按钮 */
-        .btn-primary {
-            width: 100%;
-            background: linear-gradient(90deg, var(--cyan-dim), var(--cyan-glow));
-            border: none;
-            border-radius: 8px;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #050B15;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0, 136, 255, 0.3);
-            transition: all 0.3s;
-            clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 204, 255, 0.5);
         }
 
         /* ============================================================
@@ -771,6 +757,11 @@
             }
         }
 
+        /* ★★★ 卡片下移 — 增加顶部间距 ★★★ */
+        .card-spacer {
+            height: 40px;
+        }
+
         @media (max-width: 600px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -781,6 +772,9 @@
             }
             .gold-break-card {
                 padding: 14px 12px;
+            }
+            .card-spacer {
+                height: 30px;
             }
         }
     </style>
@@ -816,6 +810,9 @@
 
             <!-- ===== 页面标题 ===== -->
             <div class="page-title" id="pageTitle">💧 流动性</div>
+
+            <!-- ★★★ 空位 — 铸造进度卡片下移一个身位 ★★★ -->
+            <div class="card-spacer"></div>
 
             <!-- ==========================================================
             ★★★ 铸造进度卡片 ★★★
@@ -887,7 +884,7 @@
                         </div>
                     </div>
 
-                    <button class="btn-gold" onclick="startMint()">立刻铸造</button>
+                    <button class="btn-mint-blue" onclick="startMint()">立刻铸造</button>
                 </div>
             </div>
 
@@ -922,21 +919,6 @@
                             <div class="value">10%</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- ==========================================================
-            ★★★ 流动性面板 ★★★
-            ========================================================== -->
-            <div class="gold-break-card">
-                <div class="corner-deco tl"></div>
-                <div class="corner-deco tr"></div>
-                <div class="corner-deco bl"></div>
-                <div class="corner-deco br"></div>
-                <div class="card-inner">
-                    <div style="color:var(--text-primary);font-size:14px;font-weight:600;margin-bottom:8px;" id="panelTitle">添加流动性</div>
-                    <div style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;" id="panelDesc">为交易对提供流动性，赚取手续费奖励</div>
-                    <button class="btn-primary" id="panelBtn">添加流动性</button>
                 </div>
             </div>
 
@@ -982,9 +964,6 @@
             cn: {
                 langBtn: '🇨🇳 CN',
                 pageTitle: '💧 流动性',
-                panelTitle: '添加流动性',
-                panelDesc: '为交易对提供流动性，赚取手续费奖励',
-                panelBtn: '添加流动性',
                 navAssets: '资产',
                 navStake: '质押',
                 navLiquidity: '流动性',
@@ -994,9 +973,6 @@
             en: {
                 langBtn: '🇺🇸 EN',
                 pageTitle: '💧 Liquidity',
-                panelTitle: 'Add Liquidity',
-                panelDesc: 'Provide liquidity for trading pairs and earn fee rewards',
-                panelBtn: 'Add Liquidity',
                 navAssets: 'Assets',
                 navStake: 'Stake',
                 navLiquidity: 'Liquidity',
@@ -1006,9 +982,6 @@
             zh: {
                 langBtn: '🇭🇰 繁中',
                 pageTitle: '💧 流動性',
-                panelTitle: '添加流動性',
-                panelDesc: '為交易對提供流動性，賺取手續費獎勵',
-                panelBtn: '添加流動性',
                 navAssets: '資產',
                 navStake: '質押',
                 navLiquidity: '流動性',
@@ -1018,9 +991,6 @@
             es: {
                 langBtn: '🇪🇸 ES',
                 pageTitle: '💧 Liquidez',
-                panelTitle: 'Agregar Liquidez',
-                panelDesc: 'Proporcione liquidez para pares comerciales y gane recompensas por tarifas',
-                panelBtn: 'Agregar Liquidez',
                 navAssets: 'Activos',
                 navStake: 'Stake',
                 navLiquidity: 'Liquidez',
@@ -1030,9 +1000,6 @@
             fr: {
                 langBtn: '🇫🇷 FR',
                 pageTitle: '💧 Liquidité',
-                panelTitle: 'Ajouter de la Liquidité',
-                panelDesc: 'Fournissez de la liquidité pour les paires de trading et gagnez des récompenses de frais',
-                panelBtn: 'Ajouter de la Liquidité',
                 navAssets: 'Actifs',
                 navStake: 'Staking',
                 navLiquidity: 'Liquidité',
@@ -1042,9 +1009,6 @@
             ko: {
                 langBtn: '🇰🇷 KO',
                 pageTitle: '💧 유동성',
-                panelTitle: '유동성 추가',
-                panelDesc: '거래 쌍에 유동성을 제공하고 수수료 보상을 받으세요',
-                panelBtn: '유동성 추가',
                 navAssets: '자산',
                 navStake: '스테이킹',
                 navLiquidity: '유동성',
@@ -1054,9 +1018,6 @@
             ja: {
                 langBtn: '🇯🇵 JA',
                 pageTitle: '💧 流動性',
-                panelTitle: '流動性を追加',
-                panelDesc: '取引ペアに流動性を提供し、手数料報酬を獲得',
-                panelBtn: '流動性を追加',
                 navAssets: '資産',
                 navStake: 'ステーキング',
                 navLiquidity: '流動性',
@@ -1066,9 +1027,6 @@
             ar: {
                 langBtn: '🇸🇦 AR',
                 pageTitle: '💧 السيولة',
-                panelTitle: 'إضافة سيولة',
-                panelDesc: 'تقديم السيولة لأزواج التداول وكسب مكافآت الرسوم',
-                panelBtn: 'إضافة سيولة',
                 navAssets: 'الأصول',
                 navStake: 'تخزين',
                 navLiquidity: 'سيولة',
@@ -1078,9 +1036,6 @@
             ru: {
                 langBtn: '🇷🇺 RU',
                 pageTitle: '💧 Ликвидность',
-                panelTitle: 'Добавить ликвидность',
-                panelDesc: 'Предоставьте ликвидность для торговых пар и получайте вознаграждение за комиссии',
-                panelBtn: 'Добавить ликвидность',
                 navAssets: 'Активы',
                 navStake: 'Стейкинг',
                 navLiquidity: 'Ликвидность',
@@ -1133,9 +1088,6 @@
         function applyTranslations(langData) {
             langBtn.textContent = langData.langBtn + ' ⌄';
             document.getElementById('pageTitle').textContent = langData.pageTitle;
-            document.getElementById('panelTitle').textContent = langData.panelTitle;
-            document.getElementById('panelDesc').textContent = langData.panelDesc;
-            document.getElementById('panelBtn').textContent = langData.panelBtn;
             document.getElementById('navAssets').textContent = langData.navAssets;
             document.getElementById('navStake').textContent = langData.navStake;
             document.getElementById('navLiquidity').textContent = langData.navLiquidity;
