@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>铸造 - AIDC</title>
+    <title>流动性 - AIDC</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js">
+    </script>
     <style>
         /* ============================================================
-                   全局重置 & 主题色 — 与AIDC项目统一
+                   全局重置 & 主题色 — 与生态页完全一致
                    ============================================================ */
         * {
             margin: 0;
@@ -44,25 +46,30 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             color: var(--text-primary);
-            padding: 0;
-            margin: 0;
         }
 
         .app-container {
             width: 100%;
             max-width: 420px;
-            min-height: 100vh;
-            min-height: 100dvh;
+            height: 100%;
+            max-height: 100vh;
+            max-height: 100dvh;
             background: radial-gradient(circle at 50% 10%, #102040 0%, #050B15 100%);
+            border-radius: 20px;
             box-shadow: 0 0 40px rgba(0, 136, 255, 0.1);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            padding-bottom: 80px;
         }
 
         .app-container::before {
@@ -79,6 +86,7 @@
             opacity: 1;
             z-index: 0;
             pointer-events: none;
+            border-radius: 20px;
         }
 
         .scroll-area {
@@ -92,19 +100,14 @@
         }
 
         /* ============================================================
-                   Header — 与AIDC项目一致
+                   Header — 与生态页完全一致
                    ============================================================ */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(5, 11, 21, 0.9);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 221, 255, 0.1);
+            padding-bottom: 20px;
+            position: relative;
         }
         .logo-area {
             display: flex;
@@ -117,18 +120,14 @@
         .logo-area img {
             width: 24px;
             height: 24px;
-            margin-right: 8px;
+            margin-right: 5px;
         }
-        .logo-area .logo-text {
+        .logo-area span {
+            margin-left: 5px;
             background: linear-gradient(90deg, #0088FF, #00DDFF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-        .logo-area .logo-spacex {
-            color: var(--gold);
-            font-weight: 900;
-            font-style: italic;
         }
 
         .header-controls {
@@ -153,6 +152,52 @@
             box-shadow: 0 0 15px rgba(0, 221, 255, 0.4);
             background: rgba(0, 221, 255, 0.1);
         }
+        .lang-btn.active {
+            background: rgba(0, 221, 255, 0.15);
+            border-color: #00DDFF;
+            color: #00DDFF;
+        }
+
+        .lang-dropdown {
+            display: none;
+            position: absolute;
+            top: 35px;
+            right: 0;
+            background: rgba(8, 20, 48, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 221, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            width: 200px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .lang-dropdown.open {
+            display: flex;
+        }
+        .lang-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: var(--text-primary-soft);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-option:hover {
+            background: rgba(0, 221, 255, 0.1);
+            color: #00DDFF;
+        }
+        .lang-option .code {
+            color: #00DDFF;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
 
         .connect-btn {
             background: transparent;
@@ -167,7 +212,7 @@
             transition: all 0.3s;
             white-space: nowrap;
         }
-        .connect-btn:hover {
+        .connect-btn:hover:not(:disabled) {
             box-shadow: 0 0 25px rgba(0, 221, 255, 0.25);
             background: rgba(0, 221, 255, 0.08);
         }
@@ -177,17 +222,21 @@
             color: #00DDFF;
             box-shadow: 0 0 20px rgba(0, 221, 255, 0.2);
         }
+        .connect-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
         /* ============================================================
-                   ★★★ 金色断点科技边框风格 — 与AIDC项目一致 ★★★
+                   ★★★ 金色断点科技边框风格 — 与生态页完全一致 ★★★
                    ============================================================ */
 
-        .gold-break-card {
+        .gold-break-panel {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
             backdrop-filter: blur(8px);
             border-radius: 16px;
-            padding: 18px 16px;
+            padding: 15px;
             margin-bottom: 15px;
             clip-path: polygon(
                 8px 0%,
@@ -201,7 +250,7 @@
             );
             transition: all 0.3s;
         }
-        .gold-break-card .card-inner {
+        .gold-break-panel .panel-inner {
             clip-path: polygon(
                 8px 0%,
                 calc(100% - 8px) 0%,
@@ -215,8 +264,8 @@
             padding: 2px;
         }
 
-        .gold-break-card::before,
-        .gold-break-card::after {
+        .gold-break-panel::before,
+        .gold-break-panel::after {
             content: '';
             position: absolute;
             top: 0;
@@ -230,8 +279,7 @@
             border-radius: 16px;
         }
 
-        /* 外层边框：金色 · 0.75px · 断点 30%-70% */
-        .gold-break-card::before {
+        .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
                 linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -253,8 +301,7 @@
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* 内层边框：蓝色 · 0.75px · 断点错位 15%-55% */
-        .gold-break-card::after {
+        .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
                 linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -276,8 +323,8 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* 四角金色装饰 (L型小线段) */
-        .gold-break-card .corner-deco {
+        /* 四角金色装饰 */
+        .gold-break-panel .corner-deco {
             position: absolute;
             z-index: 3;
             width: 12px;
@@ -285,80 +332,80 @@
             background: transparent;
             pointer-events: none;
         }
-        .gold-break-card .corner-deco::before,
-        .gold-break-card .corner-deco::after {
+        .gold-break-panel .corner-deco::before,
+        .gold-break-panel .corner-deco::after {
             content: '';
             position: absolute;
             background: #f5c842;
             box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
-        .gold-break-card .corner-deco.tl {
+        .gold-break-panel .corner-deco.tl {
             top: 3px;
             left: 3px;
         }
-        .gold-break-card .corner-deco.tl::before {
+        .gold-break-panel .corner-deco.tl::before {
             top: 0;
             left: 0;
             width: 10px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.tl::after {
+        .gold-break-panel .corner-deco.tl::after {
             top: 0;
             left: 0;
             width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.tr {
+        .gold-break-panel .corner-deco.tr {
             top: 3px;
             right: 3px;
         }
-        .gold-break-card .corner-deco.tr::before {
+        .gold-break-panel .corner-deco.tr::before {
             top: 0;
             right: 0;
             width: 10px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.tr::after {
+        .gold-break-panel .corner-deco.tr::after {
             top: 0;
             right: 0;
             width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.bl {
+        .gold-break-panel .corner-deco.bl {
             bottom: 3px;
             left: 3px;
         }
-        .gold-break-card .corner-deco.bl::before {
+        .gold-break-panel .corner-deco.bl::before {
             bottom: 0;
             left: 0;
             width: 10px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.bl::after {
+        .gold-break-panel .corner-deco.bl::after {
             bottom: 0;
             left: 0;
             width: 1.5px;
             height: 10px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.br {
+        .gold-break-panel .corner-deco.br {
             bottom: 3px;
             right: 3px;
         }
-        .gold-break-card .corner-deco.br::before {
+        .gold-break-panel .corner-deco.br::before {
             bottom: 0;
             right: 0;
             width: 10px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.br::after {
+        .gold-break-panel .corner-deco.br::after {
             bottom: 0;
             right: 0;
             width: 1.5px;
@@ -366,7 +413,6 @@
             background: #f5c842;
         }
 
-        /* 脉动动画 */
         @keyframes goldPulse {
             0% { opacity: 0.4; }
             50% { opacity: 1; }
@@ -379,250 +425,124 @@
         }
 
         /* ============================================================
-                   内容样式
+                   页面标题
                    ============================================================ */
-
-        /* 主视觉区 */
-        .hero-section {
+        .page-title {
+            font-size: 24px;
             text-align: center;
-            padding: 10px 0 15px;
-        }
-        .hero-section h1 {
-            font-size: 18px;
-            line-height: 1.4;
-            margin-bottom: 5px;
+            margin: 10px 0 20px;
             color: var(--text-primary);
-        }
-        .hero-section .subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .rocket-container {
-            position: relative;
-            height: 160px;
-            margin: 10px 0;
+            font-weight: 600;
+            letter-spacing: 1px;
             display: flex;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-        }
-        .rocket-container img {
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 40px rgba(245, 200, 66, 0.3));
-            border-radius: 50%;
-        }
-
-        /* 进度条 */
-        .progress-row {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            margin-bottom: 4px;
-            color: var(--text-secondary);
-        }
-        .progress-row .highlight {
-            color: var(--text-primary);
-        }
-        .progress-track {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            margin: 6px 0 12px;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #f5c842, #ffd700);
-            transition: width 1s ease-in-out;
-            border-radius: 4px;
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.3);
-        }
-
-        .price-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--text-secondary);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
-        }
-        .price-info .percent {
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* 铸造标题 */
-        .mint-header {
-            text-align: center;
-            color: var(--gold);
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .mint-status {
-            color: #4CAF50;
-            font-size: 12px;
-            margin-top: 2px;
-        }
-
-        /* 输入组 */
-        .input-group {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 12px;
-        }
-        .input-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-        .input-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .coin-pill {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .coin-pill img {
-            width: 18px;
-            height: 18px;
-            margin-right: 6px;
-            border-radius: 50%;
-        }
-
-        .input-number {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 20px;
-            font-weight: bold;
-            width: 60%;
-            text-align: right;
-            outline: none;
-        }
-        .input-number::placeholder {
-            color: rgba(255, 255, 255, 0.25);
-        }
-        .input-number.receive {
-            font-weight: normal;
-            font-size: 18px;
-            cursor: default;
-        }
-
-        .swap-icon {
-            text-align: center;
-            margin: -6px 0;
-            position: relative;
-            z-index: 2;
-        }
-        .swap-icon span {
-            background: rgba(0, 16, 40, 0.8);
-            padding: 4px 12px;
-            border-radius: 50%;
-            border: 1px solid rgba(245, 200, 66, 0.3);
-            display: inline-block;
-            color: var(--gold);
-            font-size: 14px;
-        }
-
-        /* 按钮 — 金色断点风格 */
-        .btn-gold {
-            display: inline-block;
-            padding: 12px 24px;
-            border: 1px solid #f5c842;
-            border-radius: 0;
-            font-size: 0.95rem;
-            letter-spacing: 3px;
-            color: #f5c842;
-            background: rgba(245, 200, 66, 0.08);
-            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(245, 200, 66, 0.05);
-        }
-        .btn-gold:hover {
-            background: rgba(245, 200, 66, 0.18);
-            box-shadow: 0 0 30px rgba(245, 200, 66, 0.2);
-            transform: translateY(-2px);
-        }
-        .btn-gold:active {
-            transform: translateY(0px);
-        }
-
-        /* 底部数据网格 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 8px;
         }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-item .icon {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-        .stat-item .label {
-            font-size: 10px;
-            color: var(--text-secondary);
-        }
-        .stat-item .value {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-top: 2px;
+        .page-title img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
         }
 
         /* ============================================================
-                   底部导航 — 与AIDC项目一致
+                   流动性内容样式
+                   ============================================================ */
+        .pool-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .pool-info:last-child {
+            border-bottom: none;
+        }
+        .pool-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        .pool-value {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .pool-value .highlight {
+            color: var(--gold);
+        }
+
+        .lp-token-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+        .lp-token-row img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        .lp-token-row .info {
+            flex: 1;
+        }
+        .lp-token-row .info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .lp-token-row .info .balance {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .lp-token-row .amount {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ============================================================
+                   底部导航栏 — 与生态页完全一致
                    ============================================================ */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            max-width: 420px;
-            margin: 0 auto;
-            right: 0;
+            flex-shrink: 0;
             background: rgba(5, 11, 21, 0.85);
             backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(0, 136, 255, 0.15);
+            border: 1px solid rgba(0, 136, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0 20px;
-            z-index: 200;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
+            padding: 12px 0;
+            margin: 0 15px 15px 15px;
+            position: relative;
+            z-index: 10;
         }
         .bottom-nav::before {
             content: '';
             position: absolute;
             top: -1px;
-            left: 0;
-            right: 0;
-            border-radius: 20px 20px 0 0;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 20px;
             padding: 1px;
             background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -642,8 +562,6 @@
             padding: 5px 10px;
             transition: all 0.3s ease;
             text-decoration: none;
-            background: none;
-            border: none;
         }
         .nav-item .nav-icon {
             width: 20px;
@@ -671,66 +589,11 @@
         }
 
         /* ============================================================
-                   弹窗 (Toast)
-                   ============================================================ */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 16, 40, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--gold-border);
-            padding: 16px 28px;
-            border-radius: 12px;
-            display: none;
-            z-index: 300;
-            text-align: center;
-            font-size: 14px;
-            max-width: 90%;
-            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
-        }
-        .toast.show {
-            display: block;
-            animation: fadeInUp 0.4s ease-out;
-        }
-        .toast .title {
-            font-weight: bold;
-            color: var(--gold);
-            margin-bottom: 4px;
-        }
-        .toast .desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        /* ============================================================
                    响应式
                    ============================================================ */
         @media (max-width: 600px) {
-            .hero-section h1 {
-                font-size: 16px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr 1fr 1fr;
-                gap: 4px;
-            }
-            .stat-item .value {
-                font-size: 12px;
-            }
-            .gold-break-card {
-                padding: 14px 12px;
+            .page-title {
+                font-size: 20px;
             }
         }
     </style>
@@ -739,143 +602,140 @@
     <div class="app-container">
         <div class="scroll-area">
 
-            <!-- ===== Header ===== -->
-            <header class="header">
+            <!-- ==========================================================
+            ★★★ Header — 与生态页完全一致 ★★★
+            ========================================================== -->
+            <div class="header">
                 <div class="logo-area">
                     <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC">
-                    <span class="logo-text">AIDC</span>
-                    <span style="margin:0 4px;color:var(--text-secondary);font-weight:300;">×</span>
-                    <span class="logo-spacex">SPACEX</span>
+                    <span>AIDC</span>
                 </div>
                 <div class="header-controls">
-                    <button class="lang-btn">🇨🇳 CN ⌄</button>
-                    <button class="connect-btn" onclick="toggleWallet()">连接钱包</button>
-                </div>
-            </header>
-
-            <!-- ===== 主视觉区 ===== -->
-            <section class="hero-section">
-                <h1>全球首个星舰粉丝群发射的AI智能体代币</h1>
-                <div class="subtitle">星舰属于每一个仰望星空的人</div>
-                <div class="rocket-container">
-                    <img src="https://img.freepik.com/free-psd/rocket-launch-3d-illustration_23-2151192275.jpg?w=740" alt="Rocket">
-                </div>
-            </section>
-
-            <!-- ==========================================================
-            ★★★ 铸造进度卡片 (金色断点风格) ★★★
-            ========================================================== -->
-            <div class="gold-break-card">
-                <div class="corner-deco tl"></div>
-                <div class="corner-deco tr"></div>
-                <div class="corner-deco bl"></div>
-                <div class="corner-deco br"></div>
-                <div class="card-inner">
-                    <div class="progress-row">
-                        <span>铸造进度</span>
-                        <span>完成指标</span>
+                    <button class="lang-btn" id="langBtn">🇨🇳 CN ⌄</button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-option"><span>🇨🇳 简体中文</span><span class="code">CN</span></div>
+                        <div class="lang-option"><span>🇺🇸 English</span><span class="code">EN</span></div>
+                        <div class="lang-option"><span>🇭🇰 繁體中文</span><span class="code">ZH</span></div>
+                        <div class="lang-option"><span>🇪🇸 Español</span><span class="code">ES</span></div>
+                        <div class="lang-option"><span>🇫🇷 Français</span><span class="code">FR</span></div>
+                        <div class="lang-option"><span>🇰🇷 한국어</span><span class="code">KO</span></div>
+                        <div class="lang-option"><span>🇯🇵 日本語</span><span class="code">JA</span></div>
+                        <div class="lang-option"><span>🇸🇦 العربية</span><span class="code">AR</span></div>
+                        <div class="lang-option"><span>🇷🇺 Русский</span><span class="code">RU</span></div>
                     </div>
-                    <div class="progress-row" style="font-size: 14px; color: var(--text-primary);">
-                        <span id="minted-amount">0.00 AIDC</span>
-                        <span id="target-amount">0.00/0 BNB</span>
-                    </div>
-
-                    <div class="progress-track">
-                        <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
-                    </div>
-
-                    <div class="price-info">
-                        <span>铸造价格 = $0.000195</span>
-                        <span class="percent" id="progress-percent">0.00%</span>
-                    </div>
+                    <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
                 </div>
             </div>
 
             <!-- ==========================================================
-            ★★★ 铸造面板 (金色断点风格) ★★★
+            ★★★ 页面标题 ★★★
             ========================================================== -->
-            <div class="gold-break-card">
+            <div class="page-title">
+                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
+                <span id="pageTitle">流动性</span>
+            </div>
+
+            <!-- ==========================================================
+            ★★★ 流动性池面板 (金色断点风格) ★★★
+            ========================================================== -->
+            <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
                 <div class="corner-deco br"></div>
-                <div class="card-inner">
-                    <div class="mint-header">
-                        铸造 $AIDC
-                        <div class="mint-status">● PRESALE LIVE</div>
+                <div class="panel-inner">
+                    <div style="font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:12px;">💰 流动性池</div>
+
+                    <div class="pool-info">
+                        <span class="pool-label">总锁仓量 (TVL)</span>
+                        <span class="pool-value">$0.00</span>
+                    </div>
+                    <div class="pool-info">
+                        <span class="pool-label">AIDC 池</span>
+                        <span class="pool-value">0.00 <span class="highlight">AIDC</span></span>
+                    </div>
+                    <div class="pool-info">
+                        <span class="pool-label">BNB 池</span>
+                        <span class="pool-value">0.00 <span class="highlight">BNB</span></span>
+                    </div>
+                    <div class="pool-info">
+                        <span class="pool-label">交易量 (24h)</span>
+                        <span class="pool-value">$0.00</span>
                     </div>
 
-                    <!-- 支付区域 -->
-                    <div class="input-group">
-                        <div class="input-label">
-                            <span>需要支付</span>
-                            <span id="wallet-balance">钱包余额: 0.00 BNB</span>
-                        </div>
-                        <div class="input-flex">
-                            <div class="coin-pill">
-                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026" alt="BNB"> BNB
+                    <div style="margin-top:15px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+                        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;">我的流动性</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;">
+                            <div class="lp-token-row">
+                                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC">
+                                <div class="info">
+                                    <div class="name">AIDC-BNB LP</div>
+                                    <div class="balance">0.0000 LP</div>
+                                </div>
                             </div>
-                            <input type="number" class="input-number" id="pay-amount" placeholder="输入最低 0.1 BNB" step="0.1">
-                        </div>
-                    </div>
-
-                    <!-- 切换按钮 -->
-                    <div class="swap-icon"><span>⇅</span></div>
-
-                    <!-- 接收区域 -->
-                    <div class="input-group">
-                        <div class="input-label">
-                            <span>可以接收</span>
-                        </div>
-                        <div class="input-flex">
-                            <div class="coin-pill">
-                                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"> AIDC
+                            <div style="display:flex;gap:8px;">
+                                <button class="btn-secondary" style="width:auto;padding:6px 16px;font-size:12px;">添加</button>
+                                <button class="btn-secondary" style="width:auto;padding:6px 16px;font-size:12px;">移除</button>
                             </div>
-                            <span class="input-number receive" id="receive-amount">0</span>
                         </div>
                     </div>
-
-                    <button class="btn-gold" onclick="startMint()">立刻铸造</button>
                 </div>
             </div>
 
             <!-- ==========================================================
-            ★★★ 底部数据卡片 (金色断点风格) ★★★
+            ★★★ 添加流动性面板 (金色断点风格) ★★★
             ========================================================== -->
-            <div class="gold-break-card">
+            <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
                 <div class="corner-deco br"></div>
-                <div class="card-inner">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="icon">🚀</div>
-                            <div class="label">发行量</div>
-                            <div class="value">100,000M</div>
+                <div class="panel-inner">
+                    <div style="font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:12px;">➕ 添加流动性</div>
+
+                    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 15px;margin-bottom:10px;">
+                        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:6px;">
+                            <span>代币 A</span>
+                            <span>余额: 0.00</span>
                         </div>
-                        <div class="stat-item">
-                            <div class="icon">👤</div>
-                            <div class="label">持有地址</div>
-                            <div class="value">∞</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="icon">📈</div>
-                            <div class="label">现价</div>
-                            <div class="value">$0.000195</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="icon">🔄</div>
-                            <div class="label">预售</div>
-                            <div class="value">10%</div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div style="display:flex;align-items:center;gap:6px;">
+                                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" style="width:24px;height:24px;border-radius:50%;" alt="AIDC">
+                                <span style="font-weight:600;color:var(--text-primary);">AIDC</span>
+                            </div>
+                            <input type="number" class="input-number" style="font-size:18px;width:60%;text-align:right;background:transparent;border:none;color:var(--text-primary);outline:none;" placeholder="0.0">
                         </div>
                     </div>
+
+                    <div style="text-align:center;margin:-4px 0;position:relative;z-index:2;">
+                        <span style="background:rgba(0,16,40,0.8);padding:4px 12px;border-radius:50%;border:1px solid rgba(245,200,66,0.3);display:inline-block;color:var(--gold);font-size:14px;">⇅</span>
+                    </div>
+
+                    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:12px 15px;margin-bottom:12px;">
+                        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:6px;">
+                            <span>代币 B</span>
+                            <span>余额: 0.00</span>
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div style="display:flex;align-items:center;gap:6px;">
+                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026" style="width:24px;height:24px;border-radius:50%;" alt="BNB">
+                                <span style="font-weight:600;color:var(--text-primary);">BNB</span>
+                            </div>
+                            <input type="number" class="input-number" style="font-size:18px;width:60%;text-align:right;background:transparent;border:none;color:var(--text-primary);outline:none;" placeholder="0.0">
+                        </div>
+                    </div>
+
+                    <button class="btn-gold" style="width:100%;padding:12px;border:1px solid #f5c842;border-radius:0;font-size:0.95rem;letter-spacing:3px;color:#f5c842;background:rgba(245,200,66,0.08);clip-path:polygon(6px 0%,calc(100% - 6px) 0%,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0% calc(100% - 6px),0% 6px);cursor:pointer;transition:all 0.3s ease;text-align:center;font-weight:600;">添加流动性</button>
                 </div>
             </div>
+
+            <div style="height:10px;"></div>
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 — 与生态页一致 ===== -->
+        <!-- ==========================================================
+        ★★★ 底部导航 — 与生态页完全一致 ★★★
+        ========================================================== -->
         <div class="bottom-nav">
             <a href="index.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
@@ -885,7 +745,7 @@
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/invite.icon.png" alt="邀请">
                 <span id="navInvite">邀请</span>
             </a>
-            <a href="liquidity.html" class="nav-item">
+            <a href="liquidity.html" class="nav-item active">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
                 <span id="navLiquidity">流动性</span>
             </a>
@@ -893,87 +753,69 @@
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
                 <span id="navStake">质押</span>
             </a>
-            <a href="ecosystem.html" class="nav-item active">
+            <a href="ecosystem.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ecosystem.icon.png" alt="生态">
                 <span id="navEcosystem">生态</span>
             </a>
-        </div>
-
-        <!-- ===== 弹窗 ===== -->
-        <div class="toast" id="mint-toast">
-            <div class="title">✦ 铸造成功！</div>
-            <div class="desc">正在处理链上交易，请稍候...</div>
         </div>
 
     </div><!-- /app-container -->
 
     <script>
         // ============================================================
-        // 钱包连接
+        // 语言切换弹窗逻辑 (与生态页一致)
         // ============================================================
-        function toggleWallet() {
-            const btn = document.querySelector('.connect-btn');
-            const balanceEl = document.getElementById('wallet-balance');
-            if (btn.textContent === '连接钱包') {
-                btn.textContent = '0x1234...ABCD';
-                balanceEl.textContent = '钱包余额: 12.50 BNB';
-                btn.classList.add('connected');
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+            langBtn.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target) && e.target !== langBtn) {
+                langDropdown.classList.remove('open');
+                langBtn.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const langCode = option.querySelector('.code').innerText.trim().toLowerCase();
+                const langName = option.querySelector('span:first-child').innerText;
+                langBtn.textContent = langName + ' ⌄';
+                langDropdown.classList.remove('open');
+                langBtn.classList.remove('active');
+            });
+        });
+
+        // ============================================================
+        // 钱包连接逻辑 (与生态页一致)
+        // ============================================================
+        const connectBtn = document.getElementById('connectWalletBtn');
+
+        connectBtn.addEventListener('click', function() {
+            if (this.textContent === 'Connect wallet' || this.textContent === '连接钱包') {
+                this.textContent = '0x1234...ABCD';
+                this.classList.add('connected');
             } else {
-                btn.textContent = '连接钱包';
-                balanceEl.textContent = '钱包余额: 0.00 BNB';
-                btn.classList.remove('connected');
+                this.textContent = 'Connect wallet';
+                this.classList.remove('connected');
             }
-        }
+        });
 
         // ============================================================
-        // 铸造逻辑
+        // 底部导航激活状态 (与生态页一致)
         // ============================================================
-        function startMint() {
-            const input = document.getElementById('pay-amount');
-            const val = parseFloat(input.value);
-
-            if (!val || val <= 0) {
-                alert("请输入有效的 BNB 数量（最低 0.1）");
-                return;
-            }
-
-            // 模拟计算接收数量 (1 BNB = 5000 AIDC)
-            const receiveEl = document.getElementById('receive-amount');
-            const receiveVal = val * 5000;
-            receiveEl.textContent = receiveVal.toLocaleString();
-
-            // 进度条动画
-            const fill = document.getElementById('progress-fill');
-            const percentText = document.getElementById('progress-percent');
-            const mintedText = document.getElementById('minted-amount');
-
-            let currentWidth = parseFloat(fill.style.width) || 0;
-            let increment = Math.min(35, 100 - currentWidth);
-            let newWidth = Math.min(currentWidth + increment, 100);
-
-            fill.style.width = newWidth + '%';
-            percentText.textContent = newWidth.toFixed(2) + '%';
-            mintedText.textContent = (newWidth * 10000).toFixed(2) + ' AIDC';
-
-            // 显示提示
-            const toast = document.getElementById('mint-toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // ============================================================
-        // 自动计算接收数量
-        // ============================================================
-        document.getElementById('pay-amount').addEventListener('input', function(e) {
-            const val = parseFloat(e.target.value);
-            const receiveEl = document.getElementById('receive-amount');
-            if (val && val > 0) {
-                receiveEl.textContent = (val * 5000).toLocaleString();
-            } else {
-                receiveEl.textContent = '0';
-            }
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                // 移除所有激活状态
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                // 允许链接跳转
+            });
         });
     </script>
 </body>
