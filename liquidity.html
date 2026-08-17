@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>流动性 - AIDC</title>
+    <title>铸造 - AIDC</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js">
     </script>
     <style>
@@ -447,21 +447,43 @@
                    内容样式
                    ============================================================ */
 
-        .page-title {
-            font-size: 24px;
-            color: var(--text-primary);
+        /* ★★★ 顶部标题 — 突显样式 ★★★ */
+        .hero-title {
             text-align: center;
-            margin: 10px 0 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            padding: 8px 10px 18px 10px;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
         }
-        .page-title img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
+        .hero-title .highlight {
+            background: linear-gradient(90deg, #f5c842, #ffd700, #f5c842);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+        .hero-title .price-tag {
+            display: inline-block;
+            background: rgba(245, 200, 66, 0.15);
+            border: 1px solid rgba(245, 200, 66, 0.3);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 18px;
+            color: var(--gold);
+            -webkit-text-fill-color: #f5c842;
+            margin: 0 4px;
+            clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
+        }
+        .hero-title .sub-text {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            -webkit-text-fill-color: var(--text-secondary);
+            letter-spacing: 2px;
         }
 
         /* 进度条 */
@@ -642,20 +664,17 @@
             margin-top: 2px;
         }
 
-        /* ★★★ 空卡片占位 — 完全透明（背景+边框+四角装饰全部透明） ★★★ */
+        /* ★★★ 空卡片占位 — 完全透明（已移除文字） ★★★ */
         .placeholder-card {
             background: transparent !important;
             backdrop-filter: none !important;
-            min-height: 80px;
+            min-height: 0px !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-            letter-spacing: 1px;
-            opacity: 0.5;
-            /* 移除clip-path，让占位完全不可见 */
             clip-path: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
         .placeholder-card .card-inner {
             background: transparent !important;
@@ -665,13 +684,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 60px;
+            min-height: 0px !important;
             color: var(--text-secondary);
             font-size: 14px;
             letter-spacing: 1px;
-            opacity: 0.5;
+            opacity: 0;
         }
-        /* 隐藏空卡片的伪元素边框和四角装饰 */
         .placeholder-card::before,
         .placeholder-card::after {
             display: none !important;
@@ -680,6 +698,11 @@
         }
         .placeholder-card .corner-deco {
             display: none !important;
+        }
+
+        /* 卡片下移 — 增加顶部间距 */
+        .card-spacer {
+            height: 40px;
         }
 
         /* ============================================================
@@ -797,11 +820,6 @@
             }
         }
 
-        /* 卡片下移 — 增加顶部间距 */
-        .card-spacer {
-            height: 40px;
-        }
-
         @media (max-width: 600px) {
             .stats-grid {
                 grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -816,13 +834,16 @@
             .card-spacer {
                 height: 30px;
             }
-            .placeholder-card {
-                min-height: 60px;
-                font-size: 12px;
+            .hero-title {
+                font-size: 18px;
+                padding: 4px 8px 12px 8px;
             }
-            .placeholder-card .card-inner {
-                min-height: 50px;
-                font-size: 12px;
+            .hero-title .price-tag {
+                font-size: 15px;
+                padding: 1px 10px;
+            }
+            .hero-title .sub-text {
+                font-size: 11px;
             }
         }
     </style>
@@ -856,18 +877,21 @@
                 </div>
             </div>
 
-            <!-- ===== 页面标题 ===== -->
-            <div class="page-title" id="pageTitle">💧 流动性</div>
+            <!-- ===== ★★★ 顶部标题 — 突显样式 ★★★ ===== -->
+            <div class="hero-title">
+                <span class="highlight">立即铸造 AIDC</span>
+                <span class="price-tag">$0.000195</span>
+                <span class="highlight">美元</span>
+                <span class="sub-text">🔥 低价预售中 · 限时抢购</span>
+            </div>
 
-            <!-- ★★★ 空卡片占位 — 完全透明（无背景、无边框、无四角装饰） ★★★ -->
+            <!-- ===== ★★★ 空卡片占位（完全透明，无文字） ★★★ ===== -->
             <div class="gold-break-card placeholder-card">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
                 <div class="corner-deco br"></div>
-                <div class="card-inner">
-                    即将上线...
-                </div>
+                <div class="card-inner"></div>
             </div>
 
             <!-- 空位 — 铸造进度卡片下移一个身位 -->
@@ -983,7 +1007,7 @@
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 — 与生态页一致 ===== -->
+        <!-- ===== 底部导航 — "流动性" 改为 "铸造" ===== -->
         <div class="bottom-nav">
             <a href="index.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
@@ -994,8 +1018,8 @@
                 <span id="navInvite">邀请</span>
             </a>
             <a href="liquidity.html" class="nav-item active">
-                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
-                <span id="navLiquidity">流动性</span>
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="铸造">
+                <span id="navLiquidity">铸造</span>
             </a>
             <a href="stake.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
@@ -1022,82 +1046,73 @@
         const translations = {
             cn: {
                 langBtn: '🇨🇳 CN',
-                pageTitle: '💧 流动性',
                 navAssets: '资产',
                 navStake: '质押',
-                navLiquidity: '流动性',
+                navLiquidity: '铸造',
                 navInvite: '邀请',
                 navEcosystem: '生态'
             },
             en: {
                 langBtn: '🇺🇸 EN',
-                pageTitle: '💧 Liquidity',
                 navAssets: 'Assets',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidity',
+                navLiquidity: 'Mint',
                 navInvite: 'Invite',
                 navEcosystem: 'Ecosystem'
             },
             zh: {
                 langBtn: '🇭🇰 繁中',
-                pageTitle: '💧 流動性',
                 navAssets: '資產',
                 navStake: '質押',
-                navLiquidity: '流動性',
+                navLiquidity: '鑄造',
                 navInvite: '邀請',
                 navEcosystem: '生態'
             },
             es: {
                 langBtn: '🇪🇸 ES',
-                pageTitle: '💧 Liquidez',
                 navAssets: 'Activos',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidez',
+                navLiquidity: 'Acuñar',
                 navInvite: 'Invitar',
                 navEcosystem: 'Ecosistema'
             },
             fr: {
                 langBtn: '🇫🇷 FR',
-                pageTitle: '💧 Liquidité',
                 navAssets: 'Actifs',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidité',
+                navLiquidity: 'Frapper',
                 navInvite: 'Inviter',
                 navEcosystem: 'Écosystème'
             },
             ko: {
                 langBtn: '🇰🇷 KO',
-                pageTitle: '💧 유동성',
                 navAssets: '자산',
                 navStake: '스테이킹',
-                navLiquidity: '유동성',
+                navLiquidity: '민팅',
                 navInvite: '초대',
                 navEcosystem: '생태계'
             },
             ja: {
                 langBtn: '🇯🇵 JA',
-                pageTitle: '💧 流動性',
                 navAssets: '資産',
                 navStake: 'ステーキング',
-                navLiquidity: '流動性',
+                navLiquidity: 'ミント',
                 navInvite: '招待',
                 navEcosystem: 'エコシステム'
             },
             ar: {
                 langBtn: '🇸🇦 AR',
-                pageTitle: '💧 السيولة',
                 navAssets: 'الأصول',
                 navStake: 'تخزين',
-                navLiquidity: 'سيولة',
+                navLiquidity: 'سك',
                 navInvite: 'دعوة',
                 navEcosystem: 'النظام البيئي'
             },
             ru: {
                 langBtn: '🇷🇺 RU',
-                pageTitle: '💧 Ликвидность',
                 navAssets: 'Активы',
                 navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
+                navLiquidity: 'Чеканка',
                 navInvite: 'Пригласить',
                 navEcosystem: 'Экосистема'
             }
@@ -1132,13 +1147,11 @@
             option.addEventListener('click', () => {
                 const langCode = option.querySelector('.code').innerText.trim().toLowerCase();
                 const langData = translations[langCode];
-
                 if (langData) {
                     currentLang = langCode;
                     localStorage.setItem('bcbsLang', langCode);
                     applyTranslations(langData);
                 }
-
                 langDropdown.classList.remove('open');
                 langBtn.classList.remove('active');
             });
@@ -1146,7 +1159,6 @@
 
         function applyTranslations(langData) {
             langBtn.textContent = langData.langBtn + ' ⌄';
-            document.getElementById('pageTitle').textContent = langData.pageTitle;
             document.getElementById('navAssets').textContent = langData.navAssets;
             document.getElementById('navStake').textContent = langData.navStake;
             document.getElementById('navLiquidity').textContent = langData.navLiquidity;
