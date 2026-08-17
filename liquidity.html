@@ -642,6 +642,46 @@
             margin-top: 2px;
         }
 
+        /* ★★★ 空卡片占位 — 完全透明（背景+边框+四角装饰全部透明） ★★★ */
+        .placeholder-card {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            /* 移除clip-path，让占位完全不可见 */
+            clip-path: none !important;
+        }
+        .placeholder-card .card-inner {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            clip-path: none !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+        /* 隐藏空卡片的伪元素边框和四角装饰 */
+        .placeholder-card::before,
+        .placeholder-card::after {
+            display: none !important;
+            opacity: 0 !important;
+            background: transparent !important;
+        }
+        .placeholder-card .corner-deco {
+            display: none !important;
+        }
+
         /* ============================================================
                    底部导航 — 与生态页一致
                    ============================================================ */
@@ -757,7 +797,7 @@
             }
         }
 
-        /* ★★★ 卡片下移 — 增加顶部间距 ★★★ */
+        /* 卡片下移 — 增加顶部间距 */
         .card-spacer {
             height: 40px;
         }
@@ -775,6 +815,14 @@
             }
             .card-spacer {
                 height: 30px;
+            }
+            .placeholder-card {
+                min-height: 60px;
+                font-size: 12px;
+            }
+            .placeholder-card .card-inner {
+                min-height: 50px;
+                font-size: 12px;
             }
         }
     </style>
@@ -811,7 +859,18 @@
             <!-- ===== 页面标题 ===== -->
             <div class="page-title" id="pageTitle">💧 流动性</div>
 
-            <!-- ★★★ 空位 — 铸造进度卡片下移一个身位 ★★★ -->
+            <!-- ★★★ 空卡片占位 — 完全透明（无背景、无边框、无四角装饰） ★★★ -->
+            <div class="gold-break-card placeholder-card">
+                <div class="corner-deco tl"></div>
+                <div class="corner-deco tr"></div>
+                <div class="corner-deco bl"></div>
+                <div class="corner-deco br"></div>
+                <div class="card-inner">
+                    即将上线...
+                </div>
+            </div>
+
+            <!-- 空位 — 铸造进度卡片下移一个身位 -->
             <div class="card-spacer"></div>
 
             <!-- ==========================================================
