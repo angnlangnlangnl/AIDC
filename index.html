@@ -8,7 +8,7 @@
     </script>
     <style>
         /* ============================================================
-                   全局重置 & 主题色 — 与生态页统一
+                   全局重置 & 主题色 — 与生态页完全一致
                    ============================================================ */
         * {
             margin: 0;
@@ -30,13 +30,11 @@
             --cyan-glow: #00DDFF;
             --cyan-dim: #0088FF;
 
-            /* 金色断点科技风格专用色 — 与生态页一致 */
             --gold: #f5c842;
             --gold-glow: rgba(245, 200, 66, 0.6);
             --gold-dim: rgba(245, 200, 66, 0.2);
             --gold-border: rgba(245, 200, 66, 0.3);
 
-            /* 内边框蓝色系 - AIDC品牌蓝 */
             --aidc-blue: #00DDFF;
             --aidc-blue-dim: #0088FF;
             --aidc-blue-glow: rgba(0, 221, 255, 0.5);
@@ -74,7 +72,6 @@
             overflow: hidden;
         }
 
-        /* bg图完全不透明 — 与生态页一致 */
         .app-container::before {
             content: '';
             position: absolute;
@@ -103,7 +100,7 @@
         }
 
         /* ============================================================
-                   Header — 与生态页一致 (AIDC蓝色系)
+                   Header — 与生态页完全一致
                    ============================================================ */
         .header {
             display: flex;
@@ -140,7 +137,6 @@
             position: relative;
         }
 
-        /* 语言切换按钮 (AIDC蓝色系) */
         .lang-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -162,7 +158,6 @@
             color: #00DDFF;
         }
 
-        /* 语言弹窗 */
         .lang-dropdown {
             display: none;
             position: absolute;
@@ -204,7 +199,6 @@
             margin-left: 8px;
         }
 
-        /* 连接钱包按钮 (AIDC蓝色系) */
         .connect-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -237,7 +231,7 @@
                    ★★★ 金色断点科技边框风格 — 与生态页完全一致 ★★★
                    ============================================================ */
 
-        /* ----- 基础面板 (带斜切 + 金色断点边框) ----- */
+        /* ----- 主面板 (金色断点边框 + 四角装饰) ----- */
         .gold-break-panel {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -268,7 +262,7 @@
                 0% calc(100% - 8px),
                 0% 8px
             );
-            padding: 4px;
+            padding: 2px;
         }
 
         .gold-break-panel::before,
@@ -286,7 +280,7 @@
             border-radius: 16px;
         }
 
-        /* 外层边框：金色 · 超细线 (0.75px) · 断点 30%-70% */
+        /* 外层边框：金色 · 0.75px · 断点 30%-70% */
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -309,7 +303,7 @@
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* 内层边框：蓝色 · 超细线 (0.75px) · 断点错位 15%-55% */
+        /* 内层边框：蓝色 · 0.75px · 断点错位 15%-55% */
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -332,33 +326,101 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* 脉动动画 */
-        @keyframes goldPulse {
-            0% {
-                opacity: 0.4;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.4;
-            }
+        /* ★★★ 主面板四角金色装饰 (L型小线段) ★★★ */
+        .gold-break-panel .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
         }
-        @keyframes bluePulse {
-            0% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.9;
-            }
-            100% {
-                opacity: 0.3;
-            }
+        .gold-break-panel .corner-deco::before,
+        .gold-break-panel .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        /* 左上 */
+        .gold-break-panel .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        /* 右上 */
+        .gold-break-panel .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        /* 左下 */
+        .gold-break-panel .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        /* 右下 */
+        .gold-break-panel .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
         }
 
-        /* ============================================================
-                   金色断点风格的资产卡片
-                   ============================================================ */
+        /* ----- 资产卡片 (金色断点边框 + 四角装饰) ----- */
         .gold-break-asset-card {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -458,6 +520,100 @@
             opacity: 0.7;
         }
 
+        /* ★★★ 资产卡片四角金色装饰 (L型小线段) ★★★ */
+        .gold-break-asset-card .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 10px;
+            height: 10px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .gold-break-asset-card .corner-deco::before,
+        .gold-break-asset-card .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 6px rgba(245, 200, 66, 0.3);
+            border-radius: 0;
+        }
+        /* 左上 */
+        .gold-break-asset-card .corner-deco.tl {
+            top: 2px;
+            left: 2px;
+        }
+        .gold-break-asset-card .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-asset-card .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        /* 右上 */
+        .gold-break-asset-card .corner-deco.tr {
+            top: 2px;
+            right: 2px;
+        }
+        .gold-break-asset-card .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-asset-card .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        /* 左下 */
+        .gold-break-asset-card .corner-deco.bl {
+            bottom: 2px;
+            left: 2px;
+        }
+        .gold-break-asset-card .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-asset-card .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        /* 右下 */
+        .gold-break-asset-card .corner-deco.br {
+            bottom: 2px;
+            right: 2px;
+        }
+        .gold-break-asset-card .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-asset-card .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+
         .gold-break-asset-card:hover {
             box-shadow: 0 0 30px rgba(245, 200, 66, 0.05);
         }
@@ -466,51 +622,16 @@
             opacity: 1;
         }
 
-        /* 资产卡片内部样式 */
-        .asset-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 221, 255, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            overflow: hidden;
-            flex-shrink: 0;
+        /* 脉动动画 */
+        @keyframes goldPulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
-        .asset-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .asset-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .asset-name {
-            font-size: 15px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        .asset-price {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        .asset-right {
-            text-align: right;
-            flex-shrink: 0;
-        }
-        .asset-balance {
-            font-size: 15px;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        .asset-usd-value {
-            font-size: 12px;
-            color: var(--aidc-blue);
+        @keyframes bluePulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.3; }
         }
 
         /* ============================================================
@@ -520,7 +641,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 12px;
+            padding: 4px 4px;
             flex-wrap: wrap;
         }
         .profile-left {
@@ -586,15 +707,9 @@
             color: var(--text-secondary);
             white-space: nowrap;
         }
-        .total-amount.small-text {
-            font-size: 18px;
-        }
-        .total-amount.xsmall-text {
-            font-size: 15px;
-        }
-        .total-amount.xxsmall-text {
-            font-size: 12px;
-        }
+        .total-amount.small-text { font-size: 18px; }
+        .total-amount.xsmall-text { font-size: 15px; }
+        .total-amount.xxsmall-text { font-size: 12px; }
 
         .dividend-container {
             width: 100%;
@@ -632,6 +747,52 @@
             color: var(--text-secondary);
         }
 
+        .asset-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 221, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .asset-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .asset-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .asset-name {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .asset-price {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .asset-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .asset-balance {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .asset-usd-value {
+            font-size: 12px;
+            color: var(--aidc-blue);
+        }
+
         .loading-spinner {
             display: inline-block;
             width: 14px;
@@ -644,16 +805,12 @@
             vertical-align: middle;
         }
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ============================================================
-                   底部导航栏 — 与生态页一致 (金色激活态)
+                   底部导航栏 — 与生态页完全一致
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
@@ -722,24 +879,11 @@
             color: var(--gold);
         }
 
-        /* ============================================================
-                   响应式微调
-                   ============================================================ */
         @media (max-width: 600px) {
-            .total-amount {
-                font-size: 18px;
-            }
-            .total-amount small {
-                font-size: 12px;
-            }
-            .profile-panel {
-                padding: 10px 10px;
-            }
-            .avatar-circle {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
+            .total-amount { font-size: 18px; }
+            .total-amount small { font-size: 12px; }
+            .profile-panel { padding: 2px 2px; }
+            .avatar-circle { width: 40px; height: 40px; font-size: 18px; }
         }
     </style>
 </head>
@@ -771,9 +915,15 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 用户信息面板 (金色断点风格) ★★★
+            ★★★ 用户信息面板 (金色断点风格 + 四角装饰) ★★★
             ========================================================== -->
             <div class="gold-break-panel">
+                <!-- 四角金色装饰 -->
+                <div class="corner-deco tl"></div>
+                <div class="corner-deco tr"></div>
+                <div class="corner-deco bl"></div>
+                <div class="corner-deco br"></div>
+
                 <div class="panel-inner">
                     <div class="profile-panel">
                         <div class="profile-left">
@@ -797,11 +947,16 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 资产列表 (金色断点风格) ★★★
+            ★★★ 资产列表 (金色断点风格 + 四角装饰) ★★★
             ========================================================== -->
             <div id="assetListContainer">
+
                 <!-- BNB -->
                 <div class="gold-break-asset-card">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
                     <div class="asset-inner">
                         <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bnb.png" alt="BNB"></div>
                         <div class="asset-info">
@@ -817,6 +972,10 @@
 
                 <!-- USDT -->
                 <div class="gold-break-asset-card">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
                     <div class="asset-inner">
                         <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/usdt.png" alt="USDT"></div>
                         <div class="asset-info">
@@ -832,6 +991,10 @@
 
                 <!-- AIDC -->
                 <div class="gold-break-asset-card">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
                     <div class="asset-inner">
                         <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC"></div>
                         <div class="asset-info">
@@ -847,6 +1010,10 @@
 
                 <!-- BCBS -->
                 <div class="gold-break-asset-card">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
                     <div class="asset-inner">
                         <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/bcbs.png" alt="BCBS"></div>
                         <div class="asset-info">
@@ -862,6 +1029,10 @@
 
                 <!-- HSBC -->
                 <div class="gold-break-asset-card">
+                    <div class="corner-deco tl"></div>
+                    <div class="corner-deco tr"></div>
+                    <div class="corner-deco bl"></div>
+                    <div class="corner-deco br"></div>
                     <div class="asset-inner">
                         <div class="asset-icon"><img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/HSBC.icon.png" alt="HSBC"></div>
                         <div class="asset-info">
@@ -874,6 +1045,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div><!-- /scroll-area -->
@@ -1078,17 +1250,13 @@
             option.addEventListener('click', () => {
                 const langCode = option.querySelector('.code').innerText.trim().toLowerCase();
                 const langData = translations[langCode];
-
                 if (langData) {
                     currentLang = langCode;
                     localStorage.setItem('bcbsLang', langCode);
                     applyTranslations(langData);
                     refreshDisplayText(langData);
-                    if (currentAccount) {
-                        loadAllData();
-                    }
+                    if (currentAccount) loadAllData();
                 }
-
                 langDropdown.classList.remove('open');
                 langBtn.classList.remove('active');
             });
@@ -1106,46 +1274,28 @@
         }
 
         function refreshDisplayText(langData) {
-            if (!langData) {
-                langData = translations[currentLang] || translations.cn;
-            }
-
+            if (!langData) langData = translations[currentLang] || translations.cn;
             const identityRow = document.getElementById('identityRow');
             const rateRow = document.getElementById('rateRow');
-
             const identityMatch = identityRow.textContent.match(/[：:]\s*(.*)/);
             const rateMatch = rateRow.textContent.match(/[：:]\s*(.*)/);
-
-            if (identityMatch) {
-                identityRow.textContent = langData.identityLabel + '：' + identityMatch[1];
-            }
-            if (rateMatch) {
-                rateRow.textContent = langData.rateLabel + '：' + rateMatch[1];
-            }
-
+            if (identityMatch) identityRow.textContent = langData.identityLabel + '：' + identityMatch[1];
+            if (rateMatch) rateRow.textContent = langData.rateLabel + '：' + rateMatch[1];
             const levelEl = document.getElementById('userLevel');
             const levelText = levelEl.textContent;
             const nodeNames = ['普通用户', '首富节点', '星链节点', '创世节点'];
             const index = nodeNames.indexOf(levelText);
-            if (index !== -1 && langData.userLevels[index]) {
-                levelEl.textContent = langData.userLevels[index];
-            }
+            if (index !== -1 && langData.userLevels[index]) levelEl.textContent = langData.userLevels[index];
         }
 
         function adjustTotalAmountSize() {
             const el = document.getElementById('totalAssetValue');
             const text = el.textContent.replace(/[^0-9.]/g, '');
             const len = text.replace('.', '').length;
-
             el.classList.remove('small-text', 'xsmall-text', 'xxsmall-text');
-
-            if (len >= 10) {
-                el.classList.add('xxsmall-text');
-            } else if (len >= 8) {
-                el.classList.add('xsmall-text');
-            } else if (len >= 6) {
-                el.classList.add('small-text');
-            }
+            if (len >= 10) el.classList.add('xxsmall-text');
+            else if (len >= 8) el.classList.add('xsmall-text');
+            else if (len >= 6) el.classList.add('small-text');
         }
 
         // ============================================================
@@ -1169,12 +1319,9 @@
         const BCBS_ABI = ["function balanceOf(address) view returns (uint256)", "function userRate(address) view returns (uint256)", "function getBCBSPrice() view returns (uint256)"];
         const ERC20_ABI = ["function balanceOf(address) view returns (uint256)"];
 
-        let currentAccount = null,
-            provider = null,
-            signer = null;
+        let currentAccount = null, provider = null, signer = null;
         let aigcContract, bcbsContract, hsbcContract, usdtContract, bnbOracle;
-        let isLoading = false,
-            refreshTimer = null;
+        let isLoading = false, refreshTimer = null;
         const connectBtn = document.getElementById('connectWalletBtn');
         const nodeNames = ['普通用户', '首富节点', '星链节点', '创世节点'];
         const poolNames = ['首富池', '星链池', '创世池', 'S4池', 'S5池', 'S6池', 'S7池', 'S8池'];
@@ -1190,18 +1337,11 @@
         }
 
         async function getBNBPrice() {
-            try {
-                const [, a] = await bnbOracle.latestRoundData();
-                return parseFloat(ethers.utils.formatUnits(a, 8));
-            } catch (e) { return 580; }
+            try { const [, a] = await bnbOracle.latestRoundData(); return parseFloat(ethers.utils.formatUnits(a, 8)); } catch (e) { return 580; }
         }
 
         async function getBCBSPrice() {
-            try {
-                const r = await bcbsContract.getBCBSPrice();
-                const p = parseFloat(ethers.utils.formatEther(r));
-                if (p > 0) return p;
-            } catch (e) {}
+            try { const r = await bcbsContract.getBCBSPrice(); const p = parseFloat(ethers.utils.formatEther(r)); if (p > 0) return p; } catch (e) {}
             return 0;
         }
 
@@ -1229,7 +1369,8 @@
                 if (refreshTimer) clearInterval(refreshTimer);
                 refreshTimer = setInterval(async () => { if (currentAccount) await loadAllData(); }, 30000);
             } catch (e) {
-                handleConnectionError(e);
+                if (e.code === 4001) alert('请在 MetaMask 中授权连接');
+                else alert('连接失败: ' + (e.message || '未知错误'));
                 connectBtn.disabled = false;
                 connectBtn.innerHTML = 'Connect wallet';
             } finally {
@@ -1254,11 +1395,6 @@
             resetUI();
         }
 
-        function handleConnectionError(err) {
-            if (err.code === 4001) alert('请在 MetaMask 中授权连接');
-            else alert('连接失败: ' + (err.message || '未知错误'));
-        }
-
         async function loadAllData() {
             if (!currentAccount || !aigcContract || !bcbsContract) return;
 
@@ -1266,34 +1402,18 @@
             document.getElementById('price-BNB').textContent = '$' + bnbPrice.toFixed(2);
             document.getElementById('price-BCBS').textContent = '$' + bcbsPrice.toFixed(4);
 
-            let nodeLevel = 0,
-                identityLevel = 0,
-                userRate = 0;
-            try {
-                const lvl = await aigcContract.getNodeLevel(currentAccount);
-                nodeLevel = parseInt(lvl.toString());
-            } catch (e) {}
-            if (nodeLevel === 0) {
-                try { if (await aigcContract.isInPool(2, currentAccount)) nodeLevel = 3; } catch (e) {}
-            }
-            if (nodeLevel === 0) {
-                try { if (await aigcContract.isInPool(1, currentAccount)) nodeLevel = 2; } catch (e) {}
-            }
-            if (nodeLevel === 0) {
-                try { if (await aigcContract.isInPool(0, currentAccount)) nodeLevel = 1; } catch (e) {}
-            }
-            try {
-                const id = await aigcContract.identityLevel(currentAccount);
-                identityLevel = parseInt(id.toString());
-            } catch (e) {}
-            try {
-                const rate = await bcbsContract.userRate(currentAccount);
-                userRate = parseFloat(ethers.utils.formatEther(rate));
-            } catch (e) {}
-            if (userRate === 0) {
-                const baseRates = [0, 0.02, 0.04, 0.15];
-                userRate = baseRates[nodeLevel] || 0;
-            }
+            let nodeLevel = 0, identityLevel = 0, userRate = 0;
+            try { const lvl = await aigcContract.getNodeLevel(currentAccount);
+                nodeLevel = parseInt(lvl.toString()); } catch (e) {}
+            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(2, currentAccount)) nodeLevel = 3; } catch (e) {} }
+            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(1, currentAccount)) nodeLevel = 2; } catch (e) {} }
+            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(0, currentAccount)) nodeLevel = 1; } catch (e) {} }
+            try { const id = await aigcContract.identityLevel(currentAccount);
+                identityLevel = parseInt(id.toString()); } catch (e) {}
+            try { const rate = await bcbsContract.userRate(currentAccount);
+                userRate = parseFloat(ethers.utils.formatEther(rate)); } catch (e) {}
+            if (userRate === 0) { const baseRates = [0, 0.02, 0.04, 0.15];
+                userRate = baseRates[nodeLevel] || 0; }
 
             const langData = translations[currentLang] || translations.cn;
             const levelName = langData.userLevels[nodeLevel] || '普通用户';
@@ -1301,8 +1421,7 @@
             document.getElementById('identityRow').textContent = langData.identityLabel + '：S' + identityLevel;
             document.getElementById('rateRow').textContent = langData.rateLabel + '：' + (userRate * 100).toFixed(1) + '%';
 
-            let dividendHtml = '',
-                hasDividend = false;
+            let dividendHtml = '', hasDividend = false;
             const poolNames = langData.poolNames;
             for (let i = 0; i < 8; i++) {
                 try {
@@ -1318,11 +1437,7 @@
             if (!hasDividend) dividendHtml = '<span class="dividend-empty">' + langData.dividendEmpty + '</span>';
             document.getElementById('dividendList').innerHTML = dividendHtml;
 
-            let bnb = 0,
-                usdt = 0,
-                aidc = 0,
-                bcbs = 0,
-                hsbc = 0;
+            let bnb = 0, usdt = 0, aidc = 0, bcbs = 0, hsbc = 0;
             try { bnb = parseFloat(ethers.utils.formatEther(await provider.getBalance(currentAccount))); } catch (e) {}
             try { usdt = parseFloat(ethers.utils.formatEther(await usdtContract.balanceOf(currentAccount))); } catch (e) {}
             try { aidc = parseFloat(ethers.utils.formatEther(await aigcContract.balanceOf(currentAccount))); } catch (e) {}
