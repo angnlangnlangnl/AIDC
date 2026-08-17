@@ -499,37 +499,75 @@
             position: relative;
             z-index: 2;
         }
-        /* 旋转光环 (保留原科技感) */
-        .gold-break-card .card-image-box::after {
-            content: '';
+
+        /* ============================================================
+                   ★★★ 扫描线效果 (替换原来的旋转光环) ★★★
+                   ============================================================ */
+        .gold-break-card .card-image-box .scanline {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             z-index: 1;
-            background: conic-gradient(from 0deg,
-                    transparent 0deg,
-                    #f5c842 30deg,
-                    transparent 60deg,
-                    #f5c842 120deg,
-                    transparent 180deg,
-                    #f5c842 240deg,
-                    transparent 300deg,
-                    transparent 360deg);
-            animation: spinRing 3s linear infinite;
-            -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
-            mask: radial-gradient(circle, transparent 58%, #000 60%);
-            opacity: 0.6;
+            overflow: hidden;
+            pointer-events: none;
         }
-        @keyframes spinRing {
+
+        .gold-break-card .card-image-box .scanline::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(127, 201, 255, 0.15) 10deg,
+                rgba(127, 201, 255, 0.6) 15deg,
+                rgba(127, 201, 255, 0.9) 18deg,
+                rgba(127, 201, 255, 0.6) 21deg,
+                rgba(127, 201, 255, 0.15) 26deg,
+                transparent 36deg,
+                transparent 360deg
+            );
+            animation: scanRotate 4s linear infinite;
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        /* 扫描线发光核心 - 更亮的光束 */
+        .gold-break-card .card-image-box .scanline::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 14deg,
+                rgba(127, 201, 255, 0.3) 16deg,
+                rgba(0, 221, 255, 0.8) 18deg,
+                rgba(127, 201, 255, 0.3) 20deg,
+                transparent 22deg,
+                transparent 360deg
+            );
+            animation: scanRotate 4s linear infinite;
+            border-radius: 50%;
+            filter: blur(4px);
+            opacity: 0.7;
+        }
+
+        @keyframes scanRotate {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg);
+                transform: rotate(0deg);
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg);
+                transform: rotate(360deg);
             }
         }
 
@@ -673,7 +711,7 @@
         }
 
         /* ============================================================
-                   ★★★ 「了解更多」按钮 — 改为内边框蓝色系 ★★★
+                   ★★★ 「了解更多」按钮 — 内边框蓝色系 ★★★
                    ============================================================ */
         .btn-warp-engine {
             display: inline-block;
@@ -821,7 +859,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 卡片1: REUST (金色断点风格) ★★★
+            ★★★ 卡片1: REUST (金色断点风格 + 扫描线) ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <!-- 四角金色装饰 -->
@@ -833,6 +871,8 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/reust.png" alt="REUST">
+                        <!-- ★★★ 扫描线容器 ★★★ -->
+                        <div class="scanline"></div>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -846,7 +886,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 卡片2: VEUST (金色断点风格) ★★★
+            ★★★ 卡片2: VEUST (金色断点风格 + 扫描线) ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -857,6 +897,8 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/veust.png" alt="VEUST">
+                        <!-- ★★★ 扫描线容器 ★★★ -->
+                        <div class="scanline"></div>
                     </div>
                     <div class="card-content">
                         <div class="card-header">
@@ -876,7 +918,6 @@
                 <div class="panel-inner">
                     <div style="color:var(--text-primary);font-size:14px;font-weight:500;margin-bottom:8px;" id="panelTitle">探索 AIDC 生态</div>
                     <div style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;" id="panelDesc">即将推出更多 DApp、NFT 市场与 GameFi 项目</div>
-                    <!-- ★★★ 按钮改为内边框蓝色系 ★★★ -->
                     <button class="btn-warp-engine" id="panelBtn">了解更多</button>
                 </div>
             </div>
