@@ -8,7 +8,7 @@
     </script>
     <style>
         /* ============================================================
-                   全局重置 & 主题色 (保留原科技蓝风格 + 金色断点融合)
+                   全局重置 & 主题色 — 与AIDC项目统一
                    ============================================================ */
         * {
             margin: 0;
@@ -30,17 +30,20 @@
             --cyan-glow: #00DDFF;
             --cyan-dim: #0088FF;
 
-            /* 金色断点科技风格专用色 */
             --gold: #f5c842;
             --gold-glow: rgba(245, 200, 66, 0.6);
             --gold-dim: rgba(245, 200, 66, 0.2);
             --gold-border: rgba(245, 200, 66, 0.3);
 
-            /* 内边框蓝色系 - AIDC品牌蓝 */
             --aidc-blue: #00DDFF;
             --aidc-blue-dim: #0088FF;
             --aidc-blue-glow: rgba(0, 221, 255, 0.5);
             --aidc-blue-border: rgba(0, 221, 255, 0.3);
+
+            /* 内边框蓝色 */
+            --inner-blue: #7fc9ff;
+            --inner-blue-glow: rgba(127, 201, 255, 0.5);
+            --inner-blue-dim: rgba(127, 201, 255, 0.15);
         }
 
         body {
@@ -74,7 +77,6 @@
             overflow: hidden;
         }
 
-        /* bg图完全不透明 */
         .app-container::before {
             content: '';
             position: absolute;
@@ -103,7 +105,7 @@
         }
 
         /* ============================================================
-                   Header
+                   Header — 与生态页一致
                    ============================================================ */
         .header {
             display: flex;
@@ -140,7 +142,6 @@
             position: relative;
         }
 
-        /* --- 语言切换按钮 (AIDC蓝色系) --- */
         .lang-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -162,7 +163,6 @@
             color: #00DDFF;
         }
 
-        /* --- 语言弹窗 --- */
         .lang-dropdown {
             display: none;
             position: absolute;
@@ -204,7 +204,6 @@
             margin-left: 8px;
         }
 
-        /* --- 连接钱包按钮 (AIDC蓝色系) --- */
         .connect-btn {
             background: transparent;
             border: 1px solid rgba(0, 221, 255, 0.3);
@@ -218,7 +217,7 @@
             transition: all 0.3s;
             white-space: nowrap;
         }
-        .connect-btn:hover {
+        .connect-btn:hover:not(:disabled) {
             box-shadow: 0 0 25px rgba(0, 221, 255, 0.25);
             background: rgba(0, 221, 255, 0.08);
         }
@@ -228,44 +227,35 @@
             color: #00DDFF;
             box-shadow: 0 0 20px rgba(0, 221, 255, 0.2);
         }
-
-        /* ============================================================
-                   页面标题
-                   ============================================================ */
-        .page-title {
-            font-size: 24px;
-            text-align: center;
-            margin: 10px 0 20px;
-            color: var(--text-primary);
-            font-weight: 600;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .page-title img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
+        .connect-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         /* ============================================================
-                   ★★★ 核心：金色断点科技边框风格 (应用于所有卡片) ★★★
+                   ★★★ 金色断点科技边框风格 ★★★
                    ============================================================ */
 
-        /* ----- 基础卡片容器 (带斜切 + 金色断点边框) ----- */
         .gold-break-card {
             position: relative;
-            /* ★★★ 卡片背景透明度70% (不透明度30%) ★★★ */
             background: rgba(0, 16, 40, 0.3);
             backdrop-filter: blur(8px);
             border-radius: 16px;
-            padding: 8px 12px 8px 0;
-            margin-bottom: 20px;
-            min-height: 90px;
+            padding: 18px 16px;
+            margin-bottom: 15px;
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
             transition: all 0.3s;
-            /* 核心斜切边缘 (非圆角/非直角) */
+        }
+        .gold-break-card .card-inner {
             clip-path: polygon(
                 8px 0%,
                 calc(100% - 8px) 0%,
@@ -276,28 +266,9 @@
                 0% calc(100% - 8px),
                 0% 8px
             );
-            /* 内容需要反斜切恢复 */
+            padding: 2px;
         }
 
-        /* 内层内容容器 (反斜切恢复直角内容) */
-        .gold-break-card .card-content-inner {
-            clip-path: polygon(
-                8px 0%,
-                calc(100% - 8px) 0%,
-                100% 8px,
-                100% calc(100% - 8px),
-                calc(100% - 8px) 100%,
-                8px 100%,
-                0% calc(100% - 8px),
-                0% 8px
-            );
-            padding: 4px 10px 4px 4px;
-            display: flex;
-            align-items: center;
-            min-height: 80px;
-        }
-
-        /* ---- 双层边框 (外框金色细线 + 内框蓝色细线 断点交替) ---- */
         .gold-break-card::before,
         .gold-break-card::after {
             content: '';
@@ -310,11 +281,10 @@
             z-index: 1;
             clip-path: inherit;
             background: transparent;
-            transition: all 0.3s;
             border-radius: 16px;
         }
 
-        /* 外层边框：金色 · 超细线 (0.75px) · 断点 30%-70% */
+        /* 外层边框：金色 · 0.75px · 断点 30%-70% */
         .gold-break-card::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -333,11 +303,11 @@
                 0 0;
             background-repeat: no-repeat;
             filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
-            opacity: 0.95;
+            opacity: 0.9;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* 内层边框：蓝色 · 超细线 (0.75px) · 断点错位 15%-55% */
+        /* 内层边框：蓝色 · 0.75px · 断点错位 15%-55% */
         .gold-break-card::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -355,12 +325,101 @@
                 6px calc(100% - 6px),
                 6px 6px;
             background-repeat: no-repeat;
-            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.4));
-            opacity: 0.95;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* 脉动动画 */
+        /* 四角金色装饰 */
+        .gold-break-card .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .gold-break-card .corner-deco::before,
+        .gold-break-card .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .gold-break-card .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .gold-break-card .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .gold-break-card .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .gold-break-card .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .gold-break-card .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-card .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+
         @keyframes goldPulse {
             0% {
                 opacity: 0.4;
@@ -384,110 +443,204 @@
             }
         }
 
-        /* ---- 悬停增强 ---- */
-        .gold-break-card:hover {
-            box-shadow: 0 0 30px rgba(245, 200, 66, 0.08);
+        /* ============================================================
+                   生态卡片样式
+                   ============================================================ */
+        .sci-fi-card {
+            position: relative;
+            background: rgba(0, 16, 40, 0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 10px 15px 10px 0;
+            margin-bottom: 20px;
+            min-height: 90px;
+            transition: all 0.3s;
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
         }
-        .gold-break-card:hover::before {
-            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.5));
+        .sci-fi-card .card-content-inner {
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
+            padding: 4px 10px 4px 4px;
+            display: flex;
+            align-items: center;
+            min-height: 80px;
         }
 
-        /* ---- 四角金色装饰 (L型小线段) ---- */
-        .gold-break-card .corner-deco {
+        .sci-fi-card::before,
+        .sci-fi-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            transition: all 0.3s;
+            border-radius: 16px;
+        }
+
+        .sci-fi-card::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                0 0,
+                100% 0,
+                0 100%,
+                0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.2));
+            opacity: 0.7;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+
+        .sci-fi-card::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                4px 4px,
+                calc(100% - 4px) 4px,
+                4px calc(100% - 4px),
+                4px 4px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.2));
+            opacity: 0.7;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        .sci-fi-card .corner-deco {
             position: absolute;
             z-index: 3;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: transparent;
             pointer-events: none;
         }
-        .gold-break-card .corner-deco::before,
-        .gold-break-card .corner-deco::after {
+        .sci-fi-card .corner-deco::before,
+        .sci-fi-card .corner-deco::after {
             content: '';
             position: absolute;
             background: #f5c842;
-            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            box-shadow: 0 0 6px rgba(245, 200, 66, 0.3);
             border-radius: 0;
         }
-        /* 左上 */
-        .gold-break-card .corner-deco.tl {
-            top: 3px;
-            left: 3px;
+        .sci-fi-card .corner-deco.tl {
+            top: 2px;
+            left: 2px;
         }
-        .gold-break-card .corner-deco.tl::before {
+        .sci-fi-card .corner-deco.tl::before {
             top: 0;
             left: 0;
-            width: 10px;
+            width: 8px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.tl::after {
+        .sci-fi-card .corner-deco.tl::after {
             top: 0;
             left: 0;
             width: 1.5px;
-            height: 10px;
+            height: 8px;
             background: #f5c842;
         }
-        /* 右上 */
-        .gold-break-card .corner-deco.tr {
-            top: 3px;
-            right: 3px;
+        .sci-fi-card .corner-deco.tr {
+            top: 2px;
+            right: 2px;
         }
-        .gold-break-card .corner-deco.tr::before {
+        .sci-fi-card .corner-deco.tr::before {
             top: 0;
             right: 0;
-            width: 10px;
+            width: 8px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.tr::after {
+        .sci-fi-card .corner-deco.tr::after {
             top: 0;
             right: 0;
             width: 1.5px;
-            height: 10px;
+            height: 8px;
             background: #f5c842;
         }
-        /* 左下 */
-        .gold-break-card .corner-deco.bl {
-            bottom: 3px;
-            left: 3px;
+        .sci-fi-card .corner-deco.bl {
+            bottom: 2px;
+            left: 2px;
         }
-        .gold-break-card .corner-deco.bl::before {
+        .sci-fi-card .corner-deco.bl::before {
             bottom: 0;
             left: 0;
-            width: 10px;
+            width: 8px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.bl::after {
+        .sci-fi-card .corner-deco.bl::after {
             bottom: 0;
             left: 0;
             width: 1.5px;
-            height: 10px;
+            height: 8px;
             background: #f5c842;
         }
-        /* 右下 */
-        .gold-break-card .corner-deco.br {
-            bottom: 3px;
-            right: 3px;
+        .sci-fi-card .corner-deco.br {
+            bottom: 2px;
+            right: 2px;
         }
-        .gold-break-card .corner-deco.br::before {
+        .sci-fi-card .corner-deco.br::before {
             bottom: 0;
             right: 0;
-            width: 10px;
+            width: 8px;
             height: 1.5px;
             background: #f5c842;
         }
-        .gold-break-card .corner-deco.br::after {
+        .sci-fi-card .corner-deco.br::after {
             bottom: 0;
             right: 0;
             width: 1.5px;
-            height: 10px;
+            height: 8px;
             background: #f5c842;
         }
 
-        /* ---- 卡片内部内容样式 ---- */
-        .gold-break-card .card-image-box {
+        .sci-fi-card:hover {
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.05);
+        }
+        .sci-fi-card:hover::before {
+            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.4));
+            opacity: 1;
+        }
+
+        .sci-fi-card .card-image-box {
             flex: 0 0 88px;
             height: 80px;
             display: flex;
@@ -496,7 +649,7 @@
             position: relative;
             margin-left: 4px;
         }
-        .gold-break-card .card-image-box img {
+        .sci-fi-card .card-image-box img {
             width: 52px;
             height: 52px;
             object-fit: contain;
@@ -506,10 +659,7 @@
             z-index: 2;
         }
 
-        /* ============================================================
-                   ★★★ 扫描线效果 (尺寸自适应缩小) ★★★
-                   ============================================================ */
-        .gold-break-card .card-image-box .scanline {
+        .sci-fi-card .card-image-box .scanline {
             position: absolute;
             top: 0;
             left: 0;
@@ -521,7 +671,7 @@
             pointer-events: none;
         }
 
-        .gold-break-card .card-image-box .scanline::before {
+        .sci-fi-card .card-image-box .scanline::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -544,7 +694,7 @@
             filter: blur(2px);
         }
 
-        .gold-break-card .card-image-box .scanline::after {
+        .sci-fi-card .card-image-box .scanline::after {
             content: '';
             position: absolute;
             top: -50%;
@@ -576,32 +726,32 @@
             }
         }
 
-        .gold-break-card .card-content {
+        .sci-fi-card .card-content {
             flex: 1;
             padding: 2px 12px 2px 8px;
             display: flex;
             flex-direction: column;
         }
-        .gold-break-card .card-header {
+        .sci-fi-card .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0px;
         }
-        .gold-break-card .card-header h2 {
+        .sci-fi-card .card-header h2 {
             font-size: 16px;
             font-weight: 500;
             color: var(--text-primary);
             letter-spacing: 1px;
         }
-        .gold-break-card .card-header .arrow {
+        .sci-fi-card .card-header .arrow {
             color: var(--gold);
             font-size: 18px;
             font-weight: 300;
             cursor: pointer;
             text-shadow: 0 0 10px var(--gold-glow);
         }
-        .gold-break-card .card-separator {
+        .sci-fi-card .card-separator {
             color: var(--gold);
             margin-bottom: 2px;
             letter-spacing: 1px;
@@ -611,7 +761,7 @@
             display: inline-block;
             opacity: 0.6;
         }
-        .gold-break-card .card-description {
+        .sci-fi-card .card-description {
             font-size: 11px;
             line-height: 1.3;
             color: var(--text-primary-soft);
@@ -622,12 +772,9 @@
             padding-right: 8px;
         }
 
-        /* ============================================================
-                   底部面板 (金色断点风格)
-                   ============================================================ */
+        /* ★★★ 底部面板 ★★★ */
         .gold-break-panel {
             position: relative;
-            /* ★★★ 底部面板透明度也改为70% ★★★ */
             background: rgba(0, 16, 40, 0.3);
             backdrop-filter: blur(8px);
             border-radius: 16px;
@@ -656,7 +803,7 @@
                 0% calc(100% - 8px),
                 0% 8px
             );
-            padding: 4px;
+            padding: 2px;
         }
 
         .gold-break-panel::before,
@@ -673,6 +820,7 @@
             background: transparent;
             border-radius: 16px;
         }
+
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -694,6 +842,7 @@
             opacity: 0.9;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
+
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -716,9 +865,96 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* ============================================================
-                   ★★★ 「了解更多」按钮 — 内边框蓝色系 ★★★
-                   ============================================================ */
+        .gold-break-panel .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .gold-break-panel .corner-deco::before,
+        .gold-break-panel .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .gold-break-panel .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+
+        /* ★★★ 按钮 — 内边框蓝色系 ★★★ */
         .btn-warp-engine {
             display: inline-block;
             padding: 10px 24px;
@@ -746,38 +982,179 @@
         }
 
         /* ============================================================
-                   底部导航栏 (保留原风格 + 金色激活态)
+                   ★★★ 底部导航 — 统一金色断点边框 ★★★
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
+            position: relative;
             background: rgba(5, 11, 21, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 136, 255, 0.15);
             border-radius: 20px;
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
             margin: 0 15px 15px 15px;
-            position: relative;
             z-index: 10;
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
+            border: none;
+            transition: all 0.3s;
         }
-        .bottom-nav::before {
+        .bottom-nav::before,
+        .bottom-nav::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            opacity: 0.4;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            border-radius: 20px;
         }
+        .bottom-nav::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                0 0,
+                100% 0,
+                0 100%,
+                0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
+            opacity: 0.9;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+        .bottom-nav::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                6px 6px,
+                calc(100% - 6px) 6px,
+                6px calc(100% - 6px),
+                6px 6px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        .bottom-nav .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .bottom-nav .corner-deco::before,
+        .bottom-nav .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .bottom-nav .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -789,6 +1166,8 @@
             padding: 5px 10px;
             transition: all 0.3s ease;
             text-decoration: none;
+            position: relative;
+            z-index: 2;
         }
         .nav-item .nav-icon {
             width: 20px;
@@ -815,15 +1194,17 @@
             color: var(--gold);
         }
 
-        /* ============================================================
-                   响应式微调
-                   ============================================================ */
+        /* ★★★ 移除页面标题 ★★★ */
+        .page-title {
+            display: none;
+        }
+
         @media (max-width: 600px) {
-            .gold-break-card .card-description {
+            .sci-fi-card .card-description {
                 transform: scale(0.55);
                 width: calc(100% / 0.55);
             }
-            .gold-break-card .card-content {
+            .sci-fi-card .card-content {
                 padding: 2px 8px 2px 4px;
             }
         }
@@ -858,17 +1239,12 @@
                 </div>
             </div>
 
-            <!-- ===== 页面标题 ===== -->
-            <div class="page-title">
-                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ecosystem.icon.png" alt="生态">
-                <span id="pageTitle">生态</span>
-            </div>
+            <!-- ===== ★★★ 移除"生态"页面标题 ★★★ ===== -->
 
             <!-- ==========================================================
-            ★★★ 卡片1: REUST (背景透明度70%) ★★★
+            ★★★ 生态卡片1: REUST ★★★
             ========================================================== -->
-            <div class="gold-break-card">
-                <!-- 四角金色装饰 -->
+            <div class="sci-fi-card">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
@@ -877,7 +1253,6 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/reust.png" alt="REUST">
-                        <!-- 扫描线容器 -->
                         <div class="scanline"></div>
                     </div>
                     <div class="card-content">
@@ -892,9 +1267,9 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 卡片2: VEUST (背景透明度70%) ★★★
+            ★★★ 生态卡片2: VEUST ★★★
             ========================================================== -->
-            <div class="gold-break-card">
+            <div class="sci-fi-card">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
@@ -903,7 +1278,6 @@
                 <div class="card-content-inner">
                     <div class="card-image-box">
                         <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/veust.png" alt="VEUST">
-                        <!-- 扫描线容器 -->
                         <div class="scanline"></div>
                     </div>
                     <div class="card-content">
@@ -918,9 +1292,13 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 底部面板 (背景透明度70%) ★★★
+            ★★★ 底部面板 ★★★
             ========================================================== -->
             <div class="gold-break-panel">
+                <div class="corner-deco tl"></div>
+                <div class="corner-deco tr"></div>
+                <div class="corner-deco bl"></div>
+                <div class="corner-deco br"></div>
                 <div class="panel-inner">
                     <div style="color:var(--text-primary);font-size:14px;font-weight:500;margin-bottom:8px;" id="panelTitle">探索 AIDC 生态</div>
                     <div style="color:var(--text-secondary);font-size:12px;margin-bottom:12px;" id="panelDesc">即将推出更多 DApp、NFT 市场与 GameFi 项目</div>
@@ -930,8 +1308,13 @@
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 ===== -->
+        <!-- ===== 底部导航 — 统一金色断点边框 ===== -->
         <div class="bottom-nav">
+            <div class="corner-deco tl"></div>
+            <div class="corner-deco tr"></div>
+            <div class="corner-deco bl"></div>
+            <div class="corner-deco br"></div>
+
             <a href="index.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
                 <span id="navAssets">资产</span>
@@ -941,8 +1324,8 @@
                 <span id="navInvite">邀请</span>
             </a>
             <a href="liquidity.html" class="nav-item">
-                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
-                <span id="navLiquidity">流动性</span>
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="铸造">
+                <span id="navLiquidity">铸造</span>
             </a>
             <a href="stake.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
@@ -958,7 +1341,157 @@
 
     <script>
         // ============================================================
-        // 语言切换弹窗逻辑 (保留原功能)
+        // 多语言翻译数据
+        // ============================================================
+        const translations = {
+            cn: {
+                langBtn: '🇨🇳 CN',
+                pageTitle: '生态',
+                cardTitle1: 'AI 算力铸造房产',
+                cardDesc1: 'AIDC链上资管铸造 · REUST不动产通证锚定海外高端豪宅资产，初始定价2USDT对标BTC价值存储赛道，实体房产背书，合规走向海外币安等交易所。',
+                cardTitle2: 'AI 算力铸造汽车',
+                cardDesc2: 'VEUST是AIDC链上资管体系推出的新能源汽车数字化权益通证，锚定海外高端新能源豪华车辆，初始公允定价2USDT，对标ETH价值存储逻辑，以实体车辆为价值基石，实现豪车资产碎片化上链、质押流转、收益确权，构建实体汽车资产RWA标准化流通基建。',
+                panelTitle: '探索 AIDC 生态',
+                panelDesc: '即将推出更多 DApp、NFT 市场与 GameFi 项目',
+                panelBtn: '了解更多',
+                navAssets: '资产',
+                navStake: '质押',
+                navLiquidity: '铸造',
+                navInvite: '邀请',
+                navEcosystem: '生态'
+            },
+            en: {
+                langBtn: '🇺🇸 EN',
+                pageTitle: 'Ecosystem',
+                cardTitle1: 'AI Computing Real Estate',
+                cardDesc1: 'AIDC on-chain asset management minting · REUST real estate token anchored to overseas high-end luxury properties, initial pricing 2USDT pegged to BTC value storage track, backed by physical real estate, compliantly moving to overseas exchanges like Binance.',
+                cardTitle2: 'AI Computing Vehicles',
+                cardDesc2: 'VEUST is a digital rights token for new energy vehicles launched by the AIDC on-chain asset management system, anchored to overseas high-end new energy luxury vehicles, initial fair pricing 2USDT, pegged to ETH value storage logic, with physical vehicles as the value foundation, realizing fragmentation of luxury vehicle assets on-chain, staking circulation, and revenue confirmation, building standardized circulation infrastructure for physical vehicle RWA.',
+                panelTitle: 'Explore AIDC Ecosystem',
+                panelDesc: 'More DApps, NFT marketplace, and GameFi projects coming soon',
+                panelBtn: 'Learn More',
+                navAssets: 'Assets',
+                navStake: 'Stake',
+                navLiquidity: 'Mint',
+                navInvite: 'Invite',
+                navEcosystem: 'Ecosystem'
+            },
+            zh: {
+                langBtn: '🇭🇰 繁中',
+                pageTitle: '生態',
+                cardTitle1: 'AI 算力鑄造房產',
+                cardDesc1: 'AIDC鏈上資管鑄造 · REUST不動產通證錨定海外高端豪宅資產，初始定價2USDT對標BTC價值存儲賽道，實體房產背書，合規走向海外幣安等交易所。',
+                cardTitle2: 'AI 算力鑄造汽車',
+                cardDesc2: 'VEUST是AIDC鏈上資管體系推出的新能源汽車數字化權益通證，錨定海外高端新能源豪華車輛，初始公允定價2USDT，對標ETH價值存儲邏輯，以實體車輛為價值基石，實現豪車資產碎片化上鏈、質押流轉、收益確權，構建實體汽車資產RWA標準化流通基建。',
+                panelTitle: '探索 AIDC 生態',
+                panelDesc: '即將推出更多 DApp、NFT 市場與 GameFi 項目',
+                panelBtn: '了解更多',
+                navAssets: '資產',
+                navStake: '質押',
+                navLiquidity: '鑄造',
+                navInvite: '邀請',
+                navEcosystem: '生態'
+            },
+            es: {
+                langBtn: '🇪🇸 ES',
+                pageTitle: 'Ecosistema',
+                cardTitle1: 'AI Computación Inmobiliaria',
+                cardDesc1: 'Acuñación de gestión de activos en cadena AIDC · Token inmobiliario REUST anclado a propiedades de lujo en el extranjero, precio inicial 2USDT vinculado al track de almacenamiento de valor BTC, respaldado por bienes raíces físicos, cumpliendo normativas para cotizar en exchanges como Binance.',
+                cardTitle2: 'AI Computación Vehicular',
+                cardDesc2: 'VEUST es un token de derechos digitales para vehículos de nueva energía lanzado por el sistema de gestión de activos en cadena AIDC, anclado a vehículos de lujo de nueva energía en el extranjero, precio justo inicial 2USDT, vinculado a la lógica de almacenamiento de valor ETH, con vehículos físicos como base de valor, realizando la fragmentación de activos de vehículos de lujo en cadena, circulación de staking y confirmación de ingresos, construyendo infraestructura de circulación estandarizada para RWA de vehículos físicos.',
+                panelTitle: 'Explorar el Ecosistema AIDC',
+                panelDesc: 'Próximamente más DApps, mercado NFT y proyectos GameFi',
+                panelBtn: 'Saber Más',
+                navAssets: 'Activos',
+                navStake: 'Staking',
+                navLiquidity: 'Acuñar',
+                navInvite: 'Invitar',
+                navEcosystem: 'Ecosistema'
+            },
+            fr: {
+                langBtn: '🇫🇷 FR',
+                pageTitle: 'Écosystème',
+                cardTitle1: 'IA Immobilier de Calcul',
+                cardDesc1: 'Frappe de gestion d\'actifs sur chaîne AIDC · Token immobilier REUST ancré à des propriétés de luxe à l\'étranger, prix initial 2USDT lié au track de stockage de valeur BTC, soutenu par l\'immobilier physique, conformité pour les exchanges comme Binance.',
+                cardTitle2: 'IA Véhicules de Calcul',
+                cardDesc2: 'VEUST est un token de droits numériques pour véhicules à énergie nouvelle lancé par le système de gestion d\'actifs sur chaîne AIDC, ancré à des véhicules de luxe à énergie nouvelle à l\'étranger, prix équitable initial 2USDT, lié à la logique de stockage de valeur ETH, avec des véhicules physiques comme base de valeur, réalisant la fragmentation d\'actifs de véhicules de luxe sur chaîne, circulation de staking et confirmation de revenus, construisant une infrastructure de circulation standardisée pour RWA de véhicules physiques.',
+                panelTitle: 'Explorer l\'Écosystème AIDC',
+                panelDesc: 'Bientôt plus de DApps, marché NFT et projets GameFi',
+                panelBtn: 'En Savoir Plus',
+                navAssets: 'Actifs',
+                navStake: 'Staking',
+                navLiquidity: 'Frapper',
+                navInvite: 'Inviter',
+                navEcosystem: 'Écosystème'
+            },
+            ko: {
+                langBtn: '🇰🇷 KO',
+                pageTitle: '생태계',
+                cardTitle1: 'AI 컴퓨팅 부동산',
+                cardDesc1: 'AIDC 체인 자산 관리 발행 · REUST 부동산 토큰은 해외 고급 주택 자산에 고정, 초기 가격 2USDT, BTC 가치 저장 트랙에 대응, 실물 부동산 백업, 해외 바이낸스 등 거래소 상장.',
+                cardTitle2: 'AI 컴퓨팅 차량',
+                cardDesc2: 'VEUST는 AIDC 체인 자산 관리 시스템이 출시한 신에너지 차량 디지털 권리 토큰으로, 해외 고급 신에너지 차량에 고정, 초기 공정 가격 2USDT, ETH 가치 저장 로직에 대응, 실물 차량을 가치 기반으로 하여 고급 차량 자산의 체인 상 조각화, 스테이킹 유통, 수익 확인을 실현, 실물 차량 RWA 표준화 유통 인프라 구축.',
+                panelTitle: 'AIDC 생태계 탐험',
+                panelDesc: '더 많은 DApp, NFT 마켓플레이스 및 GameFi 프로젝트 출시 예정',
+                panelBtn: '자세히 알아보기',
+                navAssets: '자산',
+                navStake: '스테이킹',
+                navLiquidity: '민팅',
+                navInvite: '초대',
+                navEcosystem: '생태계'
+            },
+            ja: {
+                langBtn: '🇯🇵 JA',
+                pageTitle: 'エコシステム',
+                cardTitle1: 'AI コンピューティング不動産',
+                cardDesc1: 'AIDCチェーン資産管理鋳造 · REUST不動産トークンは海外高級不動産にアンカー、初期価格2USDT、BTC価値保存トラックに連動、実物不動産を裏付け、海外バイナンス等取引所に上場。',
+                cardTitle2: 'AI コンピューティング車両',
+                cardDesc2: 'VEUSTはAIDCチェーン資産管理システムが提供する新エネルギー車両デジタル権益トークンで、海外高級新エネルギー車両にアンカー、初期公正価格2USDT、ETH価値保存ロジックに連動、実物車両を価値基盤とし、高級車資産のチェーン上断片化、ステーキング流通、収益確認を実現、実物車両RWA標準化流通インフラを構築。',
+                panelTitle: 'AIDCエコシステムを探索',
+                panelDesc: '近日中にDApp、NFTマーケットプレイス、GameFiプロジェクトが登場',
+                panelBtn: '詳細を見る',
+                navAssets: '資産',
+                navStake: 'ステーキング',
+                navLiquidity: 'ミント',
+                navInvite: '招待',
+                navEcosystem: 'エコシステム'
+            },
+            ar: {
+                langBtn: '🇸🇦 AR',
+                pageTitle: 'النظام البيئي',
+                cardTitle1: 'الحوسبة الذكية للعقارات',
+                cardDesc1: 'سك إدارة الأصول على سلسلة AIDC · رمز REUST العقاري المرتبط بالعقارات الفاخرة في الخارج، التسعير الأولي 2USDT مرتبط بمسار تخزين قيمة BTC، مدعوم بالعقارات المادية، الامتثال للانتقال إلى البورصات الخارجية مثل Binance.',
+                cardTitle2: 'الحوسبة الذكية للمركبات',
+                cardDesc2: 'VEUST هو رمز حقوق رقمية للمركبات الجديدة التي تم إطلاقها بواسطة نظام إدارة الأصول على سلسلة AIDC، مرتبط بالمركبات الفاخرة الجديدة في الخارج، التسعير العادل الأولي 2USDT، مرتبط بمنطق تخزين قيمة ETH، مع المركبات المادية كأساس للقيمة، لتحقيق تجزئة أصول المركبات الفاخرة على السلسلة، وتداول التخزين، وتأكيد الإيرادات، وبناء بنية تحتية موحدة لتداول RWA للمركبات المادية.',
+                panelTitle: 'استكشاف النظام البيئي AIDC',
+                panelDesc: 'المزيد من DApps وسوق NFT ومشاريع GameFi قادمة قريبًا',
+                panelBtn: 'اعرف المزيد',
+                navAssets: 'الأصول',
+                navStake: 'تخزين',
+                navLiquidity: 'سك',
+                navInvite: 'دعوة',
+                navEcosystem: 'النظام البيئي'
+            },
+            ru: {
+                langBtn: '🇷🇺 RU',
+                pageTitle: 'Экосистема',
+                cardTitle1: 'AI Вычисления Недвижимость',
+                cardDesc1: 'Чеканка управления активами на цепочке AIDC · Токен недвижимости REUST, привязанный к элитной зарубежной недвижимости, начальная цена 2USDT, привязан к треку хранения стоимости BTC, обеспечен физической недвижимостью, соответствует нормативам для выхода на зарубежные биржи типа Binance.',
+                cardTitle2: 'AI Вычисления Автомобили',
+                cardDesc2: 'VEUST — это токен цифровых прав для новых энергетических автомобилей, выпущенный системой управления активами на цепочке AIDC, привязанный к зарубежным роскошным новым энергетическим автомобилям, начальная справедливая цена 2USDT, привязан к логике хранения стоимости ETH, с физическими автомобилями как основой стоимости, реализуя фрагментацию активов роскошных автомобилей на цепочке, стейкинг, обращение и подтверждение доходов, создавая стандартизированную инфраструктуру обращения для RWA физических автомобилей.',
+                panelTitle: 'Исследуйте экосистему AIDC',
+                panelDesc: 'Скоро появятся новые DApps, NFT-маркетплейсы и проекты GameFi',
+                panelBtn: 'Узнать больше',
+                navAssets: 'Активы',
+                navStake: 'Стейкинг',
+                navLiquidity: 'Чеканка',
+                navInvite: 'Пригласить',
+                navEcosystem: 'Экосистема'
+            }
+        };
+
+        // ============================================================
+        // 语言切换逻辑
         // ============================================================
         const langBtn = document.getElementById('langBtn');
         const langDropdown = document.getElementById('langDropdown');
@@ -966,7 +1499,10 @@
 
         window.addEventListener('DOMContentLoaded', function() {
             const langData = translations[currentLang];
-            if (langData) applyTranslations(langData);
+            if (langData) {
+                applyTranslations(langData);
+                if (currentAccount) loadAllData();
+            }
         });
 
         langBtn.addEventListener('click', (e) => {
@@ -990,6 +1526,7 @@
                     currentLang = langCode;
                     localStorage.setItem('bcbsLang', langCode);
                     applyTranslations(langData);
+                    if (currentAccount) loadAllData();
                 }
                 langDropdown.classList.remove('open');
                 langBtn.classList.remove('active');
@@ -998,7 +1535,7 @@
 
         function applyTranslations(langData) {
             langBtn.textContent = langData.langBtn + ' ⌄';
-            document.getElementById('pageTitle').textContent = langData.pageTitle;
+            // ★★★ pageTitle 已移除 ★★★
             document.getElementById('cardTitle1').textContent = langData.cardTitle1;
             document.getElementById('cardTitle2').textContent = langData.cardTitle2;
             document.getElementById('cardDesc1').textContent = langData.cardDesc1;
@@ -1012,156 +1549,6 @@
             document.getElementById('navInvite').textContent = langData.navInvite;
             document.getElementById('navEcosystem').textContent = langData.navEcosystem;
         }
-
-        // ============================================================
-        // 多语言翻译数据 (保留原内容)
-        // ============================================================
-        const translations = {
-            cn: {
-                langBtn: '🇨🇳 CN',
-                pageTitle: '生态',
-                cardTitle1: 'AI 算力铸造房产',
-                cardDesc1: 'AIDC链上资管铸造 · REUST不动产通证锚定海外高端豪宅资产，初始定价2USDT对标BTC价值存储赛道，实体房产背书，合规走向海外币安等交易所。',
-                cardTitle2: 'AI 算力铸造汽车',
-                cardDesc2: 'VEUST是AIDC链上资管体系推出的新能源汽车数字化权益通证，锚定海外高端新能源豪华车辆，初始公允定价2USDT，对标ETH价值存储逻辑，以实体车辆为价值基石，实现豪车资产碎片化上链、质押流转、收益确权，构建实体汽车资产RWA标准化流通基建。',
-                panelTitle: '探索 AIDC 生态',
-                panelDesc: '即将推出更多 DApp、NFT 市场与 GameFi 项目',
-                panelBtn: '了解更多',
-                navAssets: '资产',
-                navStake: '质押',
-                navLiquidity: '流动性',
-                navInvite: '邀请',
-                navEcosystem: '生态'
-            },
-            en: {
-                langBtn: '🇺🇸 EN',
-                pageTitle: 'Ecosystem',
-                cardTitle1: 'AI Computing Real Estate',
-                cardDesc1: 'AIDC on-chain asset management minting · REUST real estate token anchored to overseas high-end luxury properties, initial pricing 2USDT pegged to BTC value storage track, backed by physical real estate, compliantly moving to overseas exchanges like Binance.',
-                cardTitle2: 'AI Computing Vehicles',
-                cardDesc2: 'VEUST is a digital rights token for new energy vehicles launched by the AIDC on-chain asset management system, anchored to overseas high-end new energy luxury vehicles, initial fair pricing 2USDT, pegged to ETH value storage logic, with physical vehicles as the value foundation, realizing fragmentation of luxury vehicle assets on-chain, staking circulation, and revenue confirmation, building standardized circulation infrastructure for physical vehicle RWA.',
-                panelTitle: 'Explore AIDC Ecosystem',
-                panelDesc: 'More DApps, NFT marketplace, and GameFi projects coming soon',
-                panelBtn: 'Learn More',
-                navAssets: 'Assets',
-                navStake: 'Stake',
-                navLiquidity: 'Liquidity',
-                navInvite: 'Invite',
-                navEcosystem: 'Ecosystem'
-            },
-            zh: {
-                langBtn: '🇭🇰 繁中',
-                pageTitle: '生態',
-                cardTitle1: 'AI 算力鑄造房產',
-                cardDesc1: 'AIDC鏈上資管鑄造 · REUST不動產通證錨定海外高端豪宅資產，初始定價2USDT對標BTC價值存儲賽道，實體房產背書，合規走向海外幣安等交易所。',
-                cardTitle2: 'AI 算力鑄造汽車',
-                cardDesc2: 'VEUST是AIDC鏈上資管體系推出的新能源汽車數字化權益通證，錨定海外高端新能源豪華車輛，初始公允定價2USDT，對標ETH價值存儲邏輯，以實體車輛為價值基石，實現豪車資產碎片化上鏈、質押流轉、收益確權，構建實體汽車資產RWA標準化流通基建。',
-                panelTitle: '探索 AIDC 生態',
-                panelDesc: '即將推出更多 DApp、NFT 市場與 GameFi 項目',
-                panelBtn: '了解更多',
-                navAssets: '資產',
-                navStake: '質押',
-                navLiquidity: '流動性',
-                navInvite: '邀請',
-                navEcosystem: '生態'
-            },
-            es: {
-                langBtn: '🇪🇸 ES',
-                pageTitle: 'Ecosistema',
-                cardTitle1: 'AI Computación Inmobiliaria',
-                cardDesc1: 'Acuñación de gestión de activos en cadena AIDC · Token inmobiliario REUST anclado a propiedades de lujo en el extranjero, precio inicial 2USDT vinculado al track de almacenamiento de valor BTC, respaldado por bienes raíces físicos, cumpliendo normativas para cotizar en exchanges como Binance.',
-                cardTitle2: 'AI Computación Vehicular',
-                cardDesc2: 'VEUST es un token de derechos digitales para vehículos de nueva energía lanzado por el sistema de gestión de activos en cadena AIDC, anclado a vehículos de lujo de nueva energía en el extranjero, precio justo inicial 2USDT, vinculado a la lógica de almacenamiento de valor ETH, con vehículos físicos como base de valor, realizando la fragmentación de activos de vehículos de lujo en cadena, circulación de staking y confirmación de ingresos, construyendo infraestructura de circulación estandarizada para RWA de vehículos físicos.',
-                panelTitle: 'Explorar el Ecosistema AIDC',
-                panelDesc: 'Próximamente más DApps, mercado NFT y proyectos GameFi',
-                panelBtn: 'Saber Más',
-                navAssets: 'Activos',
-                navStake: 'Staking',
-                navLiquidity: 'Liquidez',
-                navInvite: 'Invitar',
-                navEcosystem: 'Ecosistema'
-            },
-            fr: {
-                langBtn: '🇫🇷 FR',
-                pageTitle: 'Écosystème',
-                cardTitle1: 'IA Immobilier de Calcul',
-                cardDesc1: 'Frappe de gestion d\'actifs sur chaîne AIDC · Token immobilier REUST ancré à des propriétés de luxe à l\'étranger, prix initial 2USDT lié au track de stockage de valeur BTC, soutenu par l\'immobilier physique, conformité pour les exchanges comme Binance.',
-                cardTitle2: 'IA Véhicules de Calcul',
-                cardDesc2: 'VEUST est un token de droits numériques pour véhicules à énergie nouvelle lancé par le système de gestion d\'actifs sur chaîne AIDC, ancré à des véhicules de luxe à énergie nouvelle à l\'étranger, prix équitable initial 2USDT, lié à la logique de stockage de valeur ETH, avec des véhicules physiques comme base de valeur, réalisant la fragmentation d\'actifs de véhicules de luxe sur chaîne, circulation de staking et confirmation de revenus, construisant une infrastructure de circulation standardisée pour RWA de véhicules physiques.',
-                panelTitle: 'Explorer l\'Écosystème AIDC',
-                panelDesc: 'Bientôt plus de DApps, marché NFT et projets GameFi',
-                panelBtn: 'En Savoir Plus',
-                navAssets: 'Actifs',
-                navStake: 'Staking',
-                navLiquidity: 'Liquidité',
-                navInvite: 'Inviter',
-                navEcosystem: 'Écosystème'
-            },
-            ko: {
-                langBtn: '🇰🇷 KO',
-                pageTitle: '생태계',
-                cardTitle1: 'AI 컴퓨팅 부동산',
-                cardDesc1: 'AIDC 체인 자산 관리 발행 · REUST 부동산 토큰은 해외 고급 주택 자산에 고정, 초기 가격 2USDT, BTC 가치 저장 트랙에 대응, 실물 부동산 백업, 해외 바이낸스 등 거래소 상장.',
-                cardTitle2: 'AI 컴퓨팅 차량',
-                cardDesc2: 'VEUST는 AIDC 체인 자산 관리 시스템이 출시한 신에너지 차량 디지털 권리 토큰으로, 해외 고급 신에너지 차량에 고정, 초기 공정 가격 2USDT, ETH 가치 저장 로직에 대응, 실물 차량을 가치 기반으로 하여 고급 차량 자산의 체인 상 조각화, 스테이킹 유통, 수익 확인을 실현, 실물 차량 RWA 표준화 유통 인프라 구축.',
-                panelTitle: 'AIDC 생태계 탐험',
-                panelDesc: '더 많은 DApp, NFT 마켓플레이스 및 GameFi 프로젝트 출시 예정',
-                panelBtn: '자세히 알아보기',
-                navAssets: '자산',
-                navStake: '스테이킹',
-                navLiquidity: '유동성',
-                navInvite: '초대',
-                navEcosystem: '생태계'
-            },
-            ja: {
-                langBtn: '🇯🇵 JA',
-                pageTitle: 'エコシステム',
-                cardTitle1: 'AI コンピューティング不動産',
-                cardDesc1: 'AIDCチェーン資産管理鋳造 · REUST不動産トークンは海外高級不動産にアンカー、初期価格2USDT、BTC価値保存トラックに連動、実物不動産を裏付け、海外バイナンス等取引所に上場。',
-                cardTitle2: 'AI コンピューティング車両',
-                cardDesc2: 'VEUSTはAIDCチェーン資産管理システムが提供する新エネルギー車両デジタル権益トークンで、海外高級新エネルギー車両にアンカー、初期公正価格2USDT、ETH価値保存ロジックに連動、実物車両を価値基盤とし、高級車資産のチェーン上断片化、ステーキング流通、収益確認を実現、実物車両RWA標準化流通インフラを構築。',
-                panelTitle: 'AIDCエコシステムを探索',
-                panelDesc: '近日中にDApp、NFTマーケットプレイス、GameFiプロジェクトが登場',
-                panelBtn: '詳細を見る',
-                navAssets: '資産',
-                navStake: 'ステーキング',
-                navLiquidity: '流動性',
-                navInvite: '招待',
-                navEcosystem: 'エコシステム'
-            },
-            ar: {
-                langBtn: '🇸🇦 AR',
-                pageTitle: 'النظام البيئي',
-                cardTitle1: 'الحوسبة الذكية للعقارات',
-                cardDesc1: 'سك إدارة الأصول على سلسلة AIDC · رمز REUST العقاري المرتبط بالعقارات الفاخرة في الخارج، التسعير الأولي 2USDT مرتبط بمسار تخزين قيمة BTC، مدعوم بالعقارات المادية، الامتثال للانتقال إلى البورصات الخارجية مثل Binance.',
-                cardTitle2: 'الحوسبة الذكية للمركبات',
-                cardDesc2: 'VEUST هو رمز حقوق رقمية للمركبات الجديدة التي تم إطلاقها بواسطة نظام إدارة الأصول على سلسلة AIDC، مرتبط بالمركبات الفاخرة الجديدة في الخارج، التسعير العادل الأولي 2USDT، مرتبط بمنطق تخزين قيمة ETH، مع المركبات المادية كأساس للقيمة، لتحقيق تجزئة أصول المركبات الفاخرة على السلسلة، وتداول التخزين، وتأكيد الإيرادات، وبناء بنية تحتية موحدة لتداول RWA للمركبات المادية.',
-                panelTitle: 'استكشاف النظام البيئي AIDC',
-                panelDesc: 'المزيد من DApps وسوق NFT ومشاريع GameFi قادمة قريبًا',
-                panelBtn: 'اعرف المزيد',
-                navAssets: 'الأصول',
-                navStake: 'تخزين',
-                navLiquidity: 'سيولة',
-                navInvite: 'دعوة',
-                navEcosystem: 'النظام البيئي'
-            },
-            ru: {
-                langBtn: '🇷🇺 RU',
-                pageTitle: 'Экосистема',
-                cardTitle1: 'AI Вычисления Недвижимость',
-                cardDesc1: 'Чеканка управления активами на цепочке AIDC · Токен недвижимости REUST, привязанный к элитной зарубежной недвижимости, начальная цена 2USDT, привязан к треку хранения стоимости BTC, обеспечен физической недвижимостью, соответствует нормативам для выхода на зарубежные биржи типа Binance.',
-                cardTitle2: 'AI Вычисления Автомобили',
-                cardDesc2: 'VEUST — это токен цифровых прав для новых энергетических автомобилей, выпущенный системой управления активами на цепочке AIDC, привязанный к зарубежным роскошным новым энергетическим автомобилям, начальная справедливая цена 2USDT, привязан к логике хранения стоимости ETH, с физическими автомобилями как основой стоимости, реализуя фрагментацию активов роскошных автомобилей на цепочке, стейкинг, обращение и подтверждение доходов, создавая стандартизированную инфраструктуру обращения для RWA физических автомобилей.',
-                panelTitle: 'Исследуйте экосистему AIDC',
-                panelDesc: 'Скоро появятся новые DApps, NFT-маркетплейсы и проекты GameFi',
-                panelBtn: 'Узнать больше',
-                navAssets: 'Активы',
-                navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
-                navInvite: 'Пригласить',
-                navEcosystem: 'Экосистема'
-            }
-        };
 
         // ============================================================
         // 钱包连接逻辑 (保留原功能)
@@ -1224,6 +1611,12 @@
                 window.ethereum.on('chainChanged', () => window.location.reload());
             }
         }
+
+        function loadAllData() {
+            // 保留原功能，此处仅为占位
+            console.log('生态页面数据加载');
+        }
+
         window.addEventListener('load', autoConnect);
     </script>
 </body>
