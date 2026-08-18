@@ -8,7 +8,7 @@
     </script>
     <style>
         /* ============================================================
-                   全局重置 & 主题色 — 与生态页完全一致
+                   全局重置 & 主题色 — 与AIDC项目统一
                    ============================================================ */
         * {
             margin: 0;
@@ -39,6 +39,11 @@
             --aidc-blue-dim: #0088FF;
             --aidc-blue-glow: rgba(0, 221, 255, 0.5);
             --aidc-blue-border: rgba(0, 221, 255, 0.3);
+
+            /* 内边框蓝色 */
+            --inner-blue: #7fc9ff;
+            --inner-blue-glow: rgba(127, 201, 255, 0.5);
+            --inner-blue-dim: rgba(127, 201, 255, 0.15);
         }
 
         body {
@@ -100,7 +105,7 @@
         }
 
         /* ============================================================
-                   Header — 与生态页完全一致
+                   Header — 与生态页一致
                    ============================================================ */
         .header {
             display: flex;
@@ -228,10 +233,9 @@
         }
 
         /* ============================================================
-                   ★★★ 金色断点科技边框风格 — 与生态页完全一致 ★★★
+                   ★★★ 金色断点科技边框风格 ★★★
                    ============================================================ */
 
-        /* ----- 主面板 (金色断点边框 + 四角装饰) ----- */
         .gold-break-panel {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -326,7 +330,7 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* 主面板四角金色装饰 (L型小线段) */
+        /* 四角金色装饰 */
         .gold-break-panel .corner-deco {
             position: absolute;
             z-index: 3;
@@ -416,7 +420,32 @@
             background: #f5c842;
         }
 
-        /* ----- 资产卡片 (金色断点边框 + 四角装饰) ----- */
+        @keyframes goldPulse {
+            0% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.4;
+            }
+        }
+        @keyframes bluePulse {
+            0% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        /* ============================================================
+                   金色断点资产卡片
+                   ============================================================ */
         .gold-break-asset-card {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -472,7 +501,6 @@
             border-radius: 12px;
         }
 
-        /* 外层金色细线 */
         .gold-break-asset-card::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -494,7 +522,6 @@
             opacity: 0.7;
         }
 
-        /* 内层蓝色细线 */
         .gold-break-asset-card::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -516,7 +543,15 @@
             opacity: 0.7;
         }
 
-        /* 资产卡片四角金色装饰 (L型小线段) */
+        .gold-break-asset-card:hover {
+            box-shadow: 0 0 30px rgba(245, 200, 66, 0.05);
+        }
+        .gold-break-asset-card:hover::before {
+            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.4));
+            opacity: 1;
+        }
+
+        /* 资产卡片四角装饰 */
         .gold-break-asset-card .corner-deco {
             position: absolute;
             z-index: 3;
@@ -606,26 +641,6 @@
             background: #f5c842;
         }
 
-        .gold-break-asset-card:hover {
-            box-shadow: 0 0 30px rgba(245, 200, 66, 0.05);
-        }
-        .gold-break-asset-card:hover::before {
-            filter: drop-shadow(0 0 8px rgba(245, 200, 66, 0.4));
-            opacity: 1;
-        }
-
-        /* 脉动动画 */
-        @keyframes goldPulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-        @keyframes bluePulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.9; }
-            100% { opacity: 0.3; }
-        }
-
         /* ============================================================
                    面板内部内容样式
                    ============================================================ */
@@ -699,9 +714,15 @@
             color: var(--text-secondary);
             white-space: nowrap;
         }
-        .total-amount.small-text { font-size: 18px; }
-        .total-amount.xsmall-text { font-size: 15px; }
-        .total-amount.xxsmall-text { font-size: 12px; }
+        .total-amount.small-text {
+            font-size: 18px;
+        }
+        .total-amount.xsmall-text {
+            font-size: 15px;
+        }
+        .total-amount.xxsmall-text {
+            font-size: 12px;
+        }
 
         .dividend-container {
             width: 100%;
@@ -797,43 +818,188 @@
             vertical-align: middle;
         }
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* ============================================================
-                   底部导航栏 — 与生态页完全一致
+                   ★★★ 底部导航 — 统一金色断点边框 ★★★
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
+            position: relative;
             background: rgba(5, 11, 21, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 136, 255, 0.15);
             border-radius: 20px;
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
             margin: 0 15px 15px 15px;
-            position: relative;
             z-index: 10;
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
+            border: none;
+            transition: all 0.3s;
         }
-        .bottom-nav::before {
+        .bottom-nav::before,
+        .bottom-nav::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            opacity: 0.4;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            border-radius: 20px;
         }
+        .bottom-nav::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                0 0,
+                100% 0,
+                0 100%,
+                0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
+            opacity: 0.9;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+        .bottom-nav::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                6px 6px,
+                calc(100% - 6px) 6px,
+                6px calc(100% - 6px),
+                6px 6px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        .bottom-nav .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .bottom-nav .corner-deco::before,
+        .bottom-nav .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .bottom-nav .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -845,6 +1011,8 @@
             padding: 5px 10px;
             transition: all 0.3s ease;
             text-decoration: none;
+            position: relative;
+            z-index: 2;
         }
         .nav-item .nav-icon {
             width: 20px;
@@ -872,10 +1040,20 @@
         }
 
         @media (max-width: 600px) {
-            .total-amount { font-size: 18px; }
-            .total-amount small { font-size: 12px; }
-            .profile-panel { padding: 2px 2px; }
-            .avatar-circle { width: 40px; height: 40px; font-size: 18px; }
+            .total-amount {
+                font-size: 18px;
+            }
+            .total-amount small {
+                font-size: 12px;
+            }
+            .profile-panel {
+                padding: 2px 2px;
+            }
+            .avatar-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -906,15 +1084,12 @@
                 </div>
             </div>
 
-            <!-- ==========================================================
-            ★★★ 用户信息面板 (金色断点风格 + 四角装饰) ★★★
-            ========================================================== -->
+            <!-- ===== 用户信息面板 ===== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
                 <div class="corner-deco bl"></div>
                 <div class="corner-deco br"></div>
-
                 <div class="panel-inner">
                     <div class="profile-panel">
                         <div class="profile-left">
@@ -937,12 +1112,9 @@
                 </div>
             </div>
 
-            <!-- ==========================================================
-            ★★★ 资产列表 (金色断点风格 + 四角装饰) — 已移除BCBS和HSBC ★★★
-            ========================================================== -->
+            <!-- ===== 资产列表 ===== -->
             <div id="assetListContainer">
 
-                <!-- BNB -->
                 <div class="gold-break-asset-card">
                     <div class="corner-deco tl"></div>
                     <div class="corner-deco tr"></div>
@@ -961,7 +1133,6 @@
                     </div>
                 </div>
 
-                <!-- USDT -->
                 <div class="gold-break-asset-card">
                     <div class="corner-deco tl"></div>
                     <div class="corner-deco tr"></div>
@@ -980,7 +1151,6 @@
                     </div>
                 </div>
 
-                <!-- AIDC -->
                 <div class="gold-break-asset-card">
                     <div class="corner-deco tl"></div>
                     <div class="corner-deco tr"></div>
@@ -1003,8 +1173,13 @@
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 ===== -->
+        <!-- ===== 底部导航 — 统一金色断点边框 ===== -->
         <div class="bottom-nav">
+            <div class="corner-deco tl"></div>
+            <div class="corner-deco tr"></div>
+            <div class="corner-deco bl"></div>
+            <div class="corner-deco br"></div>
+
             <a href="index.html" class="nav-item active">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
                 <span id="navAssets">资产</span>
@@ -1014,8 +1189,8 @@
                 <span id="navInvite">邀请</span>
             </a>
             <a href="liquidity.html" class="nav-item">
-                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
-                <span id="navLiquidity">流动性</span>
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="铸造">
+                <span id="navLiquidity">铸造</span>
             </a>
             <a href="stake.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
@@ -1031,7 +1206,7 @@
 
     <script>
         // ============================================================
-        // 多语言翻译数据 (与生态页一致)
+        // 多语言翻译数据
         // ============================================================
         const translations = {
             cn: {
@@ -1039,7 +1214,7 @@
                 totalLabel: '总资产价值',
                 navAssets: '资产',
                 navStake: '质押',
-                navLiquidity: '流动性',
+                navLiquidity: '铸造',
                 navInvite: '邀请',
                 navEcosystem: '生态',
                 identityLabel: '身份',
@@ -1054,7 +1229,7 @@
                 totalLabel: 'Total Asset Value',
                 navAssets: 'Assets',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidity',
+                navLiquidity: 'Mint',
                 navInvite: 'Invite',
                 navEcosystem: 'Ecosystem',
                 identityLabel: 'Identity',
@@ -1069,7 +1244,7 @@
                 totalLabel: '總資產價值',
                 navAssets: '資產',
                 navStake: '質押',
-                navLiquidity: '流動性',
+                navLiquidity: '鑄造',
                 navInvite: '邀請',
                 navEcosystem: '生態',
                 identityLabel: '身份',
@@ -1084,7 +1259,7 @@
                 totalLabel: 'Valor Total de Activos',
                 navAssets: 'Activos',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidez',
+                navLiquidity: 'Acuñar',
                 navInvite: 'Invitar',
                 navEcosystem: 'Ecosistema',
                 identityLabel: 'Identidad',
@@ -1099,7 +1274,7 @@
                 totalLabel: 'Valeur Totale des Actifs',
                 navAssets: 'Actifs',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidité',
+                navLiquidity: 'Frapper',
                 navInvite: 'Inviter',
                 navEcosystem: 'Écosystème',
                 identityLabel: 'Identité',
@@ -1114,7 +1289,7 @@
                 totalLabel: '총 자산 가치',
                 navAssets: '자산',
                 navStake: '스테이킹',
-                navLiquidity: '유동성',
+                navLiquidity: '민팅',
                 navInvite: '초대',
                 navEcosystem: '생태계',
                 identityLabel: '신분',
@@ -1129,7 +1304,7 @@
                 totalLabel: '総資産価値',
                 navAssets: '資産',
                 navStake: 'ステーキング',
-                navLiquidity: '流動性',
+                navLiquidity: 'ミント',
                 navInvite: '招待',
                 navEcosystem: 'エコシステム',
                 identityLabel: '身分',
@@ -1144,7 +1319,7 @@
                 totalLabel: 'القيمة الإجمالية للأصول',
                 navAssets: 'الأصول',
                 navStake: 'تخزين',
-                navLiquidity: 'سيولة',
+                navLiquidity: 'سك',
                 navInvite: 'دعوة',
                 navEcosystem: 'النظام البيئي',
                 identityLabel: 'الهوية',
@@ -1159,7 +1334,7 @@
                 totalLabel: 'Общая стоимость активов',
                 navAssets: 'Активы',
                 navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
+                navLiquidity: 'Чеканка',
                 navInvite: 'Пригласить',
                 navEcosystem: 'Экосистема',
                 identityLabel: 'Идентичность',
@@ -1252,9 +1427,11 @@
         }
 
         // ============================================================
-        // 钱包配置 (已移除BCBS和HSBC相关合约)
+        // 钱包配置
         // ============================================================
         const AIGC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
+        const BCBS_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995';
+        const HSBC_ADDRESS = '0x20aD84A60902A91F036bD6bdB85AD1d61B2f65C1';
         const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
         const BNB_ORACLE_ADDR = '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE';
 
@@ -1267,23 +1444,43 @@
             "function claimDividend(uint8 pool) returns (bool)",
             "function isInPool(uint8, address) view returns (bool)"
         ];
+        const BCBS_ABI = ["function balanceOf(address) view returns (uint256)", "function userRate(address) view returns (uint256)", "function getBCBSPrice() view returns (uint256)"];
         const ERC20_ABI = ["function balanceOf(address) view returns (uint256)"];
 
-        let currentAccount = null, provider = null, signer = null;
-        let aigcContract, usdtContract, bnbOracle;
-        let isLoading = false, refreshTimer = null;
+        let currentAccount = null,
+            provider = null,
+            signer = null;
+        let aigcContract, bcbsContract, hsbcContract, usdtContract, bnbOracle;
+        let isLoading = false,
+            refreshTimer = null;
         const connectBtn = document.getElementById('connectWalletBtn');
+        const nodeNames = ['普通用户', '首富节点', '星链节点', '创世节点'];
+        const poolNames = ['首富池', '星链池', '创世池', 'S4池', 'S5池', 'S6池', 'S7池', 'S8池'];
 
         function initContracts() {
             if (provider && signer) {
                 aigcContract = new ethers.Contract(AIGC_ADDRESS, AIGC_ABI, signer);
+                bcbsContract = new ethers.Contract(BCBS_ADDRESS, BCBS_ABI, signer);
+                hsbcContract = new ethers.Contract(HSBC_ADDRESS, ERC20_ABI, signer);
                 usdtContract = new ethers.Contract(USDT_ADDRESS, ERC20_ABI, signer);
                 bnbOracle = new ethers.Contract(BNB_ORACLE_ADDR, BNB_ORACLE_ABI, provider);
             }
         }
 
         async function getBNBPrice() {
-            try { const [, a] = await bnbOracle.latestRoundData(); return parseFloat(ethers.utils.formatUnits(a, 8)); } catch (e) { return 580; }
+            try {
+                const [, a] = await bnbOracle.latestRoundData();
+                return parseFloat(ethers.utils.formatUnits(a, 8));
+            } catch (e) { return 580; }
+        }
+
+        async function getBCBSPrice() {
+            try {
+                const r = await bcbsContract.getBCBSPrice();
+                const p = parseFloat(ethers.utils.formatEther(r));
+                if (p > 0) return p;
+            } catch (e) {}
+            return 0;
         }
 
         window.handleConnect = async function() {
@@ -1324,6 +1521,8 @@
             provider = null;
             signer = null;
             aigcContract = null;
+            bcbsContract = null;
+            hsbcContract = null;
             usdtContract = null;
             bnbOracle = null;
             if (refreshTimer) { clearInterval(refreshTimer);
@@ -1335,24 +1534,40 @@
         }
 
         async function loadAllData() {
-            if (!currentAccount || !aigcContract) return;
+            if (!currentAccount || !aigcContract || !bcbsContract) return;
 
-            const bnbPrice = await getBNBPrice();
+            const [bnbPrice, bcbsPrice] = await Promise.all([getBNBPrice(), getBCBSPrice()]);
             document.getElementById('price-BNB').textContent = '$' + bnbPrice.toFixed(2);
+            document.getElementById('price-BCBS').textContent = '$' + bcbsPrice.toFixed(4);
 
-            let nodeLevel = 0, identityLevel = 0, userRate = 0;
-            try { const lvl = await aigcContract.getNodeLevel(currentAccount);
-                nodeLevel = parseInt(lvl.toString()); } catch (e) {}
-            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(2, currentAccount)) nodeLevel = 3; } catch (e) {} }
-            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(1, currentAccount)) nodeLevel = 2; } catch (e) {} }
-            if (nodeLevel === 0) { try { if (await aigcContract.isInPool(0, currentAccount)) nodeLevel = 1; } catch (e) {} }
-            try { const id = await aigcContract.identityLevel(currentAccount);
-                identityLevel = parseInt(id.toString()); } catch (e) {}
-            // 用户利率从AIGC合约获取，如果没有则使用默认值
-            try { const rate = await aigcContract.userRate ? await aigcContract.userRate(currentAccount) : 0;
-                userRate = parseFloat(ethers.utils.formatEther(rate)); } catch (e) {}
-            if (userRate === 0) { const baseRates = [0, 0.02, 0.04, 0.15];
-                userRate = baseRates[nodeLevel] || 0; }
+            let nodeLevel = 0,
+                identityLevel = 0,
+                userRate = 0;
+            try {
+                const lvl = await aigcContract.getNodeLevel(currentAccount);
+                nodeLevel = parseInt(lvl.toString());
+            } catch (e) {}
+            if (nodeLevel === 0) {
+                try { if (await aigcContract.isInPool(2, currentAccount)) nodeLevel = 3; } catch (e) {}
+            }
+            if (nodeLevel === 0) {
+                try { if (await aigcContract.isInPool(1, currentAccount)) nodeLevel = 2; } catch (e) {}
+            }
+            if (nodeLevel === 0) {
+                try { if (await aigcContract.isInPool(0, currentAccount)) nodeLevel = 1; } catch (e) {}
+            }
+            try {
+                const id = await aigcContract.identityLevel(currentAccount);
+                identityLevel = parseInt(id.toString());
+            } catch (e) {}
+            try {
+                const rate = await bcbsContract.userRate(currentAccount);
+                userRate = parseFloat(ethers.utils.formatEther(rate));
+            } catch (e) {}
+            if (userRate === 0) {
+                const baseRates = [0, 0.02, 0.04, 0.15];
+                userRate = baseRates[nodeLevel] || 0;
+            }
 
             const langData = translations[currentLang] || translations.cn;
             const levelName = langData.userLevels[nodeLevel] || '普通用户';
@@ -1360,7 +1575,8 @@
             document.getElementById('identityRow').textContent = langData.identityLabel + '：S' + identityLevel;
             document.getElementById('rateRow').textContent = langData.rateLabel + '：' + (userRate * 100).toFixed(1) + '%';
 
-            let dividendHtml = '', hasDividend = false;
+            let dividendHtml = '',
+                hasDividend = false;
             const poolNames = langData.poolNames;
             for (let i = 0; i < 8; i++) {
                 try {
@@ -1376,15 +1592,23 @@
             if (!hasDividend) dividendHtml = '<span class="dividend-empty">' + langData.dividendEmpty + '</span>';
             document.getElementById('dividendList').innerHTML = dividendHtml;
 
-            let bnb = 0, usdt = 0, aidc = 0;
+            let bnb = 0,
+                usdt = 0,
+                aidc = 0,
+                bcbs = 0,
+                hsbc = 0;
             try { bnb = parseFloat(ethers.utils.formatEther(await provider.getBalance(currentAccount))); } catch (e) {}
             try { usdt = parseFloat(ethers.utils.formatEther(await usdtContract.balanceOf(currentAccount))); } catch (e) {}
             try { aidc = parseFloat(ethers.utils.formatEther(await aigcContract.balanceOf(currentAccount))); } catch (e) {}
+            try { bcbs = parseFloat(ethers.utils.formatEther(await bcbsContract.balanceOf(currentAccount))); } catch (e) {}
+            try { hsbc = parseFloat(ethers.utils.formatEther(await hsbcContract.balanceOf(currentAccount))); } catch (e) {}
 
             const tokens = [
                 { sym: 'BNB', balance: bnb, price: bnbPrice },
                 { sym: 'USDT', balance: usdt, price: 1 },
-                { sym: 'AIDC', balance: aidc, price: 1 }
+                { sym: 'AIDC', balance: aidc, price: 1 },
+                { sym: 'BCBS', balance: bcbs, price: bcbsPrice },
+                { sym: 'HSBC', balance: hsbc, price: 0 }
             ];
             let total = 0;
             for (const t of tokens) {
@@ -1417,7 +1641,8 @@
             document.getElementById('rateRow').textContent = langData.rateLabel + '：0.00%';
             document.getElementById('dividendList').innerHTML = langData.dividendEmpty;
             document.getElementById('price-BNB').textContent = '$580.25';
-            ['BNB', 'USDT', 'AIDC'].forEach(s => {
+            document.getElementById('price-BCBS').textContent = '$0.00';
+            ['BNB', 'USDT', 'AIDC', 'BCBS', 'HSBC'].forEach(s => {
                 document.getElementById('bal-' + s).textContent = '0.0000';
                 document.getElementById('usd-' + s).textContent = '≈ $0.00';
             });
