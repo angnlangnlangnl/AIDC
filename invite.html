@@ -283,7 +283,7 @@
             clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
             border: none;
             transition: all 0.3s;
-            opacity: 0.5;
+            opacity: 0.7;
         }
         .bottom-nav::before,
         .bottom-nav::after {
@@ -410,13 +410,17 @@
             </div>
             <!-- 移除标题 -->
 
-            <!-- 空投卡片 -->
+            <!-- ★★★ 空投卡片 — 文字已修改 ★★★ -->
             <div class="airdrop-card">
                 <div class="panel-inner">
                     <div class="airdrop-header">
-                        <div style="text-align:center;"><div class="airdrop-title" id="airdropTitle">发红包 交链商朋友</div><div class="airdrop-desc" id="airdropDesc">链商金库，一起探索太空文明</div></div>
+                        <div style="text-align:center;">
+                            <div class="airdrop-title" id="airdropTitle">发红包 交链商朋友</div>
+                            <div class="airdrop-desc" id="airdropDesc">链商金库，一起探索太空文明</div>
+                        </div>
                     </div>
-                    <div class="airdrop-amount-box" id="airdropStatus">未领取</div>
+                    <!-- ★★★ 修改为 "可领取 100 AIDC" ★★★ -->
+                    <div class="airdrop-amount-box" id="airdropStatus">可领取 100 AIDC</div>
                     <button class="airdrop-btn" id="claimAirdropBtn">立即领取</button>
                 </div>
             </div>
@@ -499,7 +503,7 @@
             </div>
 
         </div>
-        <!-- ===== 底部导航 — 统一金色断点边框 ===== -->
+        <!-- ===== 底部导航 ===== -->
         <div class="bottom-nav">
             <div class="corner-deco tl"></div>
             <div class="corner-deco tr"></div>
@@ -536,9 +540,10 @@
             cn: {
                 langBtn: '🇨🇳 CN',
                 pageTitle: '邀请好友',
-                airdropTitle: '发红包 交朋友',
-                airdropDesc: '邀请好友，一起探索太空文明',
-                airdropStatusClaimed: '已领取 100 HSBC',
+                // ★★★ 修改文字 ★★★
+                airdropTitle: '发红包 交链商朋友',
+                airdropDesc: '链商金库，一起探索太空文明',
+                airdropStatusClaimed: '已领取 100 AIDC',
                 airdropStatusAvailable: '可领取 100 AIDC',
                 claimBtn: '立即领取',
                 claimBtnClaimed: '已领取',
@@ -611,10 +616,10 @@
             en: {
                 langBtn: '🇺🇸 EN',
                 pageTitle: 'Invite Friends',
-                airdropTitle: 'Send Red Packets, Make Friends',
-                airdropDesc: 'Invite friends to explore space civilization together',
-                airdropStatusClaimed: 'Claimed 100 HSBC',
-                airdropStatusAvailable: 'Claimable 100 HSBC',
+                airdropTitle: 'Send Red Packets, Make Chain Business Friends',
+                airdropDesc: 'Chain Business Vault, Explore Space Civilization Together',
+                airdropStatusClaimed: 'Claimed 100 AIDC',
+                airdropStatusAvailable: 'Claimable 100 AIDC',
                 claimBtn: 'Claim Now',
                 claimBtnClaimed: 'Claimed',
                 nodeTitle1: 'Genesis Node',
@@ -686,10 +691,10 @@
             zh: {
                 langBtn: '🇭🇰 繁中',
                 pageTitle: '邀請好友',
-                airdropTitle: '發紅包 交朋友',
-                airdropDesc: '邀請好友，一起探索太空文明',
-                airdropStatusClaimed: '已領取 100 HSBC',
-                airdropStatusAvailable: '可領取 100 HSBC',
+                airdropTitle: '發紅包 交鏈商朋友',
+                airdropDesc: '鏈商金庫，一起探索太空文明',
+                airdropStatusClaimed: '已領取 100 AIDC',
+                airdropStatusAvailable: '可領取 100 AIDC',
                 claimBtn: '立即領取',
                 claimBtnClaimed: '已領取',
                 nodeTitle1: '創世節點',
@@ -761,10 +766,10 @@
             es: {
                 langBtn: '🇪🇸 ES',
                 pageTitle: 'Invitar Amigos',
-                airdropTitle: 'Envía Sobres Rojos, Haz Amigos',
-                airdropDesc: 'Invita amigos a explorar la civilización espacial juntos',
-                airdropStatusClaimed: 'Reclamado 100 HSBC',
-                airdropStatusAvailable: 'Reclamable 100 HSBC',
+                airdropTitle: 'Envía Sobres Rojos, Haz Amigos de Negocios en Cadena',
+                airdropDesc: 'Cofre de Negocios en Cadena, Explorando la Civilización Espacial Juntos',
+                airdropStatusClaimed: 'Reclamado 100 AIDC',
+                airdropStatusAvailable: 'Reclamable 100 AIDC',
                 claimBtn: 'Reclamar Ahora',
                 claimBtnClaimed: 'Reclamado',
                 nodeTitle1: 'Nodo Génesis',
@@ -836,10 +841,10 @@
             fr: {
                 langBtn: '🇫🇷 FR',
                 pageTitle: 'Inviter des Amis',
-                airdropTitle: 'Envoyez des Enveloppes Rouges, Faites des Amis',
-                airdropDesc: 'Invitez des amis à explorer la civilisation spatiale ensemble',
-                airdropStatusClaimed: 'Réclamé 100 HSBC',
-                airdropStatusAvailable: 'Réclamable 100 HSBC',
+                airdropTitle: 'Envoyez des Enveloppes Rouges, Faites des Amis Commerciaux en Chaîne',
+                airdropDesc: 'Coffre-fort Commercial en Chaîne, Explorons la Civilisation Spatiale Ensemble',
+                airdropStatusClaimed: 'Réclamé 100 AIDC',
+                airdropStatusAvailable: 'Réclamable 100 AIDC',
                 claimBtn: 'Réclamer Maintenant',
                 claimBtnClaimed: 'Réclamé',
                 nodeTitle1: 'Nœud Genesis',
@@ -911,10 +916,10 @@
             ko: {
                 langBtn: '🇰🇷 KO',
                 pageTitle: '친구 초대',
-                airdropTitle: '레드패킷 보내기, 친구 만들기',
-                airdropDesc: '친구를 초대하여 우주 문명을 함께 탐험하세요',
-                airdropStatusClaimed: '100 HSBC 수령 완료',
-                airdropStatusAvailable: '100 HSBC 수령 가능',
+                airdropTitle: '레드패킷 보내기, 체인 비즈니스 친구 만들기',
+                airdropDesc: '체인 비즈니스 금고, 우주 문명을 함께 탐험하세요',
+                airdropStatusClaimed: '100 AIDC 수령 완료',
+                airdropStatusAvailable: '100 AIDC 수령 가능',
                 claimBtn: '지금 수령',
                 claimBtnClaimed: '수령 완료',
                 nodeTitle1: '창세 노드',
@@ -986,10 +991,10 @@
             ja: {
                 langBtn: '🇯🇵 JA',
                 pageTitle: '友達を招待',
-                airdropTitle: 'レッドパケットを送って友達を作ろう',
-                airdropDesc: '友達を招待して宇宙文明を一緒に探検しよう',
-                airdropStatusClaimed: '100 HSBC受領済み',
-                airdropStatusAvailable: '100 HSBC受領可能',
+                airdropTitle: 'レッドパケットを送ってチェーンビジネスの友達を作ろう',
+                airdropDesc: 'チェーンビジネス金庫、宇宙文明を一緒に探検しよう',
+                airdropStatusClaimed: '100 AIDC受領済み',
+                airdropStatusAvailable: '100 AIDC受領可能',
                 claimBtn: '今すぐ受領',
                 claimBtnClaimed: '受領済み',
                 nodeTitle1: 'ジェネシスノード',
@@ -1061,10 +1066,10 @@
             ar: {
                 langBtn: '🇸🇦 AR',
                 pageTitle: 'دعوة الأصدقاء',
-                airdropTitle: 'أرسل مظاريف حمراء، واكسب أصدقاء',
-                airdropDesc: 'ادعُ الأصدقاء لاستكشاف الحضارة الفضائية معًا',
-                airdropStatusClaimed: 'تم المطالبة بـ 100 HSBC',
-                airdropStatusAvailable: 'قابل للمطالبة 100 HSBC',
+                airdropTitle: 'أرسل مظاريف حمراء، واكسب أصدقاء أعمال السلسلة',
+                airdropDesc: 'خزينة أعمال السلسلة، استكشف الحضارة الفضائية معًا',
+                airdropStatusClaimed: 'تم المطالبة بـ 100 AIDC',
+                airdropStatusAvailable: 'قابل للمطالبة 100 AIDC',
                 claimBtn: 'المطالبة الآن',
                 claimBtnClaimed: 'تم المطالبة',
                 nodeTitle1: 'عقدة التكوين',
@@ -1136,10 +1141,10 @@
             ru: {
                 langBtn: '🇷🇺 RU',
                 pageTitle: 'Пригласить друзей',
-                airdropTitle: 'Отправляйте красные конверты, заводите друзей',
-                airdropDesc: 'Пригласите друзей исследовать космическую цивилизацию вместе',
-                airdropStatusClaimed: 'Получено 100 HSBC',
-                airdropStatusAvailable: 'Можно получить 100 HSBC',
+                airdropTitle: 'Отправляйте красные конверты, заводите друзей в цепном бизнесе',
+                airdropDesc: 'Сокровищница цепного бизнеса, исследуйте космическую цивилизацию вместе',
+                airdropStatusClaimed: 'Получено 100 AIDC',
+                airdropStatusAvailable: 'Можно получить 100 AIDC',
                 claimBtn: 'Получить сейчас',
                 claimBtnClaimed: 'Получено',
                 nodeTitle1: 'Узел Genesis',
