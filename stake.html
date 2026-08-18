@@ -284,6 +284,7 @@
             border-radius: 16px;
         }
 
+        /* 外层边框：金色 · 0.75px · 断点 30%-70% */
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -306,6 +307,7 @@
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
+        /* 内层边框：蓝色 · 0.75px · 断点错位 15%-55% */
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -328,6 +330,7 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
+        /* 四角金色装饰 */
         .gold-break-panel .corner-deco {
             position: absolute;
             z-index: 3;
@@ -344,23 +347,105 @@
             box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
-        .gold-break-panel .corner-deco.tl { top: 3px; left: 3px; }
-        .gold-break-panel .corner-deco.tl::before { top: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .gold-break-panel .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .gold-break-panel .corner-deco.tr { top: 3px; right: 3px; }
-        .gold-break-panel .corner-deco.tr::before { top: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .gold-break-panel .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .gold-break-panel .corner-deco.bl { bottom: 3px; left: 3px; }
-        .gold-break-panel .corner-deco.bl::before { bottom: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .gold-break-panel .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .gold-break-panel .corner-deco.br { bottom: 3px; right: 3px; }
-        .gold-break-panel .corner-deco.br::before { bottom: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .gold-break-panel .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .gold-break-panel .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .gold-break-panel .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .gold-break-panel .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-panel .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
 
-        @keyframes goldPulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
-        @keyframes bluePulse { 0% { opacity: 0.3; } 50% { opacity: 0.9; } 100% { opacity: 0.3; } }
+        @keyframes goldPulse {
+            0% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.4;
+            }
+        }
+        @keyframes bluePulse {
+            0% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                opacity: 0.3;
+            }
+        }
 
-        /* 质押卡片边框 */
+        /* ============================================================
+                   质押卡片边框 (金色断点风格)
+                   ============================================================ */
         .gold-break-stake-card {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -446,6 +531,7 @@
             opacity: 0.7;
         }
 
+        /* 四角装饰 */
         .gold-break-stake-card .corner-deco {
             position: absolute;
             z-index: 3;
@@ -462,32 +548,172 @@
             box-shadow: 0 0 6px rgba(245, 200, 66, 0.3);
             border-radius: 0;
         }
-        .gold-break-stake-card .corner-deco.tl { top: 2px; left: 2px; }
-        .gold-break-stake-card .corner-deco.tl::before { top: 0; left: 0; width: 8px; height: 1.5px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 8px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.tr { top: 2px; right: 2px; }
-        .gold-break-stake-card .corner-deco.tr::before { top: 0; right: 0; width: 8px; height: 1.5px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 8px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.bl { bottom: 2px; left: 2px; }
-        .gold-break-stake-card .corner-deco.bl::before { bottom: 0; left: 0; width: 8px; height: 1.5px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 8px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.br { bottom: 2px; right: 2px; }
-        .gold-break-stake-card .corner-deco.br::before { bottom: 0; right: 0; width: 8px; height: 1.5px; background: #f5c842; }
-        .gold-break-stake-card .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 8px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.tl {
+            top: 2px;
+            left: 2px;
+        }
+        .gold-break-stake-card .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.tr {
+            top: 2px;
+            right: 2px;
+        }
+        .gold-break-stake-card .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.bl {
+            bottom: 2px;
+            left: 2px;
+        }
+        .gold-break-stake-card .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.br {
+            bottom: 2px;
+            right: 2px;
+        }
+        .gold-break-stake-card .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 8px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .gold-break-stake-card .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 8px;
+            background: #f5c842;
+        }
+
+        /* ★★★ 按钮样式 — 内边框蓝色系 ★★★ */
+        .btn-clip {
+            clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+        .btn-clip:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+        .btn-clip:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-stake-blue {
+            display: inline-block;
+            padding: 14px 24px;
+            border: 1px solid #7fc9ff;
+            border-radius: 0;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            color: #7fc9ff;
+            background: rgba(127, 201, 255, 0.08);
+            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
+        }
+        .btn-stake-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+            box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        .btn-stake-blue:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-stake-blue:active:not(:disabled) {
+            transform: translateY(0px);
+        }
+
+        .btn-primary-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-primary-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+            box-shadow: 0 0 15px rgba(127, 201, 255, 0.2);
+        }
+
+        .btn-success-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-success-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+        }
+
+        .btn-danger-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-danger-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+        }
+
+        .btn-retry-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-retry-blue:hover {
+            background: rgba(127, 201, 255, 0.18);
+        }
 
         /* ============================================================
                    内容样式
                    ============================================================ */
 
+        /* ★★★ 移除页面标题 ★★★ */
         .page-title {
-            font-size: 24px;
-            color: var(--text-primary);
-            text-align: center;
-            margin: 10px 0 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            display: none;
         }
 
+        /* 余额面板 */
         .balance-panel {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -634,37 +860,6 @@
             font-weight: 600;
         }
 
-        .btn-stake-blue {
-            display: inline-block;
-            padding: 14px 24px;
-            border: 1px solid #7fc9ff;
-            border-radius: 0;
-            font-size: 0.95rem;
-            letter-spacing: 3px;
-            color: #7fc9ff;
-            background: rgba(127, 201, 255, 0.08);
-            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
-        }
-        .btn-stake-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-            box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
-            transform: translateY(-2px);
-        }
-        .btn-stake-blue:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .btn-stake-blue:active:not(:disabled) {
-            transform: translateY(0px);
-        }
-
         .order-list-title {
             font-size: 16px;
             color: var(--text-primary);
@@ -672,6 +867,7 @@
             font-weight: 500;
         }
 
+        /* 质押订单卡片内部样式 */
         .stake-header {
             display: flex;
             justify-content: space-between;
@@ -759,40 +955,6 @@
             clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
         }
 
-        .btn-primary-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-primary-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-            box-shadow: 0 0 15px rgba(127, 201, 255, 0.2);
-        }
-        .btn-success-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-success-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-        }
-        .btn-danger-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-danger-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-        }
-        .btn-retry-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-retry-blue:hover {
-            background: rgba(127, 201, 255, 0.18);
-        }
-
         .countdown {
             color: var(--cyan-glow);
             font-weight: 600;
@@ -802,6 +964,7 @@
             font-weight: 600;
         }
 
+        /* 骨架屏 */
         .skeleton {
             background: linear-gradient(90deg, rgba(0, 136, 255, 0.05) 25%, rgba(0, 204, 255, 0.1) 50%, rgba(0, 136, 255, 0.05) 75%);
             background-size: 200% 100%;
@@ -838,6 +1001,7 @@
             border-radius: 10px;
         }
 
+        /* Loading */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -880,7 +1044,16 @@
             padding: 12px 0;
             margin: 0 15px 15px 15px;
             z-index: 10;
-            clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
             border: none;
             transition: all 0.3s;
         }
@@ -904,8 +1077,16 @@
                 linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
                 linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
                 linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
-            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
-            background-position: 0 0, 100% 0, 0 100%, 0 0;
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                0 0,
+                100% 0,
+                0 100%,
+                0 0;
             background-repeat: no-repeat;
             filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
             opacity: 0.9;
@@ -917,8 +1098,16 @@
                 linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
                 linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
                 linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
-            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
-            background-position: 6px 6px, calc(100% - 6px) 6px, 6px calc(100% - 6px), 6px 6px;
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                6px 6px,
+                calc(100% - 6px) 6px,
+                6px calc(100% - 6px),
+                6px 6px;
             background-repeat: no-repeat;
             filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
             opacity: 0.9;
@@ -941,18 +1130,78 @@
             box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
-        .bottom-nav .corner-deco.tl { top: 3px; left: 3px; }
-        .bottom-nav .corner-deco.tl::before { top: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .bottom-nav .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .bottom-nav .corner-deco.tr { top: 3px; right: 3px; }
-        .bottom-nav .corner-deco.tr::before { top: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .bottom-nav .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .bottom-nav .corner-deco.bl { bottom: 3px; left: 3px; }
-        .bottom-nav .corner-deco.bl::before { bottom: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .bottom-nav .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
-        .bottom-nav .corner-deco.br { bottom: 3px; right: 3px; }
-        .bottom-nav .corner-deco.br::before { bottom: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
-        .bottom-nav .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
 
         .nav-item {
             display: flex;
@@ -968,15 +1217,30 @@
             position: relative;
             z-index: 2;
         }
-        .nav-item .nav-icon { width: 20px; height: 20px; object-fit: contain; }
-        .nav-item.active { color: var(--gold); position: relative; }
-        .nav-item.active::after {
-            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
-            width: 20px; height: 2px;
-            background: linear-gradient(to right, var(--gold), #d4a830);
-            border-radius: 5px; box-shadow: 0 0 15px var(--gold-glow);
+        .nav-item .nav-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
-        .nav-item:not(.active):hover { color: var(--gold); }
+        .nav-item.active {
+            color: var(--gold);
+            position: relative;
+        }
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background: linear-gradient(to right, var(--gold), #d4a830);
+            border-radius: 5px;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+        .nav-item:not(.active):hover {
+            color: var(--gold);
+        }
 
         @media (max-width: 600px) {
             .period-grid {
@@ -997,7 +1261,7 @@
     <div class="app-container">
         <div class="scroll-area">
 
-            <!-- ===== Header ===== -->
+            <!-- ===== Header — 与生态页一致 ===== -->
             <div class="header">
                 <div class="logo-area">
                     <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC">
@@ -1005,6 +1269,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="lang-btn" id="langBtn">🇨🇳 CN ⌄</button>
+
                     <div class="lang-dropdown" id="langDropdown">
                         <div class="lang-option"><span>🇨🇳 简体中文</span><span class="code">CN</span></div>
                         <div class="lang-option"><span>🇺🇸 English</span><span class="code">EN</span></div>
@@ -1016,14 +1281,16 @@
                         <div class="lang-option"><span>🇸🇦 العربية</span><span class="code">AR</span></div>
                         <div class="lang-option"><span>🇷🇺 Русский</span><span class="code">RU</span></div>
                     </div>
+
                     <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
                 </div>
             </div>
 
-            <!-- ===== 页面标题 ===== -->
-            <div class="page-title" id="pageTitle">🔒 质押挖矿</div>
+            <!-- ===== ★★★ 移除"🔒 质押挖矿"标题 ★★★ ===== -->
 
-            <!-- ===== 余额面板 ===== -->
+            <!-- ==========================================================
+            ★★★ 余额面板 (金色断点边框) ★★★
+            ========================================================== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1043,7 +1310,9 @@
                 </div>
             </div>
 
-            <!-- ===== 质押交互面板 ===== -->
+            <!-- ==========================================================
+            ★★★ 质押交互面板 (金色断点边框) ★★★
+            ========================================================== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1079,7 +1348,9 @@
                 </div>
             </div>
 
-            <!-- ===== 订单列表 ===== -->
+            <!-- ==========================================================
+            ★★★ 订单列表 (金色断点边框) ★★★
+            ========================================================== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1088,6 +1359,7 @@
                 <div class="panel-inner">
                     <div class="order-list-title" id="orderListTitle">📋 我的质押订单</div>
                     <div id="orderListContainer">
+                        <!-- 骨架屏会被JS替换 -->
                         <div class="gold-break-stake-card">
                             <div class="corner-deco tl"></div>
                             <div class="corner-deco tr"></div>
@@ -1148,12 +1420,12 @@
 
     <script>
         // ============================================================
-        // 多语言翻译数据
+        // 多语言翻译数据 (保留原内容)
         // ============================================================
         const translations = {
             cn: {
                 langBtn: '🇨🇳 CN',
-                pageTitle: '🔒 质押挖矿',
+                pageTitle: '质押挖矿',
                 stakeableBalanceLabel: '可质押余额: ',
                 selectPeriodLabel: '选择质押周期',
                 estRewardLabel: '预计可获得利息',
@@ -1208,7 +1480,7 @@
             },
             en: {
                 langBtn: '🇺🇸 EN',
-                pageTitle: '🔒 Stake Mining',
+                pageTitle: 'Stake Mining',
                 stakeableBalanceLabel: 'Stakeable Balance: ',
                 selectPeriodLabel: 'Select Staking Period',
                 estRewardLabel: 'Estimated Interest',
@@ -1263,7 +1535,7 @@
             },
             zh: {
                 langBtn: '🇭🇰 繁中',
-                pageTitle: '🔒 質押挖礦',
+                pageTitle: '質押挖礦',
                 stakeableBalanceLabel: '可質押餘額: ',
                 selectPeriodLabel: '選擇質押週期',
                 estRewardLabel: '預計可獲得利息',
@@ -1318,14 +1590,14 @@
             },
             es: {
                 langBtn: '🇪🇸 ES',
-                pageTitle: '🔒 Minería de Staking',
+                pageTitle: 'Minería de Staking',
                 stakeableBalanceLabel: 'Saldo Apostable: ',
                 selectPeriodLabel: 'Seleccionar Período de Staking',
                 estRewardLabel: 'Interés Estimado',
                 stakeSubmitBtn: 'En Desarrollo',
                 orderListTitle: '📋 Mis Órdenes de Staking',
                 navAssets: 'Activos',
-                navStake: 'Staking',
+                navStake: 'Stake',
                 navLiquidity: 'Acuñar',
                 navInvite: 'Invitar',
                 navEcosystem: 'Ecosistema',
@@ -1373,7 +1645,7 @@
             },
             fr: {
                 langBtn: '🇫🇷 FR',
-                pageTitle: '🔒 Minage de Staking',
+                pageTitle: 'Minage de Staking',
                 stakeableBalanceLabel: 'Solde à Staker: ',
                 selectPeriodLabel: 'Choisir la Période de Staking',
                 estRewardLabel: 'Intérêts Estimés',
@@ -1428,7 +1700,7 @@
             },
             ko: {
                 langBtn: '🇰🇷 KO',
-                pageTitle: '🔒 스테이킹 채굴',
+                pageTitle: '스테이킹 채굴',
                 stakeableBalanceLabel: '스테이킹 가능 잔액: ',
                 selectPeriodLabel: '스테이킹 기간 선택',
                 estRewardLabel: '예상 이자',
@@ -1483,7 +1755,7 @@
             },
             ja: {
                 langBtn: '🇯🇵 JA',
-                pageTitle: '🔒 ステーキングマイニング',
+                pageTitle: 'ステーキングマイニング',
                 stakeableBalanceLabel: 'ステーキング可能残高: ',
                 selectPeriodLabel: 'ステーキング期間を選択',
                 estRewardLabel: '予想利息',
@@ -1538,7 +1810,7 @@
             },
             ar: {
                 langBtn: '🇸🇦 AR',
-                pageTitle: '🔒 تعدين التخزين',
+                pageTitle: 'تعدين التخزين',
                 stakeableBalanceLabel: 'رصيد قابل للتخزين: ',
                 selectPeriodLabel: 'اختر فترة التخزين',
                 estRewardLabel: 'الفائدة المقدرة',
@@ -1593,7 +1865,7 @@
             },
             ru: {
                 langBtn: '🇷🇺 RU',
-                pageTitle: '🔒 Майнинг стейкинга',
+                pageTitle: 'Майнинг стейкинга',
                 stakeableBalanceLabel: 'Баланс для стейкинга: ',
                 selectPeriodLabel: 'Выберите период стейкинга',
                 estRewardLabel: 'Ожидаемые проценты',
@@ -1693,23 +1965,30 @@
 
         function applyTranslations(langData) {
             langBtn.textContent = langData.langBtn + ' ⌄';
-            document.getElementById('pageTitle').textContent = langData.pageTitle;
+            // ★★★ pageTitle 已移除 ★★★
             document.getElementById('stakeableBalanceLabel').textContent = langData.stakeableBalanceLabel;
             document.getElementById('selectPeriodLabel').textContent = langData.selectPeriodLabel;
             document.getElementById('estRewardLabel').textContent = langData.estRewardLabel;
             document.getElementById('stakeSubmitBtn').textContent = langData.stakeSubmitBtn;
             document.getElementById('orderListTitle').textContent = langData.orderListTitle;
+
             document.querySelectorAll('.period-btn').forEach((btn, index) => {
                 const periodText = btn.querySelector('.period-text');
                 const rateLabel = btn.querySelector('.rate-label');
-                if (periodText && langData.periodTexts[index]) periodText.textContent = langData.periodTexts[index];
-                if (rateLabel && langData.dailyRateTexts[index]) rateLabel.textContent = langData.dailyRateTexts[index];
+                if (periodText && langData.periodTexts[index]) {
+                    periodText.textContent = langData.periodTexts[index];
+                }
+                if (rateLabel && langData.dailyRateTexts[index]) {
+                    rateLabel.textContent = langData.dailyRateTexts[index];
+                }
             });
+
             document.getElementById('navAssets').textContent = langData.navAssets;
             document.getElementById('navStake').textContent = langData.navStake;
             document.getElementById('navLiquidity').textContent = langData.navLiquidity;
             document.getElementById('navInvite').textContent = langData.navInvite;
             document.getElementById('navEcosystem').textContent = langData.navEcosystem;
+
             document.getElementById('maxBtn').textContent = langData.maxBtn;
         }
 
@@ -1750,7 +2029,9 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const periodDays = [7, 35, 180, 360, 540, 720];
         const dailyRates = [0.008, 0.013, 0.018, 0.021, 0.023, 0.026];
-        let currentCoin = 'AIGC', currentPeriod = 0, countdownTimer = null;
+        let currentCoin = 'AIGC',
+            currentPeriod = 0,
+            countdownTimer = null;
         let cachedDaySeconds = 86400;
 
         function showLoading() { loadingOverlay.style.display = 'flex'; }
@@ -1763,45 +2044,45 @@
                     return parseFloat(ethers.utils.formatUnits(amount, decimals)).toFixed(precision);
                 }
                 return parseFloat(amount).toFixed(precision);
-            } catch(e) { return '0.' + '0'.repeat(precision); }
+            } catch (e) { return '0.' + '0'.repeat(precision); }
         }
 
         function formatTimestamp(timestamp) {
             if (!timestamp || timestamp === '0' || timestamp === 0) return '--';
             try {
                 const ts = typeof timestamp === 'object' ? timestamp.toNumber() : parseInt(timestamp);
-                return new Date(ts * 1000).toLocaleString('zh-CN', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
-            } catch(e) { return '--'; }
+                return new Date(ts * 1000).toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+            } catch (e) { return '--'; }
         }
 
         function formatRemainingTime(endTime) {
-            const now = Math.floor(Date.now()/1000);
+            const now = Math.floor(Date.now() / 1000);
             const remaining = endTime - now;
             if (remaining <= 0) return '已到期 ✅';
-            const days = Math.floor(remaining/86400);
-            const hours = Math.floor((remaining%86400)/3600);
-            const minutes = Math.floor((remaining%3600)/60);
+            const days = Math.floor(remaining / 86400);
+            const hours = Math.floor((remaining % 86400) / 3600);
+            const minutes = Math.floor((remaining % 3600) / 60);
             if (days > 0) return `${days}天${hours}小时${minutes}分钟`;
             if (hours > 0) return `${hours}小时${minutes}分钟`;
             return `${minutes}分钟`;
         }
 
         function getPeriodName(period) {
-            const map = { 0:{name:'7 天',test:'35 分钟'},1:{name:'35 天',test:'175 分钟'},2:{name:'180 天',test:'15 小时'},3:{name:'360 天',test:'30 小时'},4:{name:'540 天',test:'45 小时'},5:{name:'720 天',test:'60 小时'} };
-            return map[period]||{name:'未知',test:'--'};
+            const map = { 0: { name: '7 天', test: '35 分钟' }, 1: { name: '35 天', test: '175 分钟' }, 2: { name: '180 天', test: '15 小时' }, 3: { name: '360 天', test: '30 小时' }, 4: { name: '540 天', test: '45 小时' }, 5: { name: '720 天', test: '60 小时' } };
+            return map[period] || { name: '未知', test: '--' };
         }
 
         function getDailyRate(period) {
-            const map = {0:'0.8%',1:'1.3%',2:'1.8%',3:'2.1%',4:'2.3%',5:'2.6%'};
-            return map[period]||'--';
+            const map = { 0: '0.8%', 1: '1.3%', 2: '1.8%', 3: '2.1%', 4: '2.3%', 5: '2.6%' };
+            return map[period] || '--';
         }
 
         function getStatusLabel(redeemed, endTime) {
             const langData = translations[currentLang] || translations.cn;
-            if (redeemed) return { text: langData.statusRedeemed, cls:'status-redeemed' };
-            const now = Math.floor(Date.now()/1000);
-            if (now >= endTime) return { text: langData.statusReady, cls:'status-ready' };
-            return { text: langData.statusActive, cls:'status-active' };
+            if (redeemed) return { text: langData.statusRedeemed, cls: 'status-redeemed' };
+            const now = Math.floor(Date.now() / 1000);
+            if (now >= endTime) return { text: langData.statusReady, cls: 'status-ready' };
+            return { text: langData.statusActive, cls: 'status-active' };
         }
 
         function initContracts() {
@@ -1866,12 +2147,17 @@
         async function loadOrders() {
             const container = document.getElementById('orderListContainer');
             const langData = translations[currentLang] || translations.cn;
+
             if (!currentAccount || !stakeContract) { container.innerHTML = renderSkeleton(); return; }
             container.innerHTML = renderSkeleton();
+
             try {
                 const ids = await stakeContract.getUserStakeIds(currentAccount);
                 if (!ids || ids.length === 0) { container.innerHTML = renderEmptyCard(langData); return; }
-                let html = '', successCount = 0, failedCount = 0;
+
+                let html = '',
+                    successCount = 0,
+                    failedCount = 0;
                 for (const id of ids) {
                     try {
                         const orderHtml = await loadSingleOrder(id, langData);
@@ -1882,6 +2168,7 @@
                         html += renderErrorCard(id, orderErr, langData);
                     }
                 }
+
                 if (failedCount > 0) {
                     html += `<div style="color:var(--cyan-glow);text-align:center;padding:10px;font-size:12px;background:rgba(0,204,255,0.05);border-radius:8px;margin-top:8px;clip-path:polygon(4px 0%,calc(100% - 4px) 0%,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0% calc(100% - 4px),0% 4px);">✅ ${successCount} 个订单正常 &nbsp;|&nbsp; ❌ ${failedCount} 个订单加载失败</div>`;
                 }
@@ -1903,7 +2190,9 @@
                 const period = result.period !== undefined ? result.period : result[5];
                 const redeemed = result.redeemed !== undefined ? result.redeemed : result[6];
                 const accumulatedClaimed = result.accumulatedClaimed || result[8];
-                let pendingDisplay = '0.00000 BCBS', pendingValue = 0;
+
+                let pendingDisplay = '0.00000 BCBS',
+                    pendingValue = 0;
                 try {
                     const pending = await stakeContract.getPendingInterest(id);
                     pendingValue = pending ? parseFloat(ethers.utils.formatUnits(pending, 18)) : 0;
@@ -1911,36 +2200,40 @@
                 } catch (pendingErr) {
                     pendingDisplay = '⚠️ 暂不可用';
                 }
+
                 const tokenName = tokenType === 0 ? 'AIGC' : 'USDT';
                 let decimals = 18;
-                try { const contract = tokenType === 0 ? aigcContract : usdtContract; decimals = await getDecimals(contract); } catch (e) {}
+                try { const contract = tokenType === 0 ? aigcContract : usdtContract;
+                    decimals = await getDecimals(contract); } catch (e) {}
+
                 const periodInfo = getPeriodName(Number(period));
                 const dailyRate = getDailyRate(Number(period));
                 const endTime = parseInt(startTime) + periodDays[Number(period)] * cachedDaySeconds;
                 const status = getStatusLabel(redeemed, endTime);
+
                 return `
-                    <div class="gold-break-stake-card" data-stake-id="${stakeId}">
-                        <div class="corner-deco tl"></div>
-                        <div class="corner-deco tr"></div>
-                        <div class="corner-deco bl"></div>
-                        <div class="corner-deco br"></div>
-                        <div class="stake-header"><span class="stake-id"># ${stakeId}</span><span class="stake-status ${status.cls}">${status.text}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelAsset}</span><span class="value">${tokenName}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelAmount}</span><span class="value">${formatTokenAmount(amount, decimals)} ${tokenName}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelStart}</span><span class="value">${formatTimestamp(startTime)}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelEnd}</span><span class="value">${formatTimestamp(endTime)}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelRemaining}</span><span class="value countdown" data-end-time="${endTime}">${formatRemainingTime(endTime)}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelPeriod}</span><span class="value">${periodInfo.name}${cachedDaySeconds !== 86400 ? ' (测试版)' : ''}</span></div>
-                        <div class="info-row"><span class="label">${langData.labelDailyRate}</span><span class="value rate">${dailyRate}</span></div>
-                        <div class="stake-interest">
-                            <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} BCBS</span></div>
-                            <div class="info-row"><span class="label">${langData.labelPending}</span><span class="value pending-interest">${pendingDisplay}</span></div>
-                        </div>
-                        <div class="stake-actions">
-                            <button class="btn btn-primary-blue btn-clip" data-id="${stakeId}" data-action="claim" ${redeemed || pendingValue <= 0 ? 'disabled' : ''}>${langData.btnClaim}</button>
-                            ${status.text === langData.statusReady ? `<button class="btn btn-success-blue btn-clip" data-id="${stakeId}" data-action="redeem">${langData.btnRedeem}</button>` : `<button class="btn btn-danger-blue btn-clip" data-id="${stakeId}" data-action="early" ${redeemed ? 'disabled' : ''}>${langData.btnEarly}</button>`}
-                        </div>
-                    </div>`;
+                        <div class="gold-break-stake-card" data-stake-id="${stakeId}">
+                            <div class="corner-deco tl"></div>
+                            <div class="corner-deco tr"></div>
+                            <div class="corner-deco bl"></div>
+                            <div class="corner-deco br"></div>
+                            <div class="stake-header"><span class="stake-id"># ${stakeId}</span><span class="stake-status ${status.cls}">${status.text}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelAsset}</span><span class="value">${tokenName}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelAmount}</span><span class="value">${formatTokenAmount(amount, decimals)} ${tokenName}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelStart}</span><span class="value">${formatTimestamp(startTime)}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelEnd}</span><span class="value">${formatTimestamp(endTime)}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelRemaining}</span><span class="value countdown" data-end-time="${endTime}">${formatRemainingTime(endTime)}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelPeriod}</span><span class="value">${periodInfo.name}${cachedDaySeconds !== 86400 ? ' (测试版)' : ''}</span></div>
+                            <div class="info-row"><span class="label">${langData.labelDailyRate}</span><span class="value rate">${dailyRate}</span></div>
+                            <div class="stake-interest">
+                                <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} BCBS</span></div>
+                                <div class="info-row"><span class="label">${langData.labelPending}</span><span class="value pending-interest">${pendingDisplay}</span></div>
+                            </div>
+                            <div class="stake-actions">
+                                <button class="btn btn-primary-blue btn-clip" data-id="${stakeId}" data-action="claim" ${redeemed || pendingValue <= 0 ? 'disabled' : ''}>${langData.btnClaim}</button>
+                                ${status.text === langData.statusReady ? `<button class="btn btn-success-blue btn-clip" data-id="${stakeId}" data-action="redeem">${langData.btnRedeem}</button>` : `<button class="btn btn-danger-blue btn-clip" data-id="${stakeId}" data-action="early" ${redeemed ? 'disabled' : ''}>${langData.btnEarly}</button>`}
+                            </div>
+                        </div>`;
             } catch (e) { throw e; }
         }
 
@@ -1958,9 +2251,11 @@
             if (card) { card.innerHTML = '<div style="text-align:center;padding:20px;color:var(--cyan-glow);">⏳ 加载中...</div>'; }
             try {
                 const orderHtml = await loadSingleOrder(id, langData);
-                if (card) { card.outerHTML = orderHtml; bindOrderActions(); }
+                if (card) { card.outerHTML = orderHtml;
+                    bindOrderActions(); }
             } catch (e) {
-                if (card) { card.innerHTML = renderErrorCard(id, e, langData); bindOrderActions(); }
+                if (card) { card.innerHTML = renderErrorCard(id, e, langData);
+                    bindOrderActions(); }
             }
         }
 
@@ -1984,11 +2279,13 @@
 
         function bindOrderActions() {
             const langData = translations[currentLang] || translations.cn;
+
             document.querySelectorAll('.stake-actions .btn:not(:disabled)').forEach(btn => {
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
                 newBtn.addEventListener('click', async function() {
-                    const id = this.dataset.id, action = this.dataset.action;
+                    const id = this.dataset.id,
+                        action = this.dataset.action;
                     this.disabled = true;
                     const origText = this.textContent;
                     this.textContent = langData.processing;
@@ -2110,7 +2407,8 @@
         });
 
         async function autoConnect() {
-            if (!window.ethereum) { connectBtn.textContent = 'No Wallet'; connectBtn.disabled = true; return; }
+            if (!window.ethereum) { connectBtn.textContent = 'No Wallet';
+                connectBtn.disabled = true; return; }
             try {
                 const accounts = await window.ethereum.request({ method: 'eth_accounts' });
                 if (accounts.length > 0) {
@@ -2125,7 +2423,12 @@
             } catch (e) {}
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) disconnectWallet();
-                else { currentAccount = accounts[0]; provider = new ethers.providers.Web3Provider(window.ethereum); signer = provider.getSigner(); initContracts(); updateUIForConnected(currentAccount); refreshAll(); }
+                else { currentAccount = accounts[0];
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    initContracts();
+                    updateUIForConnected(currentAccount);
+                    refreshAll(); }
             });
             window.ethereum.on('chainChanged', () => window.location.reload());
         }
