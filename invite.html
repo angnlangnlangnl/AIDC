@@ -153,9 +153,9 @@
         @keyframes goldPulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
         @keyframes bluePulse { 0% { opacity: 0.3; } 50% { opacity: 0.9; } 100% { opacity: 0.3; } }
 
-        /* ★★★ 空投卡片 — hb.png铺满 + 背景和边框完全透明 ★★★ */
+        /* 空投卡片 */
         .airdrop-card { 
-            background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/100% 100% no-repeat !important; 
+            background: url('https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/hb.png') center/100% 100% no-repeat; 
             border: 1px solid transparent !important;
             border-radius: 16px;
             padding: 15px;
@@ -169,19 +169,10 @@
             align-items: center;
             justify-content: center;
         }
-        .airdrop-card::before { 
-            display: none !important;
-        }
-        .airdrop-card .panel-inner { 
-            padding: 0; 
-            background: transparent !important; 
-            clip-path: none;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
+        .airdrop-card::before { display: none !important; }
+        .airdrop-card .panel-inner { padding: 0; background: transparent !important; clip-path: none; position: relative; z-index: 1; width: 100%; }
 
-        /* ★★★ 节点容器 ★★★ */
+        /* 节点容器 */
         .node-container {
             background: var(--card-bg);
             border-radius: 16px;
@@ -207,23 +198,11 @@
         }
         .node-container .panel-inner { padding: 0; }
 
-        /* ★★★ 移除页面标题 ★★★ */
         .page-title { display: none; }
 
         .airdrop-card .airdrop-header { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; margin-bottom: 8px; }
         .airdrop-card .airdrop-title { color: var(--text-primary); font-size: 18px; font-weight: 700; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .airdrop-card .airdrop-amount-box { 
-            background: transparent !important; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 6px; 
-            padding: 12px; 
-            text-align: right !important; 
-            color: var(--text-primary); 
-            font-size: 24px; 
-            font-weight: 700; 
-            margin: 8px 0 12px 0; 
-            backdrop-filter: none !important;
-        }
+        .airdrop-card .airdrop-amount-box { background: transparent !important; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 12px; text-align: right !important; color: var(--text-primary); font-size: 24px; font-weight: 700; margin: 8px 0 12px 0; backdrop-filter: none !important; }
         .airdrop-card .airdrop-desc { color: var(--text-primary-soft); font-size: 12px; margin-bottom: 12px; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
         .airdrop-btn { width: 100%; background: linear-gradient(90deg, var(--cyan-dim), var(--cyan-glow)); border: none; border-radius: 8px; padding: 12px; font-weight: 600; color: #050B15; cursor: pointer; box-shadow: 0 0 15px rgba(0, 136, 255, 0.4); font-size: 15px; transition: all 0.2s; clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px); }
         .airdrop-btn:hover:not(:disabled) { box-shadow: 0 0 25px rgba(0, 204, 255, 0.6); transform: translateY(-2px); }
@@ -286,12 +265,117 @@
         .loading-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(0, 204, 255, 0.15); border-top: 2px solid var(--cyan-glow); border-radius: 50%; animation: spin 0.6s linear infinite; margin-right: 4px; vertical-align: middle; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .bottom-nav { flex-shrink: 0; background: rgba(5, 11, 21, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(0, 136, 255, 0.15); border-radius: 20px; box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8); display: flex; justify-content: space-around; padding: 12px 0; margin: 0 15px 15px 15px; position: relative; z-index: 10; }
-        .bottom-nav::before { content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px; border-radius: 20px; padding: 1px; background: linear-gradient(135deg, var(--gold), transparent, var(--gold)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; opacity: 0.4; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-secondary); font-size: 11px; gap: 4px; cursor: pointer; padding: 5px 10px; transition: all 0.3s ease; text-decoration: none; }
+        /* ============================================================
+                   ★★★ 底部导航 — 统一金色断点边框 ★★★
+                   ============================================================ */
+        .bottom-nav {
+            flex-shrink: 0;
+            position: relative;
+            background: rgba(5, 11, 21, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            margin: 0 15px 15px 15px;
+            z-index: 10;
+            clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+            border: none;
+            transition: all 0.3s;
+        }
+        .bottom-nav::before,
+        .bottom-nav::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            border-radius: 20px;
+        }
+        .bottom-nav::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
+            background-position: 0 0, 100% 0, 0 100%, 0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
+            opacity: 0.9;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+        .bottom-nav::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
+            background-position: 6px 6px, calc(100% - 6px) 6px, 6px calc(100% - 6px), 6px 6px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        .bottom-nav .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .bottom-nav .corner-deco::before,
+        .bottom-nav .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .bottom-nav .corner-deco.tl { top: 3px; left: 3px; }
+        .bottom-nav .corner-deco.tl::before { top: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.tr { top: 3px; right: 3px; }
+        .bottom-nav .corner-deco.tr::before { top: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.bl { bottom: 3px; left: 3px; }
+        .bottom-nav .corner-deco.bl::before { bottom: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.br { bottom: 3px; right: 3px; }
+        .bottom-nav .corner-deco.br::before { bottom: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 11px;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
         .nav-item .nav-icon { width: 20px; height: 20px; object-fit: contain; }
         .nav-item.active { color: var(--gold); position: relative; }
-        .nav-item.active::after { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: linear-gradient(to right, var(--gold), #d4a830); border-radius: 5px; box-shadow: 0 0 15px var(--gold-glow); }
+        .nav-item.active::after {
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px;
+            background: linear-gradient(to right, var(--gold), #d4a830);
+            border-radius: 5px; box-shadow: 0 0 15px var(--gold-glow);
+        }
         .nav-item:not(.active):hover { color: var(--gold); }
 
         .claim-stats-row { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 12px; padding: 0 4px; }
@@ -323,9 +407,9 @@
                     <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
                 </div>
             </div>
-            <!-- ★★★ 移除"邀请好友"标题 ★★★ -->
+            <!-- 移除标题 -->
 
-            <!-- ★★★ 空投卡片 — hb.png铺满，背景和边框完全透明 ★★★ -->
+            <!-- 空投卡片 -->
             <div class="airdrop-card">
                 <div class="panel-inner">
                     <div class="airdrop-header">
@@ -336,7 +420,7 @@
                 </div>
             </div>
 
-            <!-- ★★★ 节点容器 ★★★ -->
+            <!-- 节点容器 -->
             <div class="node-container">
                 <div class="panel-inner">
                     <div class="node-slider" id="nodeSlider">
@@ -352,7 +436,7 @@
                 </div>
             </div>
 
-            <!-- ★★★ 业绩卡片 (金色断点边框) ★★★ -->
+            <!-- 业绩卡片 -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -374,7 +458,7 @@
                 </div>
             </div>
 
-            <!-- ★★★ 操作流程卡片 (金色断点边框) ★★★ -->
+            <!-- 操作流程卡片 -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -398,7 +482,7 @@
                 </div>
             </div>
 
-            <!-- ★★★ 记录卡片 (金色断点边框) ★★★ -->
+            <!-- 记录卡片 -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -414,12 +498,33 @@
             </div>
 
         </div>
+        <!-- ===== 底部导航 — 统一金色断点边框 ===== -->
         <div class="bottom-nav">
-            <a href="index.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产"><span id="navAssets">资产</span></a>
-            <a href="invite.html" class="nav-item active"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/invite.icon.png" alt="邀请"><span id="navInvite">邀请</span></a>
-            <a href="liquidity.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性"><span id="navLiquidity">流动性</span></a>
-            <a href="stake.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押"><span id="navStake">质押</span></a>
-            <a href="ecosystem.html" class="nav-item"><img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ecosystem.icon.png" alt="生态"><span id="navEcosystem">生态</span></a>
+            <div class="corner-deco tl"></div>
+            <div class="corner-deco tr"></div>
+            <div class="corner-deco bl"></div>
+            <div class="corner-deco br"></div>
+
+            <a href="index.html" class="nav-item">
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
+                <span id="navAssets">资产</span>
+            </a>
+            <a href="invite.html" class="nav-item active">
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/invite.icon.png" alt="邀请">
+                <span id="navInvite">邀请</span>
+            </a>
+            <a href="liquidity.html" class="nav-item">
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="铸造">
+                <span id="navLiquidity">铸造</span>
+            </a>
+            <a href="stake.html" class="nav-item">
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
+                <span id="navStake">质押</span>
+            </a>
+            <a href="ecosystem.html" class="nav-item">
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/ecosystem.icon.png" alt="生态">
+                <span id="navEcosystem">生态</span>
+            </a>
         </div>
     </div>
 
@@ -475,7 +580,7 @@
                 tabClaim: '领取记录',
                 navAssets: '资产',
                 navStake: '质押',
-                navLiquidity: '流动性',
+                navLiquidity: '铸造',
                 navInvite: '邀请',
                 navEcosystem: '生态',
                 noRecords: '暂无记录',
@@ -550,7 +655,7 @@
                 tabClaim: 'Claim Records',
                 navAssets: 'Assets',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidity',
+                navLiquidity: 'Mint',
                 navInvite: 'Invite',
                 navEcosystem: 'Ecosystem',
                 noRecords: 'No records yet',
@@ -625,7 +730,7 @@
                 tabClaim: '領取記錄',
                 navAssets: '資產',
                 navStake: '質押',
-                navLiquidity: '流動性',
+                navLiquidity: '鑄造',
                 navInvite: '邀請',
                 navEcosystem: '生態',
                 noRecords: '暫無記錄',
@@ -700,7 +805,7 @@
                 tabClaim: 'Registros de Reclamaciones',
                 navAssets: 'Activos',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidez',
+                navLiquidity: 'Acuñar',
                 navInvite: 'Invitar',
                 navEcosystem: 'Ecosistema',
                 noRecords: 'Sin registros',
@@ -775,7 +880,7 @@
                 tabClaim: 'Historique des Réclamations',
                 navAssets: 'Actifs',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidité',
+                navLiquidity: 'Frapper',
                 navInvite: 'Inviter',
                 navEcosystem: 'Écosystème',
                 noRecords: 'Aucun enregistrement',
@@ -850,7 +955,7 @@
                 tabClaim: '수령 기록',
                 navAssets: '자산',
                 navStake: '스테이킹',
-                navLiquidity: '유동성',
+                navLiquidity: '민팅',
                 navInvite: '초대',
                 navEcosystem: '생태계',
                 noRecords: '기록 없음',
@@ -925,7 +1030,7 @@
                 tabClaim: '受領記録',
                 navAssets: '資産',
                 navStake: 'ステーキング',
-                navLiquidity: '流動性',
+                navLiquidity: 'ミント',
                 navInvite: '招待',
                 navEcosystem: 'エコシステム',
                 noRecords: '記録なし',
@@ -1000,7 +1105,7 @@
                 tabClaim: 'سجلات المطالبة',
                 navAssets: 'الأصول',
                 navStake: 'تخزين',
-                navLiquidity: 'سيولة',
+                navLiquidity: 'سك',
                 navInvite: 'دعوة',
                 navEcosystem: 'النظام البيئي',
                 noRecords: 'لا توجد سجلات',
@@ -1075,7 +1180,7 @@
                 tabClaim: 'История получения',
                 navAssets: 'Активы',
                 navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
+                navLiquidity: 'Чеканка',
                 navInvite: 'Пригласить',
                 navEcosystem: 'Экосистема',
                 noRecords: 'Нет записей',
