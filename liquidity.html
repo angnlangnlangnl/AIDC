@@ -703,38 +703,183 @@
         }
 
         /* ============================================================
-                   底部导航 — 与生态页一致
+                   ★★★ 底部导航 — 统一金色断点边框 ★★★
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
+            position: relative;
             background: rgba(5, 11, 21, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 136, 255, 0.15);
             border-radius: 20px;
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
             margin: 0 15px 15px 15px;
-            position: relative;
             z-index: 10;
+            /* ★★★ 统一金色断点边框 ★★★ */
+            clip-path: polygon(
+                8px 0%,
+                calc(100% - 8px) 0%,
+                100% 8px,
+                100% calc(100% - 8px),
+                calc(100% - 8px) 100%,
+                8px 100%,
+                0% calc(100% - 8px),
+                0% 8px
+            );
+            border: none;
+            transition: all 0.3s;
         }
-        .bottom-nav::before {
+        .bottom-nav::before,
+        .bottom-nav::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            opacity: 0.4;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            border-radius: 20px;
         }
+        /* 外层金色边框 */
+        .bottom-nav::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                0 0,
+                100% 0,
+                0 100%,
+                0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
+            opacity: 0.9;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+        /* 内层蓝色边框 */
+        .bottom-nav::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size:
+                100% 0.75px,
+                0.75px 100%,
+                100% 0.75px,
+                0.75px 100%;
+            background-position:
+                6px 6px,
+                calc(100% - 6px) 6px,
+                6px calc(100% - 6px),
+                6px 6px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        /* ★★★ 底部导航四角金色装饰 ★★★ */
+        .bottom-nav .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .bottom-nav .corner-deco::before,
+        .bottom-nav .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .bottom-nav .corner-deco.tl {
+            top: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.tl::before {
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tl::after {
+            top: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr {
+            top: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.tr::before {
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.tr::after {
+            top: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl {
+            bottom: 3px;
+            left: 3px;
+        }
+        .bottom-nav .corner-deco.bl::before {
+            bottom: 0;
+            left: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.bl::after {
+            bottom: 0;
+            left: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br {
+            bottom: 3px;
+            right: 3px;
+        }
+        .bottom-nav .corner-deco.br::before {
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 1.5px;
+            background: #f5c842;
+        }
+        .bottom-nav .corner-deco.br::after {
+            bottom: 0;
+            right: 0;
+            width: 1.5px;
+            height: 10px;
+            background: #f5c842;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -746,6 +891,8 @@
             padding: 5px 10px;
             transition: all 0.3s ease;
             text-decoration: none;
+            position: relative;
+            z-index: 2;
         }
         .nav-item .nav-icon {
             width: 20px;
@@ -1000,8 +1147,16 @@
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 — "流动性" 改为 "铸造" ===== -->
+        <!-- ==========================================================
+        ★★★ 底部导航 — 统一金色断点边框 ★★★
+        ========================================================== -->
         <div class="bottom-nav">
+            <!-- 四角装饰 -->
+            <div class="corner-deco tl"></div>
+            <div class="corner-deco tr"></div>
+            <div class="corner-deco bl"></div>
+            <div class="corner-deco br"></div>
+
             <a href="index.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
                 <span id="navAssets">资产</span>
