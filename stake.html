@@ -40,7 +40,7 @@
             --aidc-blue-glow: rgba(0, 221, 255, 0.5);
             --aidc-blue-border: rgba(0, 221, 255, 0.3);
 
-            /* 内边框蓝色 — 与生态页"了解更多"按钮一致 */
+            /* 内边框蓝色 */
             --inner-blue: #7fc9ff;
             --inner-blue-glow: rgba(127, 201, 255, 0.5);
             --inner-blue-dim: rgba(127, 201, 255, 0.15);
@@ -284,7 +284,6 @@
             border-radius: 16px;
         }
 
-        /* 外层边框：金色 · 0.75px · 断点 30%-70% */
         .gold-break-panel::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -307,7 +306,6 @@
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
 
-        /* 内层边框：蓝色 · 0.75px · 断点错位 15%-55% */
         .gold-break-panel::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -330,7 +328,6 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* 四角金色装饰 */
         .gold-break-panel .corner-deco {
             position: absolute;
             z-index: 3;
@@ -347,93 +344,23 @@
             box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
             border-radius: 0;
         }
-        .gold-break-panel .corner-deco.tl {
-            top: 3px;
-            left: 3px;
-        }
-        .gold-break-panel .corner-deco.tl::before {
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.tl::after {
-            top: 0;
-            left: 0;
-            width: 1.5px;
-            height: 10px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.tr {
-            top: 3px;
-            right: 3px;
-        }
-        .gold-break-panel .corner-deco.tr::before {
-            top: 0;
-            right: 0;
-            width: 10px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.tr::after {
-            top: 0;
-            right: 0;
-            width: 1.5px;
-            height: 10px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.bl {
-            bottom: 3px;
-            left: 3px;
-        }
-        .gold-break-panel .corner-deco.bl::before {
-            bottom: 0;
-            left: 0;
-            width: 10px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.bl::after {
-            bottom: 0;
-            left: 0;
-            width: 1.5px;
-            height: 10px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.br {
-            bottom: 3px;
-            right: 3px;
-        }
-        .gold-break-panel .corner-deco.br::before {
-            bottom: 0;
-            right: 0;
-            width: 10px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-panel .corner-deco.br::after {
-            bottom: 0;
-            right: 0;
-            width: 1.5px;
-            height: 10px;
-            background: #f5c842;
-        }
+        .gold-break-panel .corner-deco.tl { top: 3px; left: 3px; }
+        .gold-break-panel .corner-deco.tl::before { top: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .gold-break-panel .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .gold-break-panel .corner-deco.tr { top: 3px; right: 3px; }
+        .gold-break-panel .corner-deco.tr::before { top: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .gold-break-panel .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .gold-break-panel .corner-deco.bl { bottom: 3px; left: 3px; }
+        .gold-break-panel .corner-deco.bl::before { bottom: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .gold-break-panel .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .gold-break-panel .corner-deco.br { bottom: 3px; right: 3px; }
+        .gold-break-panel .corner-deco.br::before { bottom: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .gold-break-panel .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
 
-        @keyframes goldPulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-        @keyframes bluePulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 0.9; }
-            100% { opacity: 0.3; }
-        }
+        @keyframes goldPulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        @keyframes bluePulse { 0% { opacity: 0.3; } 50% { opacity: 0.9; } 100% { opacity: 0.3; } }
 
-        /* ============================================================
-                   质押卡片边框 (金色断点风格)
-                   ============================================================ */
+        /* 质押卡片边框 */
         .gold-break-stake-card {
             position: relative;
             background: rgba(0, 16, 40, 0.3);
@@ -519,7 +446,6 @@
             opacity: 0.7;
         }
 
-        /* 四角装饰 */
         .gold-break-stake-card .corner-deco {
             position: absolute;
             z-index: 3;
@@ -536,165 +462,18 @@
             box-shadow: 0 0 6px rgba(245, 200, 66, 0.3);
             border-radius: 0;
         }
-        .gold-break-stake-card .corner-deco.tl {
-            top: 2px;
-            left: 2px;
-        }
-        .gold-break-stake-card .corner-deco.tl::before {
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.tl::after {
-            top: 0;
-            left: 0;
-            width: 1.5px;
-            height: 8px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.tr {
-            top: 2px;
-            right: 2px;
-        }
-        .gold-break-stake-card .corner-deco.tr::before {
-            top: 0;
-            right: 0;
-            width: 8px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.tr::after {
-            top: 0;
-            right: 0;
-            width: 1.5px;
-            height: 8px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.bl {
-            bottom: 2px;
-            left: 2px;
-        }
-        .gold-break-stake-card .corner-deco.bl::before {
-            bottom: 0;
-            left: 0;
-            width: 8px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.bl::after {
-            bottom: 0;
-            left: 0;
-            width: 1.5px;
-            height: 8px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.br {
-            bottom: 2px;
-            right: 2px;
-        }
-        .gold-break-stake-card .corner-deco.br::before {
-            bottom: 0;
-            right: 0;
-            width: 8px;
-            height: 1.5px;
-            background: #f5c842;
-        }
-        .gold-break-stake-card .corner-deco.br::after {
-            bottom: 0;
-            right: 0;
-            width: 1.5px;
-            height: 8px;
-            background: #f5c842;
-        }
-
-        /* ============================================================
-                   ★★★ 按钮样式 — 内边框蓝色系（与生态页"了解更多"一致） ★★★
-                   ============================================================ */
-        .btn-clip {
-            clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
-            letter-spacing: 2px;
-            transition: all 0.3s;
-        }
-        .btn-clip:hover:not(:disabled) {
-            transform: translateY(-2px);
-        }
-        .btn-clip:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ★★★ 主按钮 — 内边框蓝色系 ★★★ */
-        .btn-stake-blue {
-            display: inline-block;
-            padding: 14px 24px;
-            border: 1px solid #7fc9ff;
-            border-radius: 0;
-            font-size: 0.95rem;
-            letter-spacing: 3px;
-            color: #7fc9ff;
-            background: rgba(127, 201, 255, 0.08);
-            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
-        }
-        .btn-stake-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-            box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
-            transform: translateY(-2px);
-        }
-        .btn-stake-blue:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .btn-stake-blue:active:not(:disabled) {
-            transform: translateY(0px);
-        }
-
-        /* ★★★ 订单操作按钮 — 内边框蓝色系 ★★★ */
-        .btn-primary-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-primary-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-            box-shadow: 0 0 15px rgba(127, 201, 255, 0.2);
-        }
-
-        .btn-success-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-success-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-        }
-
-        .btn-danger-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-danger-blue:hover:not(:disabled) {
-            background: rgba(127, 201, 255, 0.18);
-        }
-
-        .btn-retry-blue {
-            background: rgba(127, 201, 255, 0.08);
-            color: #7fc9ff;
-            border: 1px solid #7fc9ff;
-        }
-        .btn-retry-blue:hover {
-            background: rgba(127, 201, 255, 0.18);
-        }
+        .gold-break-stake-card .corner-deco.tl { top: 2px; left: 2px; }
+        .gold-break-stake-card .corner-deco.tl::before { top: 0; left: 0; width: 8px; height: 1.5px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 8px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.tr { top: 2px; right: 2px; }
+        .gold-break-stake-card .corner-deco.tr::before { top: 0; right: 0; width: 8px; height: 1.5px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 8px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.bl { bottom: 2px; left: 2px; }
+        .gold-break-stake-card .corner-deco.bl::before { bottom: 0; left: 0; width: 8px; height: 1.5px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 8px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.br { bottom: 2px; right: 2px; }
+        .gold-break-stake-card .corner-deco.br::before { bottom: 0; right: 0; width: 8px; height: 1.5px; background: #f5c842; }
+        .gold-break-stake-card .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 8px; background: #f5c842; }
 
         /* ============================================================
                    内容样式
@@ -709,7 +488,6 @@
             letter-spacing: 1px;
         }
 
-        /* 余额面板 - 保持原有风格，添加金色断点边框 */
         .balance-panel {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -856,6 +634,37 @@
             font-weight: 600;
         }
 
+        .btn-stake-blue {
+            display: inline-block;
+            padding: 14px 24px;
+            border: 1px solid #7fc9ff;
+            border-radius: 0;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            color: #7fc9ff;
+            background: rgba(127, 201, 255, 0.08);
+            clip-path: polygon(6px 0%, calc(100% - 6px) 0%, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0% calc(100% - 6px), 0% 6px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
+        }
+        .btn-stake-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+            box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        .btn-stake-blue:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-stake-blue:active:not(:disabled) {
+            transform: translateY(0px);
+        }
+
         .order-list-title {
             font-size: 16px;
             color: var(--text-primary);
@@ -863,7 +672,6 @@
             font-weight: 500;
         }
 
-        /* 质押订单卡片内部样式 */
         .stake-header {
             display: flex;
             justify-content: space-between;
@@ -951,6 +759,40 @@
             clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
         }
 
+        .btn-primary-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-primary-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+            box-shadow: 0 0 15px rgba(127, 201, 255, 0.2);
+        }
+        .btn-success-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-success-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+        }
+        .btn-danger-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-danger-blue:hover:not(:disabled) {
+            background: rgba(127, 201, 255, 0.18);
+        }
+        .btn-retry-blue {
+            background: rgba(127, 201, 255, 0.08);
+            color: #7fc9ff;
+            border: 1px solid #7fc9ff;
+        }
+        .btn-retry-blue:hover {
+            background: rgba(127, 201, 255, 0.18);
+        }
+
         .countdown {
             color: var(--cyan-glow);
             font-weight: 600;
@@ -960,7 +802,6 @@
             font-weight: 600;
         }
 
-        /* 骨架屏 */
         .skeleton {
             background: linear-gradient(90deg, rgba(0, 136, 255, 0.05) 25%, rgba(0, 204, 255, 0.1) 50%, rgba(0, 136, 255, 0.05) 75%);
             background-size: 200% 100%;
@@ -997,7 +838,6 @@
             border-radius: 10px;
         }
 
-        /* Loading */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -1026,38 +866,94 @@
         }
 
         /* ============================================================
-                   底部导航 — 与生态页一致
+                   ★★★ 底部导航 — 统一金色断点边框 ★★★
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
+            position: relative;
             background: rgba(5, 11, 21, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 136, 255, 0.15);
             border-radius: 20px;
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
             margin: 0 15px 15px 15px;
-            position: relative;
             z-index: 10;
+            clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0% calc(100% - 8px), 0% 8px);
+            border: none;
+            transition: all 0.3s;
         }
-        .bottom-nav::before {
+        .bottom-nav::before,
+        .bottom-nav::after {
             content: '';
             position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 20px;
-            padding: 1px;
-            background: linear-gradient(135deg, var(--gold), transparent, var(--gold));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            opacity: 0.4;
+            z-index: 1;
+            clip-path: inherit;
+            background: transparent;
+            border-radius: 20px;
         }
+        .bottom-nav::before {
+            background-image:
+                linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(180deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(270deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
+                linear-gradient(0deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%);
+            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
+            background-position: 0 0, 100% 0, 0 100%, 0 0;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 4px rgba(245, 200, 66, 0.3));
+            opacity: 0.9;
+            animation: goldPulse 4s infinite alternate ease-in-out;
+        }
+        .bottom-nav::after {
+            background-image:
+                linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(180deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(270deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
+                linear-gradient(0deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%);
+            background-size: 100% 0.75px, 0.75px 100%, 100% 0.75px, 0.75px 100%;
+            background-position: 6px 6px, calc(100% - 6px) 6px, 6px calc(100% - 6px), 6px 6px;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 6px rgba(0, 180, 255, 0.35));
+            opacity: 0.9;
+            animation: bluePulse 5s infinite alternate-reverse ease-in-out;
+        }
+
+        .bottom-nav .corner-deco {
+            position: absolute;
+            z-index: 3;
+            width: 12px;
+            height: 12px;
+            background: transparent;
+            pointer-events: none;
+        }
+        .bottom-nav .corner-deco::before,
+        .bottom-nav .corner-deco::after {
+            content: '';
+            position: absolute;
+            background: #f5c842;
+            box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+            border-radius: 0;
+        }
+        .bottom-nav .corner-deco.tl { top: 3px; left: 3px; }
+        .bottom-nav .corner-deco.tl::before { top: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.tl::after { top: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.tr { top: 3px; right: 3px; }
+        .bottom-nav .corner-deco.tr::before { top: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.tr::after { top: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.bl { bottom: 3px; left: 3px; }
+        .bottom-nav .corner-deco.bl::before { bottom: 0; left: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.bl::after { bottom: 0; left: 0; width: 1.5px; height: 10px; background: #f5c842; }
+        .bottom-nav .corner-deco.br { bottom: 3px; right: 3px; }
+        .bottom-nav .corner-deco.br::before { bottom: 0; right: 0; width: 10px; height: 1.5px; background: #f5c842; }
+        .bottom-nav .corner-deco.br::after { bottom: 0; right: 0; width: 1.5px; height: 10px; background: #f5c842; }
+
         .nav-item {
             display: flex;
             flex-direction: column;
@@ -1069,31 +965,18 @@
             padding: 5px 10px;
             transition: all 0.3s ease;
             text-decoration: none;
-        }
-        .nav-item .nav-icon {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-        .nav-item.active {
-            color: var(--gold);
             position: relative;
+            z-index: 2;
         }
+        .nav-item .nav-icon { width: 20px; height: 20px; object-fit: contain; }
+        .nav-item.active { color: var(--gold); position: relative; }
         .nav-item.active::after {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 2px;
+            content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px;
             background: linear-gradient(to right, var(--gold), #d4a830);
-            border-radius: 5px;
-            box-shadow: 0 0 15px var(--gold-glow);
+            border-radius: 5px; box-shadow: 0 0 15px var(--gold-glow);
         }
-        .nav-item:not(.active):hover {
-            color: var(--gold);
-        }
+        .nav-item:not(.active):hover { color: var(--gold); }
 
         @media (max-width: 600px) {
             .period-grid {
@@ -1114,7 +997,7 @@
     <div class="app-container">
         <div class="scroll-area">
 
-            <!-- ===== Header — 与生态页一致 ===== -->
+            <!-- ===== Header ===== -->
             <div class="header">
                 <div class="logo-area">
                     <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/aidc.png" alt="AIDC">
@@ -1122,7 +1005,6 @@
                 </div>
                 <div class="header-controls">
                     <button class="lang-btn" id="langBtn">🇨🇳 CN ⌄</button>
-
                     <div class="lang-dropdown" id="langDropdown">
                         <div class="lang-option"><span>🇨🇳 简体中文</span><span class="code">CN</span></div>
                         <div class="lang-option"><span>🇺🇸 English</span><span class="code">EN</span></div>
@@ -1134,7 +1016,6 @@
                         <div class="lang-option"><span>🇸🇦 العربية</span><span class="code">AR</span></div>
                         <div class="lang-option"><span>🇷🇺 Русский</span><span class="code">RU</span></div>
                     </div>
-
                     <button id="connectWalletBtn" class="connect-btn">Connect wallet</button>
                 </div>
             </div>
@@ -1142,9 +1023,7 @@
             <!-- ===== 页面标题 ===== -->
             <div class="page-title" id="pageTitle">🔒 质押挖矿</div>
 
-            <!-- ==========================================================
-            ★★★ 余额面板 (金色断点边框) ★★★
-            ========================================================== -->
+            <!-- ===== 余额面板 ===== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1164,9 +1043,7 @@
                 </div>
             </div>
 
-            <!-- ==========================================================
-            ★★★ 质押交互面板 (金色断点边框) ★★★
-            ========================================================== -->
+            <!-- ===== 质押交互面板 ===== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1198,14 +1075,11 @@
                         <span id="estRewardLabel">预计可获得利息</span>
                         <strong id="estimatedReward">0.00000 BCBS</strong>
                     </div>
-                    <!-- ★★★ 主按钮改为内边框蓝色系 ★★★ -->
                     <button class="btn-stake-blue" id="stakeSubmitBtn" disabled>暂未开放</button>
                 </div>
             </div>
 
-            <!-- ==========================================================
-            ★★★ 订单列表 (金色断点边框) ★★★
-            ========================================================== -->
+            <!-- ===== 订单列表 ===== -->
             <div class="gold-break-panel">
                 <div class="corner-deco tl"></div>
                 <div class="corner-deco tr"></div>
@@ -1214,7 +1088,6 @@
                 <div class="panel-inner">
                     <div class="order-list-title" id="orderListTitle">📋 我的质押订单</div>
                     <div id="orderListContainer">
-                        <!-- 骨架屏会被JS替换 -->
                         <div class="gold-break-stake-card">
                             <div class="corner-deco tl"></div>
                             <div class="corner-deco tr"></div>
@@ -1237,8 +1110,13 @@
 
         </div><!-- /scroll-area -->
 
-        <!-- ===== 底部导航 — 与生态页一致 ===== -->
+        <!-- ===== 底部导航 — 统一金色断点边框 ===== -->
         <div class="bottom-nav">
+            <div class="corner-deco tl"></div>
+            <div class="corner-deco tr"></div>
+            <div class="corner-deco bl"></div>
+            <div class="corner-deco br"></div>
+
             <a href="index.html" class="nav-item">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/index.icon.png" alt="资产">
                 <span id="navAssets">资产</span>
@@ -1248,8 +1126,8 @@
                 <span id="navInvite">邀请</span>
             </a>
             <a href="liquidity.html" class="nav-item">
-                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="流动性">
-                <span id="navLiquidity">流动性</span>
+                <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/liquidity.icon.png" alt="铸造">
+                <span id="navLiquidity">铸造</span>
             </a>
             <a href="stake.html" class="nav-item active">
                 <img class="nav-icon" src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/stake.icon.png" alt="质押">
@@ -1270,7 +1148,7 @@
 
     <script>
         // ============================================================
-        // 多语言翻译数据 (保留原内容)
+        // 多语言翻译数据
         // ============================================================
         const translations = {
             cn: {
@@ -1283,7 +1161,7 @@
                 orderListTitle: '📋 我的质押订单',
                 navAssets: '资产',
                 navStake: '质押',
-                navLiquidity: '流动性',
+                navLiquidity: '铸造',
                 navInvite: '邀请',
                 navEcosystem: '生态',
                 periodTexts: ['7天', '35天', '180天', '360天', '540天', '720天'],
@@ -1338,7 +1216,7 @@
                 orderListTitle: '📋 My Staking Orders',
                 navAssets: 'Assets',
                 navStake: 'Stake',
-                navLiquidity: 'Liquidity',
+                navLiquidity: 'Mint',
                 navInvite: 'Invite',
                 navEcosystem: 'Ecosystem',
                 periodTexts: ['7 Days', '35 Days', '180 Days', '360 Days', '540 Days', '720 Days'],
@@ -1393,7 +1271,7 @@
                 orderListTitle: '📋 我的質押訂單',
                 navAssets: '資產',
                 navStake: '質押',
-                navLiquidity: '流動性',
+                navLiquidity: '鑄造',
                 navInvite: '邀請',
                 navEcosystem: '生態',
                 periodTexts: ['7天', '35天', '180天', '360天', '540天', '720天'],
@@ -1448,7 +1326,7 @@
                 orderListTitle: '📋 Mis Órdenes de Staking',
                 navAssets: 'Activos',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidez',
+                navLiquidity: 'Acuñar',
                 navInvite: 'Invitar',
                 navEcosystem: 'Ecosistema',
                 periodTexts: ['7 Días', '35 Días', '180 Días', '360 Días', '540 Días', '720 Días'],
@@ -1503,7 +1381,7 @@
                 orderListTitle: '📋 Mes Ordres de Staking',
                 navAssets: 'Actifs',
                 navStake: 'Staking',
-                navLiquidity: 'Liquidité',
+                navLiquidity: 'Frapper',
                 navInvite: 'Inviter',
                 navEcosystem: 'Écosystème',
                 periodTexts: ['7 Jours', '35 Jours', '180 Jours', '360 Jours', '540 Jours', '720 Jours'],
@@ -1558,7 +1436,7 @@
                 orderListTitle: '📋 내 스테이킹 주문',
                 navAssets: '자산',
                 navStake: '스테이킹',
-                navLiquidity: '유동성',
+                navLiquidity: '민팅',
                 navInvite: '초대',
                 navEcosystem: '생태계',
                 periodTexts: ['7일', '35일', '180일', '360일', '540일', '720일'],
@@ -1613,7 +1491,7 @@
                 orderListTitle: '📋 マイステーキング注文',
                 navAssets: '資産',
                 navStake: 'ステーキング',
-                navLiquidity: '流動性',
+                navLiquidity: 'ミント',
                 navInvite: '招待',
                 navEcosystem: 'エコシステム',
                 periodTexts: ['7日', '35日', '180日', '360日', '540日', '720日'],
@@ -1668,7 +1546,7 @@
                 orderListTitle: '📋 طلبات التخزين الخاصة بي',
                 navAssets: 'الأصول',
                 navStake: 'تخزين',
-                navLiquidity: 'سيولة',
+                navLiquidity: 'سك',
                 navInvite: 'دعوة',
                 navEcosystem: 'النظام البيئي',
                 periodTexts: ['7 أيام', '35 يومًا', '180 يومًا', '360 يومًا', '540 يومًا', '720 يومًا'],
@@ -1723,7 +1601,7 @@
                 orderListTitle: '📋 Мои заказы стейкинга',
                 navAssets: 'Активы',
                 navStake: 'Стейкинг',
-                navLiquidity: 'Ликвидность',
+                navLiquidity: 'Чеканка',
                 navInvite: 'Пригласить',
                 navEcosystem: 'Экосистема',
                 periodTexts: ['7 дней', '35 дней', '180 дней', '360 дней', '540 дней', '720 дней'],
@@ -1802,17 +1680,12 @@
             option.addEventListener('click', () => {
                 const langCode = option.querySelector('.code').innerText.trim().toLowerCase();
                 const langData = translations[langCode];
-
                 if (langData) {
                     currentLang = langCode;
                     localStorage.setItem('bcbsLang', langCode);
                     applyTranslations(langData);
-
-                    if (currentAccount) {
-                        loadOrders();
-                    }
+                    if (currentAccount) loadOrders();
                 }
-
                 langDropdown.classList.remove('open');
                 langBtn.classList.remove('active');
             });
@@ -1826,24 +1699,17 @@
             document.getElementById('estRewardLabel').textContent = langData.estRewardLabel;
             document.getElementById('stakeSubmitBtn').textContent = langData.stakeSubmitBtn;
             document.getElementById('orderListTitle').textContent = langData.orderListTitle;
-
             document.querySelectorAll('.period-btn').forEach((btn, index) => {
                 const periodText = btn.querySelector('.period-text');
                 const rateLabel = btn.querySelector('.rate-label');
-                if (periodText && langData.periodTexts[index]) {
-                    periodText.textContent = langData.periodTexts[index];
-                }
-                if (rateLabel && langData.dailyRateTexts[index]) {
-                    rateLabel.textContent = langData.dailyRateTexts[index];
-                }
+                if (periodText && langData.periodTexts[index]) periodText.textContent = langData.periodTexts[index];
+                if (rateLabel && langData.dailyRateTexts[index]) rateLabel.textContent = langData.dailyRateTexts[index];
             });
-
             document.getElementById('navAssets').textContent = langData.navAssets;
             document.getElementById('navStake').textContent = langData.navStake;
             document.getElementById('navLiquidity').textContent = langData.navLiquidity;
             document.getElementById('navInvite').textContent = langData.navInvite;
             document.getElementById('navEcosystem').textContent = langData.navEcosystem;
-
             document.getElementById('maxBtn').textContent = langData.maxBtn;
         }
 
@@ -1884,13 +1750,10 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const periodDays = [7, 35, 180, 360, 540, 720];
         const dailyRates = [0.008, 0.013, 0.018, 0.021, 0.023, 0.026];
-        let currentCoin = 'AIGC',
-            currentPeriod = 0,
-            countdownTimer = null;
+        let currentCoin = 'AIGC', currentPeriod = 0, countdownTimer = null;
         let cachedDaySeconds = 86400;
 
         function showLoading() { loadingOverlay.style.display = 'flex'; }
-
         function hideLoading() { loadingOverlay.style.display = 'none'; }
 
         function formatTokenAmount(amount, decimals = 18, precision = 5) {
@@ -1900,45 +1763,45 @@
                     return parseFloat(ethers.utils.formatUnits(amount, decimals)).toFixed(precision);
                 }
                 return parseFloat(amount).toFixed(precision);
-            } catch (e) { return '0.' + '0'.repeat(precision); }
+            } catch(e) { return '0.' + '0'.repeat(precision); }
         }
 
         function formatTimestamp(timestamp) {
             if (!timestamp || timestamp === '0' || timestamp === 0) return '--';
             try {
                 const ts = typeof timestamp === 'object' ? timestamp.toNumber() : parseInt(timestamp);
-                return new Date(ts * 1000).toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
-            } catch (e) { return '--'; }
+                return new Date(ts * 1000).toLocaleString('zh-CN', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false });
+            } catch(e) { return '--'; }
         }
 
         function formatRemainingTime(endTime) {
-            const now = Math.floor(Date.now() / 1000);
+            const now = Math.floor(Date.now()/1000);
             const remaining = endTime - now;
             if (remaining <= 0) return '已到期 ✅';
-            const days = Math.floor(remaining / 86400);
-            const hours = Math.floor((remaining % 86400) / 3600);
-            const minutes = Math.floor((remaining % 3600) / 60);
+            const days = Math.floor(remaining/86400);
+            const hours = Math.floor((remaining%86400)/3600);
+            const minutes = Math.floor((remaining%3600)/60);
             if (days > 0) return `${days}天${hours}小时${minutes}分钟`;
             if (hours > 0) return `${hours}小时${minutes}分钟`;
             return `${minutes}分钟`;
         }
 
         function getPeriodName(period) {
-            const map = { 0: { name: '7 天', test: '35 分钟' }, 1: { name: '35 天', test: '175 分钟' }, 2: { name: '180 天', test: '15 小时' }, 3: { name: '360 天', test: '30 小时' }, 4: { name: '540 天', test: '45 小时' }, 5: { name: '720 天', test: '60 小时' } };
-            return map[period] || { name: '未知', test: '--' };
+            const map = { 0:{name:'7 天',test:'35 分钟'},1:{name:'35 天',test:'175 分钟'},2:{name:'180 天',test:'15 小时'},3:{name:'360 天',test:'30 小时'},4:{name:'540 天',test:'45 小时'},5:{name:'720 天',test:'60 小时'} };
+            return map[period]||{name:'未知',test:'--'};
         }
 
         function getDailyRate(period) {
-            const map = { 0: '0.8%', 1: '1.3%', 2: '1.8%', 3: '2.1%', 4: '2.3%', 5: '2.6%' };
-            return map[period] || '--';
+            const map = {0:'0.8%',1:'1.3%',2:'1.8%',3:'2.1%',4:'2.3%',5:'2.6%'};
+            return map[period]||'--';
         }
 
         function getStatusLabel(redeemed, endTime) {
             const langData = translations[currentLang] || translations.cn;
-            if (redeemed) return { text: langData.statusRedeemed, cls: 'status-redeemed' };
-            const now = Math.floor(Date.now() / 1000);
-            if (now >= endTime) return { text: langData.statusReady, cls: 'status-ready' };
-            return { text: langData.statusActive, cls: 'status-active' };
+            if (redeemed) return { text: langData.statusRedeemed, cls:'status-redeemed' };
+            const now = Math.floor(Date.now()/1000);
+            if (now >= endTime) return { text: langData.statusReady, cls:'status-ready' };
+            return { text: langData.statusActive, cls:'status-active' };
         }
 
         function initContracts() {
@@ -2003,17 +1866,12 @@
         async function loadOrders() {
             const container = document.getElementById('orderListContainer');
             const langData = translations[currentLang] || translations.cn;
-
             if (!currentAccount || !stakeContract) { container.innerHTML = renderSkeleton(); return; }
             container.innerHTML = renderSkeleton();
-
             try {
                 const ids = await stakeContract.getUserStakeIds(currentAccount);
                 if (!ids || ids.length === 0) { container.innerHTML = renderEmptyCard(langData); return; }
-
-                let html = '',
-                    successCount = 0,
-                    failedCount = 0;
+                let html = '', successCount = 0, failedCount = 0;
                 for (const id of ids) {
                     try {
                         const orderHtml = await loadSingleOrder(id, langData);
@@ -2024,7 +1882,6 @@
                         html += renderErrorCard(id, orderErr, langData);
                     }
                 }
-
                 if (failedCount > 0) {
                     html += `<div style="color:var(--cyan-glow);text-align:center;padding:10px;font-size:12px;background:rgba(0,204,255,0.05);border-radius:8px;margin-top:8px;clip-path:polygon(4px 0%,calc(100% - 4px) 0%,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0% calc(100% - 4px),0% 4px);">✅ ${successCount} 个订单正常 &nbsp;|&nbsp; ❌ ${failedCount} 个订单加载失败</div>`;
                 }
@@ -2046,9 +1903,7 @@
                 const period = result.period !== undefined ? result.period : result[5];
                 const redeemed = result.redeemed !== undefined ? result.redeemed : result[6];
                 const accumulatedClaimed = result.accumulatedClaimed || result[8];
-
-                let pendingDisplay = '0.00000 BCBS',
-                    pendingValue = 0;
+                let pendingDisplay = '0.00000 BCBS', pendingValue = 0;
                 try {
                     const pending = await stakeContract.getPendingInterest(id);
                     pendingValue = pending ? parseFloat(ethers.utils.formatUnits(pending, 18)) : 0;
@@ -2056,40 +1911,36 @@
                 } catch (pendingErr) {
                     pendingDisplay = '⚠️ 暂不可用';
                 }
-
                 const tokenName = tokenType === 0 ? 'AIGC' : 'USDT';
                 let decimals = 18;
-                try { const contract = tokenType === 0 ? aigcContract : usdtContract;
-                    decimals = await getDecimals(contract); } catch (e) {}
-
+                try { const contract = tokenType === 0 ? aigcContract : usdtContract; decimals = await getDecimals(contract); } catch (e) {}
                 const periodInfo = getPeriodName(Number(period));
                 const dailyRate = getDailyRate(Number(period));
                 const endTime = parseInt(startTime) + periodDays[Number(period)] * cachedDaySeconds;
                 const status = getStatusLabel(redeemed, endTime);
-
                 return `
-                        <div class="gold-break-stake-card" data-stake-id="${stakeId}">
-                            <div class="corner-deco tl"></div>
-                            <div class="corner-deco tr"></div>
-                            <div class="corner-deco bl"></div>
-                            <div class="corner-deco br"></div>
-                            <div class="stake-header"><span class="stake-id"># ${stakeId}</span><span class="stake-status ${status.cls}">${status.text}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelAsset}</span><span class="value">${tokenName}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelAmount}</span><span class="value">${formatTokenAmount(amount, decimals)} ${tokenName}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelStart}</span><span class="value">${formatTimestamp(startTime)}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelEnd}</span><span class="value">${formatTimestamp(endTime)}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelRemaining}</span><span class="value countdown" data-end-time="${endTime}">${formatRemainingTime(endTime)}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelPeriod}</span><span class="value">${periodInfo.name}${cachedDaySeconds !== 86400 ? ' (测试版)' : ''}</span></div>
-                            <div class="info-row"><span class="label">${langData.labelDailyRate}</span><span class="value rate">${dailyRate}</span></div>
-                            <div class="stake-interest">
-                                <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} BCBS</span></div>
-                                <div class="info-row"><span class="label">${langData.labelPending}</span><span class="value pending-interest">${pendingDisplay}</span></div>
-                            </div>
-                            <div class="stake-actions">
-                                <button class="btn btn-primary-blue btn-clip" data-id="${stakeId}" data-action="claim" ${redeemed || pendingValue <= 0 ? 'disabled' : ''}>${langData.btnClaim}</button>
-                                ${status.text === langData.statusReady ? `<button class="btn btn-success-blue btn-clip" data-id="${stakeId}" data-action="redeem">${langData.btnRedeem}</button>` : `<button class="btn btn-danger-blue btn-clip" data-id="${stakeId}" data-action="early" ${redeemed ? 'disabled' : ''}>${langData.btnEarly}</button>`}
-                            </div>
-                        </div>`;
+                    <div class="gold-break-stake-card" data-stake-id="${stakeId}">
+                        <div class="corner-deco tl"></div>
+                        <div class="corner-deco tr"></div>
+                        <div class="corner-deco bl"></div>
+                        <div class="corner-deco br"></div>
+                        <div class="stake-header"><span class="stake-id"># ${stakeId}</span><span class="stake-status ${status.cls}">${status.text}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelAsset}</span><span class="value">${tokenName}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelAmount}</span><span class="value">${formatTokenAmount(amount, decimals)} ${tokenName}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelStart}</span><span class="value">${formatTimestamp(startTime)}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelEnd}</span><span class="value">${formatTimestamp(endTime)}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelRemaining}</span><span class="value countdown" data-end-time="${endTime}">${formatRemainingTime(endTime)}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelPeriod}</span><span class="value">${periodInfo.name}${cachedDaySeconds !== 86400 ? ' (测试版)' : ''}</span></div>
+                        <div class="info-row"><span class="label">${langData.labelDailyRate}</span><span class="value rate">${dailyRate}</span></div>
+                        <div class="stake-interest">
+                            <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} BCBS</span></div>
+                            <div class="info-row"><span class="label">${langData.labelPending}</span><span class="value pending-interest">${pendingDisplay}</span></div>
+                        </div>
+                        <div class="stake-actions">
+                            <button class="btn btn-primary-blue btn-clip" data-id="${stakeId}" data-action="claim" ${redeemed || pendingValue <= 0 ? 'disabled' : ''}>${langData.btnClaim}</button>
+                            ${status.text === langData.statusReady ? `<button class="btn btn-success-blue btn-clip" data-id="${stakeId}" data-action="redeem">${langData.btnRedeem}</button>` : `<button class="btn btn-danger-blue btn-clip" data-id="${stakeId}" data-action="early" ${redeemed ? 'disabled' : ''}>${langData.btnEarly}</button>`}
+                        </div>
+                    </div>`;
             } catch (e) { throw e; }
         }
 
@@ -2107,11 +1958,9 @@
             if (card) { card.innerHTML = '<div style="text-align:center;padding:20px;color:var(--cyan-glow);">⏳ 加载中...</div>'; }
             try {
                 const orderHtml = await loadSingleOrder(id, langData);
-                if (card) { card.outerHTML = orderHtml;
-                    bindOrderActions(); }
+                if (card) { card.outerHTML = orderHtml; bindOrderActions(); }
             } catch (e) {
-                if (card) { card.innerHTML = renderErrorCard(id, e, langData);
-                    bindOrderActions(); }
+                if (card) { card.innerHTML = renderErrorCard(id, e, langData); bindOrderActions(); }
             }
         }
 
@@ -2135,13 +1984,11 @@
 
         function bindOrderActions() {
             const langData = translations[currentLang] || translations.cn;
-
             document.querySelectorAll('.stake-actions .btn:not(:disabled)').forEach(btn => {
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
                 newBtn.addEventListener('click', async function() {
-                    const id = this.dataset.id,
-                        action = this.dataset.action;
+                    const id = this.dataset.id, action = this.dataset.action;
                     this.disabled = true;
                     const origText = this.textContent;
                     this.textContent = langData.processing;
@@ -2263,8 +2110,7 @@
         });
 
         async function autoConnect() {
-            if (!window.ethereum) { connectBtn.textContent = 'No Wallet';
-                connectBtn.disabled = true; return; }
+            if (!window.ethereum) { connectBtn.textContent = 'No Wallet'; connectBtn.disabled = true; return; }
             try {
                 const accounts = await window.ethereum.request({ method: 'eth_accounts' });
                 if (accounts.length > 0) {
@@ -2279,12 +2125,7 @@
             } catch (e) {}
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) disconnectWallet();
-                else { currentAccount = accounts[0];
-                    provider = new ethers.providers.Web3Provider(window.ethereum);
-                    signer = provider.getSigner();
-                    initContracts();
-                    updateUIForConnected(currentAccount);
-                    refreshAll(); }
+                else { currentAccount = accounts[0]; provider = new ethers.providers.Web3Provider(window.ethereum); signer = provider.getSigner(); initContracts(); updateUIForConnected(currentAccount); refreshAll(); }
             });
             window.ethereum.on('chainChanged', () => window.location.reload());
         }
