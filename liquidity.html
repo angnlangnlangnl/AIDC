@@ -640,7 +640,7 @@
             transform: translateY(0px);
         }
 
-        /* 底部数据网格 */
+        /* ★★★ 底部数据网格 — 去掉图标 ★★★ */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -649,13 +649,10 @@
         .stat-item {
             text-align: center;
         }
-        .stat-item .icon {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
         .stat-item .label {
             font-size: 10px;
             color: var(--text-secondary);
+            margin-bottom: 2px;
         }
         .stat-item .value {
             font-size: 13px;
@@ -877,10 +874,10 @@
                 </div>
             </div>
 
-            <!-- ===== ★★★ 顶部标题 — 突显样式 ★★★ ===== -->
+            <!-- ===== ★★★ 顶部标题 — $0.1 ★★★ ===== -->
             <div class="hero-title">
                 <span class="highlight">立即铸造 AIDC</span>
-                <span class="price-tag">$0.000195</span>
+                <span class="price-tag">$0.1</span>
                 <span class="highlight">美元</span>
                 <span class="sub-text">🔥 低价预售中 · 限时抢购</span>
             </div>
@@ -912,7 +909,7 @@
                     </div>
                     <div class="progress-row" style="font-size: 14px; color: var(--text-primary);">
                         <span id="minted-amount">0.00 AIDC</span>
-                        <span id="target-amount">0.00/0 BNB</span>
+                        <span id="target-amount">0.00/0 USDT</span>
                     </div>
 
                     <div class="progress-track">
@@ -920,14 +917,14 @@
                     </div>
 
                     <div class="price-info">
-                        <span>铸造价格 = $0.000195</span>
+                        <span>铸造价格 = $0.1</span>
                         <span class="percent" id="progress-percent">0.00%</span>
                     </div>
                 </div>
             </div>
 
             <!-- ==========================================================
-            ★★★ 铸造 $AIDC 卡片 ★★★
+            ★★★ 铸造 $AIDC 卡片 — BNB改为USDT ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -943,13 +940,13 @@
                     <div class="input-group">
                         <div class="input-label">
                             <span>需要支付</span>
-                            <span id="wallet-balance">钱包余额: 0.00 BNB</span>
+                            <span id="wallet-balance">钱包余额: 0.00 USDT</span>
                         </div>
                         <div class="input-flex">
                             <div class="coin-pill">
-                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026" alt="BNB"> BNB
+                                <img src="https://raw.githubusercontent.com/angnlangnlangnl/AIDC/main/images/usdt.png" alt="USDT"> USDT
                             </div>
-                            <input type="number" class="input-number" id="pay-amount" placeholder="输入最低 0.1 BNB" step="0.1">
+                            <input type="number" class="input-number" id="pay-amount" placeholder="输入最低 0.1 USDT" step="0.1">
                         </div>
                     </div>
 
@@ -972,7 +969,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 数据统计卡片 ★★★
+            ★★★ 数据统计卡片 — 去掉图标 ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -982,22 +979,18 @@
                 <div class="card-inner">
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <div class="icon">🚀</div>
                             <div class="label">发行量</div>
                             <div class="value">100,000M</div>
                         </div>
                         <div class="stat-item">
-                            <div class="icon">👤</div>
                             <div class="label">持有地址</div>
                             <div class="value">∞</div>
                         </div>
                         <div class="stat-item">
-                            <div class="icon">📈</div>
                             <div class="label">现价</div>
-                            <div class="value">$0.000195</div>
+                            <div class="value">$0.1</div>
                         </div>
                         <div class="stat-item">
-                            <div class="icon">🔄</div>
                             <div class="label">预售</div>
                             <div class="value">10%</div>
                         </div>
@@ -1230,14 +1223,14 @@
         window.addEventListener('load', autoConnect);
 
         // ============================================================
-        // 铸造逻辑
+        // 铸造逻辑 (1 USDT = 5000 AIDC)
         // ============================================================
         function startMint() {
             const input = document.getElementById('pay-amount');
             const val = parseFloat(input.value);
 
             if (!val || val <= 0) {
-                alert("请输入有效的 BNB 数量（最低 0.1）");
+                alert("请输入有效的 USDT 数量（最低 0.1）");
                 return;
             }
 
