@@ -613,7 +613,7 @@
             font-size: 14px;
         }
 
-        /* 立刻铸造按钮 — 内边框蓝色系 */
+        /* 立刻铸造按钮 */
         .btn-mint-blue {
             display: inline-block;
             padding: 12px 24px;
@@ -631,16 +631,21 @@
             font-weight: 600;
             box-shadow: 0 0 20px rgba(127, 201, 255, 0.05);
         }
-        .btn-mint-blue:hover {
+        .btn-mint-blue:hover:not(:disabled) {
             background: rgba(127, 201, 255, 0.18);
             box-shadow: 0 0 30px rgba(127, 201, 255, 0.25);
             transform: translateY(-2px);
         }
-        .btn-mint-blue:active {
+        .btn-mint-blue:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-mint-blue:active:not(:disabled) {
             transform: translateY(0px);
         }
 
-        /* ★★★ 底部数据网格 — 去掉图标 ★★★ */
+        /* 底部数据网格 */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -661,7 +666,7 @@
             margin-top: 2px;
         }
 
-        /* ★★★ 空卡片占位 — 完全透明（已移除文字） ★★★ */
+        /* 空卡片占位 */
         .placeholder-card {
             background: transparent !important;
             backdrop-filter: none !important;
@@ -697,13 +702,82 @@
             display: none !important;
         }
 
-        /* 卡片下移 — 增加顶部间距 */
+        /* 卡片下移 */
         .card-spacer {
             height: 40px;
         }
 
+        /* ★★★ 提币记录卡片 — 修复样式 ★★★ */
+        .withdraw-record-item {
+            background: rgba(0, 16, 40, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            clip-path: polygon(4px 0%, calc(100% - 4px) 0%, 100% 4px, 100% calc(100% - 4px), calc(100% - 4px) 100%, 4px 100%, 0% calc(100% - 4px), 0% 4px);
+            transition: all 0.3s;
+        }
+        .withdraw-record-item:hover {
+            border-color: rgba(0, 204, 255, 0.3);
+        }
+
+        .withdraw-record-item .record-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(0, 136, 255, 0.04);
+        }
+        .withdraw-record-item .record-row:last-child {
+            border-bottom: none;
+        }
+        .withdraw-record-item .record-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        .withdraw-record-item .record-value {
+            font-size: 12px;
+            color: var(--text-primary-soft);
+            font-weight: 500;
+            word-break: break-all;
+            text-align: right;
+        }
+        .withdraw-record-item .record-value.address {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--cyan-glow);
+        }
+        .withdraw-record-item .record-value.amount {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .withdraw-record-item .record-value.time {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 11px;
+        }
+
+        .withdraw-empty {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 24px 0;
+            font-size: 13px;
+        }
+
+        .withdraw-summary {
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-align: center;
+            padding: 8px 0 2px 0;
+            border-top: 1px solid rgba(0, 136, 255, 0.06);
+            margin-top: 8px;
+        }
+        .withdraw-summary span {
+            color: var(--cyan-glow);
+            font-weight: 600;
+        }
+
         /* ============================================================
-                   ★★★ 底部导航 — 统一金色断点边框 ★★★
+                   底部导航 — 与生态页一致
                    ============================================================ */
         .bottom-nav {
             flex-shrink: 0;
@@ -717,7 +791,6 @@
             padding: 12px 0;
             margin: 0 15px 15px 15px;
             z-index: 10;
-            /* ★★★ 统一金色断点边框 ★★★ */
             clip-path: polygon(
                 8px 0%,
                 calc(100% - 8px) 0%,
@@ -730,7 +803,7 @@
             );
             border: none;
             transition: all 0.3s;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         .bottom-nav::before,
         .bottom-nav::after {
@@ -746,7 +819,6 @@
             background: transparent;
             border-radius: 20px;
         }
-        /* 外层金色边框 */
         .bottom-nav::before {
             background-image:
                 linear-gradient(90deg, #f5c842 0%, #f5c842 30%, transparent 30%, transparent 70%, #f5c842 70%, #f5c842 100%),
@@ -768,7 +840,6 @@
             opacity: 0.9;
             animation: goldPulse 4s infinite alternate ease-in-out;
         }
-        /* 内层蓝色边框 */
         .bottom-nav::after {
             background-image:
                 linear-gradient(90deg, #7fc9ff 0%, #7fc9ff 15%, transparent 15%, transparent 55%, #7fc9ff 55%, #7fc9ff 100%),
@@ -791,7 +862,6 @@
             animation: bluePulse 5s infinite alternate-reverse ease-in-out;
         }
 
-        /* ★★★ 底部导航四角金色装饰 ★★★ */
         .bottom-nav .corner-deco {
             position: absolute;
             z-index: 3;
@@ -990,6 +1060,15 @@
             .hero-title .sub-text {
                 font-size: 11px;
             }
+            .withdraw-record-item {
+                padding: 12px 14px;
+            }
+            .withdraw-record-item .record-value {
+                font-size: 11px;
+            }
+            .withdraw-record-item .record-value.address {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -1072,7 +1151,7 @@
             </div>
 
             <!-- ==========================================================
-            ★★★ 铸造 $AIDC 卡片 — BNB改为USDT ★★★
+            ★★★ 铸造 $AIDC 卡片 ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -1112,12 +1191,12 @@
                         </div>
                     </div>
 
-                    <button class="btn-mint-blue" onclick="startMint()">立刻铸造</button>
+                    <button class="btn-mint-blue" id="mintBtn" onclick="startMint()">立刻铸造</button>
                 </div>
             </div>
 
             <!-- ==========================================================
-            ★★★ 数据统计卡片 — 去掉图标 ★★★
+            ★★★ 数据统计卡片 ★★★
             ========================================================== -->
             <div class="gold-break-card">
                 <div class="corner-deco tl"></div>
@@ -1146,13 +1225,26 @@
                 </div>
             </div>
 
+            <!-- ==========================================================
+            ★★★ 提币记录卡片 (修复样式) ★★★
+            ========================================================== -->
+            <div class="gold-break-card">
+                <div class="corner-deco tl"></div>
+                <div class="corner-deco tr"></div>
+                <div class="corner-deco bl"></div>
+                <div class="corner-deco br"></div>
+                <div class="card-inner">
+                    <div style="color:var(--text-primary);font-size:14px;font-weight:600;margin-bottom:12px;">📋 提币记录</div>
+                    <div id="withdrawRecordContainer">
+                        <div class="withdraw-empty">暂无提币记录</div>
+                    </div>
+                </div>
+            </div>
+
         </div><!-- /scroll-area -->
 
-        <!-- ==========================================================
-        ★★★ 底部导航 — 统一金色断点边框 ★★★
-        ========================================================== -->
+        <!-- ===== 底部导航 — "流动性" 改为 "铸造" ===== -->
         <div class="bottom-nav">
-            <!-- 四角装饰 -->
             <div class="corner-deco tl"></div>
             <div class="corner-deco tr"></div>
             <div class="corner-deco bl"></div>
@@ -1316,72 +1408,163 @@
         }
 
         // ============================================================
-        // 钱包连接
+        // 合约配置 — AIDC主合约
         // ============================================================
-        const AIGC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
-        const BCBS_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995';
-        const HSBC_ADDRESS = '0x20aD84A60902A91F036bD6bdB85AD1d61B2f65C1';
+        const AIDC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
+        const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
+
+        const AIDC_ABI = [
+            "function balanceOf(address) view returns (uint256)",
+            "function decimals() view returns (uint8)",
+            "function approve(address,uint256) returns (bool)",
+            "function allowance(address,address) view returns (uint256)",
+            "function transfer(address,uint256) returns (bool)",
+            "function referrer(address) view returns (address)",
+            "function getDirectReferrals(address) view returns (address[])",
+            "function getDirectReferralsWithTime(address) view returns (tuple(address user, uint256 timestamp)[])",
+            "function getDirectReferralCount(address) view returns (uint256)",
+            "function getUpgradedReferralCount(address) view returns (uint256)",
+            "function getReferralLevelStats(address) view returns (uint256 total, uint256 first, uint256 openai, uint256 spacex)",
+            "function getNodeLevel(address) view returns (uint8)",
+            "function identityLevel(address) view returns (uint256)",
+            "function getLevelDetail(address user, uint8 level) view returns (uint256 deposit, uint256 pendingReward, uint256 totalMinted, uint256 dailyReward, uint256 maxReward, uint256 lastClaimTime, bool activated)",
+            "function getPendingDividend(address user, uint8 pool) view returns (uint256)",
+            "function claimDividend(uint8 pool) returns (bool)",
+            "function isInPool(uint8, address) view returns (bool)",
+            "function userInfo(address) view returns (uint256 totalDeposit, uint8 currentLevel, uint256 lastClaimAmount)",
+            "function getTotalMinted(address) view returns (uint256)",
+            "function getMinClaimRequirement(address) view returns (uint256)",
+            "function claimReward() payable",
+            "function getPendingReward(address) view returns (uint256)",
+            "function getBnbRequiredForClaim(uint256 reward) view returns (uint256)",
+            "function updateReward(address user) external",
+            "function getDirectReferralsPaginated(address user, uint256 offset, uint256 limit) view returns (address[])",
+            "function getDirectReferralsWithTimePaginated(address user, uint256 offset, uint256 limit) view returns (address[] users, uint256[] timestamps)",
+            "function depositUSDT(uint256 usdtAmount) external",
+            "function getLevelByDeposit(uint256 deposit) view returns (uint8)"
+        ];
+
+        const USDT_ABI = [
+            "function balanceOf(address) view returns (uint256)",
+            "function decimals() view returns (uint8)",
+            "function approve(address,uint256) returns (bool)",
+            "function allowance(address,address) view returns (uint256)",
+            "function transferFrom(address,address,uint256) returns (bool)"
+        ];
+
+        // ============================================================
+        // 钱包状态
+        // ============================================================
         let provider, signer, currentAccount;
+        let aidcContract, usdtContract;
         const connectBtn = document.getElementById('connectWalletBtn');
+        let refreshTimer = null;
 
-        function updateUIForConnected(acc) {
-            connectBtn.textContent = `${acc.substring(0,6)}...${acc.substring(acc.length-4)}`;
-            connectBtn.classList.add('connected');
-            connectBtn.onclick = disconnectWallet;
-        }
-
-        function setDisconnectedUI() {
-            connectBtn.textContent = 'Connect wallet';
-            connectBtn.classList.remove('connected');
-            connectBtn.onclick = connectWallet;
-        }
-
-        async function connectWallet() {
-            if (typeof window.ethereum === 'undefined') { alert('请安装MetaMask'); return; }
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            currentAccount = accounts[0];
-            provider = new ethers.providers.Web3Provider(window.ethereum);
-            signer = provider.getSigner();
-            updateUIForConnected(currentAccount);
-        }
-
-        function disconnectWallet() {
-            currentAccount = null;
-            signer = null;
-            setDisconnectedUI();
-        }
-
-        function handleAccountsChanged(accounts) {
-            if (accounts.length === 0) disconnectWallet();
-            else {
-                currentAccount = accounts[0];
-                provider = new ethers.providers.Web3Provider(window.ethereum);
-                signer = provider.getSigner();
-                updateUIForConnected(currentAccount);
+        function initContracts() {
+            if (provider && signer) {
+                aidcContract = new ethers.Contract(AIDC_ADDRESS, AIDC_ABI, signer);
+                usdtContract = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
             }
         }
 
-        async function autoConnect() {
-            if (typeof window.ethereum !== 'undefined') {
-                provider = new ethers.providers.Web3Provider(window.ethereum);
-                try {
-                    const accounts = await provider.listAccounts();
-                    if (accounts.length > 0) {
-                        currentAccount = accounts[0];
-                        signer = provider.getSigner();
-                        updateUIForConnected(currentAccount);
-                    } else setDisconnectedUI();
-                } catch (e) { setDisconnectedUI(); }
-                window.ethereum.on('accountsChanged', handleAccountsChanged);
-                window.ethereum.on('chainChanged', () => window.location.reload());
-            }
+        function formatTokenAmount(amount, decimals = 18, precision = 4) {
+            if (!amount || amount === '0' || amount === 0) return '0.' + '0'.repeat(precision);
+            try {
+                if (typeof amount === 'object' && amount._isBigNumber) {
+                    return parseFloat(ethers.utils.formatUnits(amount, decimals)).toFixed(precision);
+                }
+                return parseFloat(amount).toFixed(precision);
+            } catch (e) { return '0.' + '0'.repeat(precision); }
         }
-        window.addEventListener('load', autoConnect);
+
+        function shortenAddress(address) {
+            if (!address) return '--';
+            return address.substring(0, 6) + '...' + address.substring(address.length - 4);
+        }
 
         // ============================================================
-        // 铸造逻辑 (1 USDT = 5000 AIDC)
+        // 刷新数据
         // ============================================================
-        function startMint() {
+        async function refreshAllData() {
+            if (!currentAccount || !aidcContract) return;
+            try {
+                await updateBalances();
+                await loadWithdrawRecords();
+            } catch (e) {
+                console.log('refreshAllData error:', e);
+            }
+        }
+
+        // ============================================================
+        // 更新余额
+        // ============================================================
+        async function updateBalances() {
+            if (!currentAccount || !usdtContract) return;
+            try {
+                const usdtBal = await usdtContract.balanceOf(currentAccount);
+                const usdtDec = await usdtContract.decimals();
+                const usdtStr = formatTokenAmount(usdtBal, usdtDec, 4);
+                document.getElementById('wallet-balance').textContent = '钱包余额: ' + usdtStr + ' USDT';
+            } catch (e) {
+                console.log('updateBalances error:', e);
+            }
+        }
+
+        // ============================================================
+        // ★★★ 获取提币记录 (修复样式) ★★★
+        // ============================================================
+        async function loadWithdrawRecords() {
+            const container = document.getElementById('withdrawRecordContainer');
+            if (!currentAccount || !aidcContract) {
+                container.innerHTML = '<div class="withdraw-empty">请先连接钱包</div>';
+                return;
+            }
+
+            try {
+                // 获取用户总铸造量
+                const totalMinted = await aidcContract.getTotalMinted(currentAccount);
+                const userInfo = await aidcContract.userInfo(currentAccount);
+                const lastClaimAmount = userInfo.lastClaimAmount || 0;
+
+                // 如果有提币记录
+                if (totalMinted.gt(0) || lastClaimAmount > 0) {
+                    const amount = lastClaimAmount > 0 ? lastClaimAmount : totalMinted;
+                    const amountStr = formatTokenAmount(amount);
+                    const totalStr = formatTokenAmount(totalMinted);
+                    const now = new Date();
+                    const dateStr = now.toLocaleString('zh-CN', { hour12: false });
+                    const addrShort = shortenAddress(currentAccount);
+
+                    container.innerHTML = `
+                        <div class="withdraw-record-item">
+                            <div class="record-row">
+                                <span class="record-label">提币地址</span>
+                                <span class="record-value address">${addrShort}</span>
+                            </div>
+                            <div class="record-row">
+                                <span class="record-label">提币数量</span>
+                                <span class="record-value amount">${amountStr} AIDC</span>
+                            </div>
+                            <div class="record-row">
+                                <span class="record-label">提币时间</span>
+                                <span class="record-value time">${dateStr}</span>
+                            </div>
+                        </div>
+                        <div class="withdraw-summary">累计提币: <span>${totalStr}</span> AIDC</div>
+                    `;
+                } else {
+                    container.innerHTML = '<div class="withdraw-empty">暂无提币记录</div>';
+                }
+            } catch (e) {
+                console.log('loadWithdrawRecords error:', e);
+                container.innerHTML = '<div class="withdraw-empty">加载失败，请重试</div>';
+            }
+        }
+
+        // ============================================================
+        // 铸造逻辑
+        // ============================================================
+        async function startMint() {
             const input = document.getElementById('pay-amount');
             const val = parseFloat(input.value);
 
@@ -1390,27 +1573,71 @@
                 return;
             }
 
-            const receiveEl = document.getElementById('receive-amount');
-            const receiveVal = val * 5000;
-            receiveEl.textContent = receiveVal.toLocaleString();
+            const mintBtn = document.getElementById('mintBtn');
+            mintBtn.disabled = true;
+            const origText = mintBtn.textContent;
+            mintBtn.innerHTML = '<span class="loading-spinner"></span> 处理中...';
 
-            const fill = document.getElementById('progress-fill');
-            const percentText = document.getElementById('progress-percent');
-            const mintedText = document.getElementById('minted-amount');
+            try {
+                if (!currentAccount || !aidcContract || !usdtContract) {
+                    alert('请先连接钱包');
+                    mintBtn.disabled = false;
+                    mintBtn.textContent = origText;
+                    return;
+                }
 
-            let currentWidth = parseFloat(fill.style.width) || 0;
-            let increment = Math.min(35, 100 - currentWidth);
-            let newWidth = Math.min(currentWidth + increment, 100);
+                const usdtDec = await usdtContract.decimals();
+                const usdtAmount = ethers.utils.parseUnits(val.toString(), usdtDec);
+                const balance = await usdtContract.balanceOf(currentAccount);
+                if (balance.lt(usdtAmount)) {
+                    alert('USDT 余额不足');
+                    mintBtn.disabled = false;
+                    mintBtn.textContent = origText;
+                    return;
+                }
 
-            fill.style.width = newWidth + '%';
-            percentText.textContent = newWidth.toFixed(2) + '%';
-            mintedText.textContent = (newWidth * 10000).toFixed(2) + ' AIDC';
+                const allowance = await usdtContract.allowance(currentAccount, AIDC_ADDRESS);
+                if (allowance.lt(usdtAmount)) {
+                    mintBtn.innerHTML = '授权中...';
+                    const approveTx = await usdtContract.approve(AIDC_ADDRESS, ethers.constants.MaxUint256);
+                    await approveTx.wait();
+                }
 
-            const toast = document.getElementById('mint-toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+                mintBtn.innerHTML = '铸币中...';
+                const tx = await aidcContract.depositUSDT(usdtAmount, { gasLimit: 500000 });
+                await tx.wait();
+
+                // 更新进度
+                const receiveEl = document.getElementById('receive-amount');
+                const receiveVal = val * 5000;
+                receiveEl.textContent = receiveVal.toLocaleString();
+
+                const fill = document.getElementById('progress-fill');
+                const percentText = document.getElementById('progress-percent');
+                const mintedText = document.getElementById('minted-amount');
+
+                let currentWidth = parseFloat(fill.style.width) || 0;
+                let increment = Math.min(35, 100 - currentWidth);
+                let newWidth = Math.min(currentWidth + increment, 100);
+
+                fill.style.width = newWidth + '%';
+                percentText.textContent = newWidth.toFixed(2) + '%';
+                mintedText.textContent = (newWidth * 10000).toFixed(2) + ' AIDC';
+
+                const toast = document.getElementById('mint-toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+
+                await refreshAllData();
+
+            } catch (e) {
+                alert('铸造失败: ' + (e.reason || e.message));
+            } finally {
+                mintBtn.disabled = false;
+                mintBtn.textContent = origText;
+            }
         }
 
         // ============================================================
@@ -1425,6 +1652,97 @@
                 receiveEl.textContent = '0';
             }
         });
+
+        // ============================================================
+        // 钱包连接
+        // ============================================================
+        function updateUIForConnected(acc) {
+            connectBtn.textContent = `${acc.substring(0,6)}...${acc.substring(acc.length-4)}`;
+            connectBtn.classList.add('connected');
+        }
+
+        function setDisconnectedUI() {
+            connectBtn.textContent = 'Connect wallet';
+            connectBtn.classList.remove('connected');
+            document.getElementById('wallet-balance').textContent = '钱包余额: 0.00 USDT';
+            document.getElementById('withdrawRecordContainer').innerHTML = '<div class="withdraw-empty">请先连接钱包</div>';
+        }
+
+        async function connectWallet() {
+            if (!window.ethereum) { alert('请安装MetaMask'); return; }
+            connectBtn.disabled = true;
+            connectBtn.innerHTML = '<span class="loading-spinner"></span> 连接中...';
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                currentAccount = accounts[0];
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                signer = provider.getSigner();
+                initContracts();
+                updateUIForConnected(currentAccount);
+                await refreshAllData();
+                if (refreshTimer) clearInterval(refreshTimer);
+                refreshTimer = setInterval(refreshAllData, 30000);
+            } catch (e) {
+                alert('连接失败: ' + (e.message || '未知错误'));
+            } finally {
+                connectBtn.disabled = false;
+            }
+        }
+
+        function disconnectWallet() {
+            currentAccount = null;
+            signer = null;
+            provider = null;
+            aidcContract = null;
+            usdtContract = null;
+            if (refreshTimer) { clearInterval(refreshTimer);
+                refreshTimer = null; }
+            setDisconnectedUI();
+        }
+
+        connectBtn.addEventListener('click', () => {
+            if (currentAccount) disconnectWallet();
+            else connectWallet();
+        });
+
+        async function autoConnect() {
+            if (!window.ethereum) return;
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts && accounts.length > 0) {
+                    currentAccount = accounts[0];
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    initContracts();
+                    updateUIForConnected(currentAccount);
+                    await refreshAllData();
+                    if (refreshTimer) clearInterval(refreshTimer);
+                    refreshTimer = setInterval(refreshAllData, 30000);
+                }
+            } catch (e) {}
+            window.ethereum.on('accountsChanged', (accounts) => {
+                if (!accounts || accounts.length === 0) disconnectWallet();
+                else {
+                    currentAccount = accounts[0];
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    initContracts();
+                    updateUIForConnected(currentAccount);
+                    refreshAllData();
+                }
+            });
+            window.ethereum.on('chainChanged', () => {
+                if (currentAccount) {
+                    provider = new ethers.providers.Web3Provider(window.ethereum);
+                    signer = provider.getSigner();
+                    initContracts();
+                    refreshAllData();
+                }
+            });
+        }
+
+        window.addEventListener('load', () => setTimeout(() => autoConnect(), 500));
+        window.addEventListener('beforeunload', () => { if (refreshTimer) clearInterval(refreshTimer); });
     </script>
 </body>
 </html>
