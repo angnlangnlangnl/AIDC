@@ -1056,7 +1056,7 @@
             );
             border: none;
             transition: all 0.3s;
-            opacity: 0.8;
+            opacity: 0.7;
         }
         .bottom-nav::before,
         .bottom-nav::after {
@@ -1300,8 +1300,8 @@
                 <div class="panel-inner">
                     <div class="balance-panel">
                         <div class="balance-item">
-                            <div class="balance-label">AIGC</div>
-                            <div class="balance-value" id="aigcBalance">--</div>
+                            <div class="balance-label">AIDC</div>
+                            <div class="balance-value" id="aidcBalance">--</div>
                         </div>
                         <div class="balance-item">
                             <div class="balance-label">USDT</div>
@@ -1321,16 +1321,16 @@
                 <div class="corner-deco br"></div>
                 <div class="panel-inner">
                     <div class="tab-container">
-                        <div class="tab-btn active" data-coin="AIGC">AIGC</div>
+                        <div class="tab-btn active" data-coin="AIDC">AIDC</div>
                         <div class="tab-btn" data-coin="USDT">USDT</div>
                     </div>
                     <div class="balance-info">
-                        <span id="stakeableBalanceLabel">可质押余额: </span><span id="availableBalance">0.00000</span> <span id="coinLabel">AIGC</span>
+                        <span id="stakeableBalanceLabel">可质押余额: </span><span id="availableBalance">0.00000</span> <span id="coinLabel">AIDC</span>
                         <span class="max-btn" id="maxBtn">MAX</span>
                     </div>
                     <div class="amount-input-wrapper">
                         <input type="number" id="stakeAmount" placeholder="0.00000" value="0">
-                        <span id="currencyDisplay" style="color:var(--cyan-glow);font-size:14px;font-weight:600;">AIGC</span>
+                        <span id="currencyDisplay" style="color:var(--cyan-glow);font-size:14px;font-weight:600;">AIDC</span>
                     </div>
                     <div style="color:var(--text-secondary);font-size:13px;margin-bottom:8px;" id="selectPeriodLabel">选择质押周期</div>
                     <div class="period-grid">
@@ -1343,7 +1343,7 @@
                     </div>
                     <div class="reward-preview">
                         <span id="estRewardLabel">预计可获得利息</span>
-                        <strong id="estimatedReward">0.00000 BCBS</strong>
+                        <strong id="estimatedReward">0.00000 DGCX</strong>
                     </div>
                     <button class="btn-stake-blue" id="stakeSubmitBtn" disabled>暂未开放</button>
                 </div>
@@ -1421,7 +1421,7 @@
 
     <script>
         // ============================================================
-        // 多语言翻译数据 (保留原内容)
+        // 多语言翻译数据
         // ============================================================
         const translations = {
             cn: {
@@ -1994,48 +1994,71 @@
         }
 
         // ============================================================
-        // 配置
+        // 配置 — 与DGCX合约兼容
         // ============================================================
-        const AIGC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae';
-        const BCBS_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995';
+        // ★★★ 合约地址更新为DGCX合约地址 ★★★
+        const DGCX_ADDRESS = '0x9ECcC2B06582Ca14509CAd41F1d5204979Ce6995'; // DGCX合约地址
+        const AIDC_ADDRESS = '0x2Ad8Ef580B1B6c2Ba5Fc41DF86fC6741D5d102ae'; // AIDC合约地址
         const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955';
 
-        const ERC20_ABI = [
+        // ★★★ DGCX合约ABI (来自合约) ★★★
+        const DGCX_ABI = [
+            // ERC20
+            "function balanceOf(address) view returns (uint256)",
+            "function decimals() view returns (uint8)",
+            "function approve(address,uint256) returns (bool)",
+            "function allowance(address,address) view returns (uint256)",
+            "function transfer(address,uint256) returns (bool)",
+            // 质押函数
+            "function stakeAIDC(uint256 amount, uint8 period) external",
+            "function stakeUSDT(uint256 amount, uint8 period) external",
+            "function claimInterest(uint256 stakeId) external payable",
+            "function redeemPrincipal(uint256 stakeId) external",
+            "function redeemPrincipalEarly(uint256 stakeId) external",
+            // 查询函数
+            "function getUserStakeIds(address user) view returns (uint256[])",
+            "function getStakeInfo(uint256 stakeId) view returns (tuple(uint256 id, address user, uint8 tokenType, uint256 amount, uint256 startTime, uint8 period, bool redeemed, uint256 lastClaimTime, uint256 accumulatedClaimed))",
+            "function getPendingInterest(uint256 stakeId) view returns (uint256)",
+            "function getBnbRequiredForClaim(uint256 reward) view returns (uint256)",
+            "function getDGCXPrice() view returns (uint256)",
+            "function getBnbPrice() view returns (uint256)",
+            "function userRate(address) view returns (uint256)",
+            "function refreshRate() external",
+            "function daySeconds() view returns (uint256)"
+        ];
+
+        // AIDC合约ABI (用于余额查询)
+        const AIDC_ABI = [
             "function balanceOf(address) view returns (uint256)",
             "function decimals() view returns (uint8)",
             "function approve(address,uint256) returns (bool)",
             "function allowance(address,address) view returns (uint256)"
         ];
 
-        const STAKE_ABI = [
-            "function stakeAIGC(uint256,uint8) returns (bool)",
-            "function stakeUSDT(uint256,uint8) returns (bool)",
-            "function getUserStakeIds(address) view returns (uint256[])",
-            "function getStakeInfo(uint256) view returns (tuple(uint256 id, address user, uint8 tokenType, uint256 amount, uint256 startTime, uint8 period, bool redeemed, uint256 lastClaimTime, uint256 accumulatedClaimed))",
-            "function getPendingInterest(uint256) view returns (uint256)",
-            "function getBnbRequiredForClaim(uint256) view returns (uint256)",
-            "function claimInterest(uint256) payable",
-            "function redeemPrincipal(uint256) returns (bool)",
-            "function redeemPrincipalEarly(uint256) returns (bool)",
-            "function daySeconds() view returns (uint256)"
+        const USDT_ABI = [
+            "function balanceOf(address) view returns (uint256)",
+            "function decimals() view returns (uint8)",
+            "function approve(address,uint256) returns (bool)",
+            "function allowance(address,address) view returns (uint256)"
         ];
 
         // ============================================================
         // 状态
         // ============================================================
         let provider, signer, currentAccount;
-        let stakeContract, aigcContract, usdtContract;
+        let dgcxContract, aidcContract, usdtContract;
         const connectBtn = document.getElementById('connectWalletBtn');
         const stakeBtn = document.getElementById('stakeSubmitBtn');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const periodDays = [7, 35, 180, 360, 540, 720];
         const dailyRates = [0.008, 0.013, 0.018, 0.021, 0.023, 0.026];
-        let currentCoin = 'AIGC',
+        let currentCoin = 'AIDC',
             currentPeriod = 0,
             countdownTimer = null;
         let cachedDaySeconds = 86400;
 
         function showLoading() { loadingOverlay.style.display = 'flex'; }
+
         function hideLoading() { loadingOverlay.style.display = 'none'; }
 
         function formatTokenAmount(amount, decimals = 18, precision = 5) {
@@ -2088,16 +2111,16 @@
 
         function initContracts() {
             if (provider && signer) {
-                aigcContract = new ethers.Contract(AIGC_ADDRESS, ERC20_ABI, signer);
-                usdtContract = new ethers.Contract(USDT_ADDRESS, ERC20_ABI, signer);
-                stakeContract = new ethers.Contract(BCBS_ADDRESS, STAKE_ABI, signer);
+                dgcxContract = new ethers.Contract(DGCX_ADDRESS, DGCX_ABI, signer);
+                aidcContract = new ethers.Contract(AIDC_ADDRESS, AIDC_ABI, signer);
+                usdtContract = new ethers.Contract(USDT_ADDRESS, USDT_ABI, signer);
             }
         }
 
         async function fetchChainParams() {
-            if (!stakeContract) return;
+            if (!dgcxContract) return;
             try {
-                const ds = await stakeContract.daySeconds();
+                const ds = await dgcxContract.daySeconds();
                 if (ds && ds.gt(0)) cachedDaySeconds = ds.toNumber();
             } catch (e) {
                 cachedDaySeconds = 86400;
@@ -2110,7 +2133,7 @@
 
         async function updateBalance() {
             try {
-                const contract = currentCoin === 'AIGC' ? aigcContract : usdtContract;
+                const contract = currentCoin === 'AIDC' ? aidcContract : usdtContract;
                 if (!contract || !currentAccount) { document.getElementById('availableBalance').textContent = '0.00000'; return; }
                 const balance = await contract.balanceOf(currentAccount);
                 const decimals = await getDecimals(contract);
@@ -2119,13 +2142,13 @@
         }
 
         async function updateAllBalances() {
-            if (!currentAccount || !aigcContract || !usdtContract) return;
+            if (!currentAccount || !aidcContract || !usdtContract) return;
             try {
-                const [aigcBal, usdtBal, aigcDec, usdtDec] = await Promise.all([
-                    aigcContract.balanceOf(currentAccount), usdtContract.balanceOf(currentAccount),
-                    getDecimals(aigcContract), getDecimals(usdtContract)
+                const [aidcBal, usdtBal, aidcDec, usdtDec] = await Promise.all([
+                    aidcContract.balanceOf(currentAccount), usdtContract.balanceOf(currentAccount),
+                    getDecimals(aidcContract), getDecimals(usdtContract)
                 ]);
-                document.getElementById('aigcBalance').textContent = parseFloat(ethers.utils.formatUnits(aigcBal, aigcDec)).toFixed(5);
+                document.getElementById('aidcBalance').textContent = parseFloat(ethers.utils.formatUnits(aidcBal, aidcDec)).toFixed(5);
                 document.getElementById('usdtBalance').textContent = parseFloat(ethers.utils.formatUnits(usdtBal, usdtDec)).toFixed(5);
             } catch (e) {}
         }
@@ -2133,7 +2156,7 @@
         function updateRewardPreview() {
             const amount = parseFloat(document.getElementById('stakeAmount').value) || 0;
             const reward = amount * dailyRates[currentPeriod] * periodDays[currentPeriod];
-            document.getElementById('estimatedReward').textContent = `${reward.toFixed(5)} BCBS`;
+            document.getElementById('estimatedReward').textContent = `${reward.toFixed(5)} DGCX`;
         }
 
         async function refreshAll() {
@@ -2149,11 +2172,11 @@
             const container = document.getElementById('orderListContainer');
             const langData = translations[currentLang] || translations.cn;
 
-            if (!currentAccount || !stakeContract) { container.innerHTML = renderSkeleton(); return; }
+            if (!currentAccount || !dgcxContract) { container.innerHTML = renderSkeleton(); return; }
             container.innerHTML = renderSkeleton();
 
             try {
-                const ids = await stakeContract.getUserStakeIds(currentAccount);
+                const ids = await dgcxContract.getUserStakeIds(currentAccount);
                 if (!ids || ids.length === 0) { container.innerHTML = renderEmptyCard(langData); return; }
 
                 let html = '',
@@ -2183,7 +2206,7 @@
 
         async function loadSingleOrder(id, langData) {
             try {
-                const result = await stakeContract.getStakeInfo(id);
+                const result = await dgcxContract.getStakeInfo(id);
                 const stakeId = (result.id || result[0]).toString();
                 const tokenType = result.tokenType !== undefined ? result.tokenType : result[2];
                 const amount = result.amount || result[3];
@@ -2192,19 +2215,19 @@
                 const redeemed = result.redeemed !== undefined ? result.redeemed : result[6];
                 const accumulatedClaimed = result.accumulatedClaimed || result[8];
 
-                let pendingDisplay = '0.00000 BCBS',
+                let pendingDisplay = '0.00000 DGCX',
                     pendingValue = 0;
                 try {
-                    const pending = await stakeContract.getPendingInterest(id);
+                    const pending = await dgcxContract.getPendingInterest(id);
                     pendingValue = pending ? parseFloat(ethers.utils.formatUnits(pending, 18)) : 0;
-                    pendingDisplay = pendingValue.toFixed(5) + ' BCBS';
+                    pendingDisplay = pendingValue.toFixed(5) + ' DGCX';
                 } catch (pendingErr) {
                     pendingDisplay = '⚠️ 暂不可用';
                 }
 
-                const tokenName = tokenType === 0 ? 'AIGC' : 'USDT';
+                const tokenName = tokenType === 0 ? 'AIDC' : 'USDT';
                 let decimals = 18;
-                try { const contract = tokenType === 0 ? aigcContract : usdtContract;
+                try { const contract = tokenType === 0 ? aidcContract : usdtContract;
                     decimals = await getDecimals(contract); } catch (e) {}
 
                 const periodInfo = getPeriodName(Number(period));
@@ -2227,7 +2250,7 @@
                             <div class="info-row"><span class="label">${langData.labelPeriod}</span><span class="value">${periodInfo.name}${cachedDaySeconds !== 86400 ? ' (测试版)' : ''}</span></div>
                             <div class="info-row"><span class="label">${langData.labelDailyRate}</span><span class="value rate">${dailyRate}</span></div>
                             <div class="stake-interest">
-                                <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} BCBS</span></div>
+                                <div class="info-row"><span class="label">${langData.labelClaimed}</span><span class="value">${formatTokenAmount(accumulatedClaimed)} DGCX</span></div>
                                 <div class="info-row"><span class="label">${langData.labelPending}</span><span class="value pending-interest">${pendingDisplay}</span></div>
                             </div>
                             <div class="stake-actions">
@@ -2292,21 +2315,21 @@
                     this.textContent = langData.processing;
                     try {
                         if (action === 'claim') {
-                            const pending = await stakeContract.getPendingInterest(id);
+                            const pending = await dgcxContract.getPendingInterest(id);
                             if (!pending || pending.eq(0)) { alert(langData.noInterest); return; }
                             let fee;
-                            try { fee = await stakeContract.getBnbRequiredForClaim(pending); } catch (e) { fee = ethers.utils.parseEther('0.01'); }
-                            const tx = await stakeContract.claimInterest(id, { value: fee, gasLimit: 500000 });
+                            try { fee = await dgcxContract.getBnbRequiredForClaim(pending); } catch (e) { fee = ethers.utils.parseEther('0.01'); }
+                            const tx = await dgcxContract.claimInterest(id, { value: fee, gasLimit: 500000 });
                             await tx.wait();
                             alert(langData.successClaim);
                         } else if (action === 'redeem') {
                             if (!confirm(langData.confirmRedeem)) return;
-                            const tx = await stakeContract.redeemPrincipal(id, { gasLimit: 500000 });
+                            const tx = await dgcxContract.redeemPrincipal(id, { gasLimit: 500000 });
                             await tx.wait();
                             alert(langData.successRedeem);
                         } else if (action === 'early') {
                             if (!confirm(langData.confirmEarly)) return;
-                            const tx = await stakeContract.redeemPrincipalEarly(id, { gasLimit: 500000 });
+                            const tx = await dgcxContract.redeemPrincipalEarly(id, { gasLimit: 500000 });
                             await tx.wait();
                             alert(langData.successEarly);
                         }
@@ -2370,7 +2393,7 @@
             connectBtn.textContent = 'Connect wallet';
             connectBtn.classList.remove('connected');
             document.getElementById('availableBalance').textContent = '0.00000';
-            document.getElementById('aigcBalance').textContent = '--';
+            document.getElementById('aidcBalance').textContent = '--';
             document.getElementById('usdtBalance').textContent = '--';
             document.getElementById('orderListContainer').innerHTML = renderSkeleton();
         }
